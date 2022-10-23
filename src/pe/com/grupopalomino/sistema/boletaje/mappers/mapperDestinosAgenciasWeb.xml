@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="destinosagenciasBeanIbatis" id="resultDestinosAgencias">
+		<id property="nro" column="nro" />
+		<result property="Origen" column="Origen" />
+		<result property="OrigenD" column="OrigenD" />
+		<result property="Destino" column="Destino" />
+		<result property="DestinoD" column="DestinoD" />
+		<result property="CiudadD" column="CiudadD" />
+	</resultMap>
+
+	<select id="SQL_DestinosAgenciasWeb" resultType="destinosagenciasBeanIbatis"
+		parameterType="map" resultMap="resultDestinosAgencias" statementType="CALLABLE">
+
+		EXECUTE USP_LIST_DESTINOS_AGENCIAS_V_DestinosAgenciasWeb_SQL
+		#{origen},#{destino}
+
+	</select>
+
+	<select id="SQL_ListaDestinosAgenciasWeb" resultType="destinosagenciasBeanIbatis"
+		parameterType="map" resultMap="resultDestinosAgencias" statementType="CALLABLE">
+
+		EXECUTE USP_LIST_DESTINOS_TODOS_AGENCIAS_V_DestinosAgenciasWeb_SQL
+
+	</select>
+
+
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoletajePalomino03">
+
+
+	<resultMap type="pSalidaBeanIbatis" id="resultProgramacionSalidas">
+		<id property="Nro" column="Nro" />
+		<result property="Agencia1" column="Agencia1" />
+		<result property="Agencia2" column="Agencia2" />
+		<result property="Agencia2D" column="Agencia2D" />
+		<result property="Agencia3" column="Agencia3" />
+		<result property="Agencia3D" column="Agencia3D" />
+		<result property="Agencia4" column="Agencia4" />
+		<result property="Agencia4D" column="Agencia4D" />
+		<result property="Agencia5" column="Agencia5" />
+		<result property="Agencia5D" column="Agencia5D" />
+		<result property="Agencia6" column="Agencia6" />
+		<result property="Agencia6D" column="Agencia6D" />
+		<result property="Agencia7" column="Agencia7" />
+		<result property="Agencia7D" column="Agencia7D" />
+		<result property="Agencia8" column="Agencia8" />
+		<result property="Agencia8D" column="AgenciaD" />
+		<result property="Asientos" column="Asientos" />
+		<result property="Bus" column="Bus" />
+		<result property="Comentario" column="Comentario" />
+		<result property="CoPiloto" column="CoPiloto" />
+		<result property="CoPiloto2" column="CoPiloto2" />
+		<result property="CoPilotoB" column="CoPilotoB" />
+		<result property="CoPilotoD" column="CoPilotoD" />
+		<result property="CoPilotoD2" column="CoPilotoD2" />
+		<result property="CoPilotoPos" column="CoPilotoPos" />
+		<result property="Correlativo" column="Correlativo" />
+		<result property="Desde" column="Desde" />
+		<result property="DestinoD" column="DestinoD" />
+		<result property="Empresa" column="Empresa" />
+		<result property="EmpresaD" column="EmpresaD" />
+		<result property="EstadoChofer" column="EstadoChofer" />
+		<result property="EstadoCopiloto" column="EstadoCopiloto" />
+		<result property="Factura" column="Factura" />
+		<result property="Fecha" column="Fecha" />
+		<result property="FechaImpresion" column="FechaImpresion" />
+		<result property="GrupoItinerario" column="GrupoItinerario" />
+		<result property="Hasta" column="Hasta" />
+		<result property="HCRutaNumero" column="HCRutaNumero" />
+		<result property="Hora1" column="Hora1" />
+		<result property="Hora2" column="Hora2" />
+		<result property="Hora3" column="Hora3" />
+		<result property="Hora4" column="Hora4" />
+		<result property="Hora5" column="Hora5" />
+		<result property="Hora6" column="Hora6" />
+		<result property="Hora7" column="Hora7" />
+		<result property="Hora8" column="Hora8" />
+		<result property="HRutaNumero" column="HRutaNumero" />
+		<result property="NroAutorizacion" column="NroAutorizacion" />
+		<result property="NroHojaE" column="NroHojaE" />
+		<result property="NroHojaM1" column="NroHojaM1" />
+		<result property="NroHojaM2" column="NroHojaM2" />
+		<result property="Observacion" column="Observacion" />
+		<result property="Pasajero" column="Pasajero" />
+		<result property="PasajeroVacio" column="PasajeroVacio" />
+		<result property="Piloto" column="Piloto" />
+		<result property="PilotoB" column="PilotoB" />
+		<result property="PilotoD" column="PilotoD" />
+		<result property="PilotoPos" column="PilotoPos" />
+		<result property="PlanillaChofer" column="PlanillaChofer" />
+		<result property="Precio1" column="Precio1" />
+		<result property="Precio2" column="Precio2" />
+		<result property="Serie" column="Serie" />
+		<result property="Servicio" column="Servicio" />
+		<result property="ServicioD" column="ServicioD" />
+		<result property="Terramoza" column="Terramoza" />
+		<result property="TerramozaD" column="TerramozaD" />
+		<result property="TerramozaDni" column="TerramozaDni" />
+		<result property="AgenciaD" column="AgenciaD" />
+		<result property="Agencia" column="Agencia" />
+	</resultMap>
+	
+	<resultMap type="Precio_DesdeBeanIbatis" id="resultProgramacionPdesde">
+		<result property="Asiento" column="Nro" />
+		<result property="Asiento" column="Asiento" />
+		<result property="Precio" column="Precio" />
+	</resultMap>
+	
+	
+	<select id="SQL_getProgramacionPdesdeView" parameterType="Precio_DesdeBeanIbatis" 
+		resultMap="resultProgramacionPdesde" statementType="CALLABLE">		
+		EXEC USP_SELECT_PRECIOPORSALIDAWEB #{programacion}	
+	</select>
+	
+	
+	
+
+	<select id="SQL_getProgramacionSalidaView" parameterType="pSalidaBeanIbatis"
+		resultMap="resultProgramacionSalidas" statementType="CALLABLE">
+
+		EXEC USP_LIST_PROGRAMACIONSALIDAS_B_ProgramacionSalida_SQL
+		#{Fecha},#{rol},#{origenAgencia},#{destino},#{promocionWeb}
+
+	</select>
+
+	<select id="SQL_getProgramacionSalidaViewNro" parameterType="pSalidaBeanIbatis"
+		resultMap="resultProgramacionSalidas" statementType="CALLABLE">
+
+		EXEC USP_LIST_PROGRAMACIONSALIDAS_NRO_B_ProgramacionSalida_SQL #{Nro}
+
+	</select>
+
+	<select id="SQL_getProgramacionSalidaAgenciasView"
+		parameterType="pSalidaBeanIbatis" resultMap="resultProgramacionSalidas"
+		statementType="CALLABLE">
+
+		EXEC USP_LIST_PROGRAMACIONSALIDAS_NRO_B_ProgramacionSalida_Agencias_SQL
+		#{Nro},#{origenAgencia}
+	</select>
+
+	<select id="SQL_getProgramacionSalidaCiudades" parameterType="pSalidaBeanIbatis"
+		resultMap="resultProgramacionSalidas" statementType="CALLABLE">
+
+		EXEC USP_LIST_PROGRAMACIONSALIDAS_CIUDADES_B_ProgramacionSalida_SQL
+		#{Fecha},#{origenCiudad},#{destinoCiudad}
+
+	</select>
+
+	<select id="SQL_getProgramacionSalidaPrecioPromocion"
+		parameterType="pSalidaBeanIbatis" resultMap="resultProgramacionSalidas"
+		statementType="CALLABLE">
+
+
+		EXEC
+		USP_LIST_PROGRAMACIONSALIDAS_NRO_PRECIO_PROMOCION_B_ProgramacionSalida_SQL
+		#{Nro},#{destino},#{promocionWeb}
+
+	</select>
+
+</mapper>

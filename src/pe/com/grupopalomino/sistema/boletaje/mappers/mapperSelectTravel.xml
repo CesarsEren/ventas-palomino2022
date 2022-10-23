@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<!-- paramtype - tipo de parametro del metodo resultype - tipo de salida 
+		del metodo -->
+	<!-- Consulta SQL del Ibaitis -->
+	<!-- <select id=[nombre.de.llamado] parameterType=[ConfigIbatis.typeAliases.item] 
+		resultType=[ConfigIbatis.typeAliases.item]>SQL</select> -->
+	<!-- manejo de variables #{[def.variable.objeto]} -->
+
+	<resultMap type="croquisBusBeanIbatis" id="croquisBusResultado">
+		<id property="Bus" column="Bus" />
+		<result property="Asiento" column="Asiento" />
+		<result property="LLeft" column="LLeft" />
+		<result property="TTop" column="TTop" />
+		<result property="Visible" column="Visible" />
+	</resultMap>
+
+	<resultMap type="boletoBeanIbatis" id="boletoResultado">
+		<id property="Nro" column="Nro"></id>
+		<result property="Salida" column="Salida" />
+		<result property="Destino" column="Destino" />
+		<result property="Asiento" column="Asiento" />
+	</resultMap>
+
+
+
+
+	<!-- paramtype - tipo de parametro del metodo resultype - tipo de salida 
+		del metodo -->
+	<!-- Consulta SQL del Ibaitis -->
+	<!-- <select id=[nombre.de.llamado] parameterType=[ConfigIbatis.typeAliases.item] 
+		resultType=[ConfigIbatis.typeAliases.item]>SQL</select> -->
+	<!-- manejo de variables #{[def.variable.objeto]} -->
+	<select id="SQL_ObtieneCroquisBus" statementType="CALLABLE"
+		resultMap="croquisBusResultado" parameterType="java.lang.String">
+		USP_OBTIENE_CROQUIS_POR_NRO_BUS #{Bus}
+	</select>
+
+	<select id="SQL_ObtieneAsientosOcupados_Por_NRO_Programacion"
+		statementType="CALLABLE" resultMap="boletoResultado" parameterType="int">
+		Obtiene_Asientos_ocupados_Por_Programacion_Salida #{Salida}
+	</select>
+
+	<select id="SQL_Obtiene_Cantidad_Asientos_Bus" statementType="CALLABLE"
+		resultType="int" parameterType="java.lang.String">
+		USP_OBTIENE_BUS #{Bus}
+	</select>
+
+	<select id="SQL_Obtiene_Datos_Asiento_Ocupado" statementType="CALLABLE"
+		resultMap="asientoBoletoResultado" parameterType="map">
+		SQL_Obtiene_Datos_Asiento_Ocupado #{nroProgramacion}, #{asiento}
+	</select>
+
+
+
+
+
+
+</mapper>

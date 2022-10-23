@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="variosBeanIbatis" id="resultVarios">
+
+		<result property="PasajeDscto" column="PasajeDscto" />
+		<result property="PasajeDsctoR" column="PasajeDsctoR" />
+		<result property="MaximoBoletoPrecio" column="MaximoBoletoPrecio" />
+		<result property="PostergadoNivelUsu" column="PostergadoNivelUsu" />
+		<result property="AnuladoNivelUsu" column="AnuladoNivelUsu" />
+		<result property="ReservaUsuario1" column="ReservaUsuario1" />
+		<result property="ReservaUsuario2" column="ReservaUsuario2" />
+		<result property="ReservaUsuario3" column="ReservaUsuario3" />
+		<result property="RecorridoMinimoChofer" column="RecorridoMinimoChofer" />
+		<result property="KiloMetrajeMin" column="KiloMetrajeMin" />
+		<result property="KiloMetrajeVig" column="KiloMetrajeVig" />
+		<result property="BloquearNombre" column="BloquearNombre" />
+		<result property="DiasAsientoCero" column="DiasAsientoCero" />
+		<result property="RutaNoReserva" column="RutaNoReserva" />
+		<result property="Igv" column="Igv" />
+		<result property="Pass" column="Pass" />
+		<result property="mostrarComida" column="mostrarComida" />
+
+	</resultMap>
+
+	<select id="SQL_ObtenerPrecioMaximoAsiento" resultMap="resultVarios"
+		statementType="CALLABLE">
+
+		USP_OBTENER_PRECIO_MAXIMO_PERMITIDO_V_Varios_Web
+
+	</select>
+
+	<select id="SQL_ObtenerCantidaMaximoPasajeros" resultMap="resultVarios"
+		statementType="CALLABLE">
+
+		USP_OBTENER_CANTIDAD_MAXIMO_PASAJEROS_V_Varios_Web
+
+	</select>
+
+	<select id="SQL_Select_Varios" resultMap="resultVarios"
+		statementType="CALLABLE">
+
+		USP_SELECT_V_Varios_Web
+
+	</select>
+
+	<select id="SQL_ObtenerBusesconFallas" statementType="CALLABLE"
+		resultType="java.lang.String">
+		EXEC USP_GET_NroBusesConFallas
+	</select>
+
+</mapper>

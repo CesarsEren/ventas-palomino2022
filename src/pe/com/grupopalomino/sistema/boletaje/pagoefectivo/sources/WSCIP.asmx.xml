@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+	xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+	<wsdl:types>
+		<s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+			<s:element name="GenerarCIP">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="request"
+							type="tns:BEWSGenCIPRequest" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="BEWSGenCIPRequest">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="CAPI" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="CClave"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Password"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Xml" type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="GenerarCIPResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="GenerarCIPResult"
+							type="tns:BEWSGenCIPResponse" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="BEWSGenCIPResponse">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="Estado"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="CIP" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Mensaje"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="InformacionCIP"
+						type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="EliminarCIP">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="request"
+							type="tns:BEWSElimCIPRequest" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="BEWSElimCIPRequest">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="CAPI" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="CClave"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="CIP" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="InfoRequest"
+						type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="EliminarCIPResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="EliminarCIPResult"
+							type="tns:BEWSElimCIPResponse" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="BEWSElimCIPResponse">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="Estado"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Mensaje"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="InfoResponse"
+						type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="ConsultarCIPConciliados">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="request"
+							type="tns:BEWSConsCIPsConciliadosRequest" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="BEWSConsCIPsConciliadosRequest">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="CAPI" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="CClave"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="FechaDesde"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="FechaHasta"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="InfoRequest"
+						type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="ConsultarCIPConciliadosResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="ConsultarCIPConciliadosResult" type="tns:BEWSConsCIPsConciliadosResponse" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="BEWSConsCIPsConciliadosResponse">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="Estado"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Mensaje"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="CIPs"
+						type="tns:ArrayOfBEWSConsCIPConciliado" />
+					<s:element minOccurs="0" maxOccurs="1" name="InfoResponse"
+						type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="ArrayOfBEWSConsCIPConciliado">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded"
+						name="BEWSConsCIPConciliado" nillable="true" type="tns:BEWSConsCIPConciliado" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="BEWSConsCIPConciliado">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:BEWSConsCIP">
+						<s:sequence>
+							<s:element minOccurs="0" maxOccurs="1" name="FechaConciliacion"
+								type="s:string" />
+							<s:element minOccurs="0" maxOccurs="1" name="EstadoConciliacion"
+								type="s:string" />
+						</s:sequence>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="BEWSConsCIP">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="IdOrdenPago"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="IdCliente"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="NumeroOrdenPago"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="OrderIdComercio"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="IdMoneda"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Total" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="FechaEmision"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="FechaCancelado"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="FechaConciliado"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="EstadoConciliado"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="UsuarioID"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="UsuarioNombre"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="UsuarioApellidos"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="UsuarioAlias"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="UsuarioEmail"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="DataAdicional"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Estado"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Detalle"
+						type="tns:ArrayOfBEWSConsCIPDetalle" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="ArrayOfBEWSConsCIPDetalle">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="BEWSConsCIPDetalle"
+						nillable="true" type="tns:BEWSConsCIPDetalle" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="BEWSConsCIPDetalle">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="IdDetalleOrdenPago"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="ConceptoPago"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Importe"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Tipo_Origen"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Cod_Origen"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Campo1"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Campo2"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Campo3"
+						type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="ConsultarCIP">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="request"
+							type="tns:BEWSConsultarCIPRequest" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="BEWSConsultarCIPRequest">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="CAPI" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="CClave"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="CIPS" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="InfoRequest"
+						type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="ConsultarCIPResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="ConsultarCIPResult"
+							type="tns:BEWSConsultarCIPResponse" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="BEWSConsultarCIPResponse">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="XML" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Estado"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Mensaje"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="CIPs"
+						type="tns:ArrayOfBEWSConsCIP" />
+					<s:element minOccurs="0" maxOccurs="1" name="InfoResponse"
+						type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="ArrayOfBEWSConsCIP">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="BEWSConsCIP"
+						nillable="true" type="tns:BEWSConsCIP" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="SolicitarPago">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="request"
+							type="tns:BEWSSolicitarRequest" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="BEWSSolicitarRequest">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="cServ" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="CClave"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Xml" type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="SolicitarPagoResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="SolicitarPagoResult"
+							type="tns:BEWSSolicitarResponse" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="BEWSSolicitarResponse">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="Estado"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Mensaje"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Xml" type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="ConsultarSolicitudPago">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="request"
+							type="tns:BEWSConsultarSolicitudRequest" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="BEWSConsultarSolicitudRequest">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="cServ" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="CClave"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Xml" type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="ConsultarSolicitudPagoResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="ConsultarSolicitudPagoResult" type="tns:BEWSConsultarSolicitudResponse" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="BEWSConsultarSolicitudResponse">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="Estado"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Mensaje"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Xml" type="s:string" />
+				</s:sequence>
+			</s:complexType>
+		</s:schema>
+	</wsdl:types>
+	<wsdl:message name="GenerarCIPSoapIn">
+		<wsdl:part name="parameters" element="tns:GenerarCIP" />
+	</wsdl:message>
+	<wsdl:message name="GenerarCIPSoapOut">
+		<wsdl:part name="parameters" element="tns:GenerarCIPResponse" />
+	</wsdl:message>
+	<wsdl:message name="EliminarCIPSoapIn">
+		<wsdl:part name="parameters" element="tns:EliminarCIP" />
+	</wsdl:message>
+	<wsdl:message name="EliminarCIPSoapOut">
+		<wsdl:part name="parameters" element="tns:EliminarCIPResponse" />
+	</wsdl:message>
+	<wsdl:message name="ConsultarCIPConciliadosSoapIn">
+		<wsdl:part name="parameters" element="tns:ConsultarCIPConciliados" />
+	</wsdl:message>
+	<wsdl:message name="ConsultarCIPConciliadosSoapOut">
+		<wsdl:part name="parameters" element="tns:ConsultarCIPConciliadosResponse" />
+	</wsdl:message>
+	<wsdl:message name="ConsultarCIPSoapIn">
+		<wsdl:part name="parameters" element="tns:ConsultarCIP" />
+	</wsdl:message>
+	<wsdl:message name="ConsultarCIPSoapOut">
+		<wsdl:part name="parameters" element="tns:ConsultarCIPResponse" />
+	</wsdl:message>
+	<wsdl:message name="SolicitarPagoSoapIn">
+		<wsdl:part name="parameters" element="tns:SolicitarPago" />
+	</wsdl:message>
+	<wsdl:message name="SolicitarPagoSoapOut">
+		<wsdl:part name="parameters" element="tns:SolicitarPagoResponse" />
+	</wsdl:message>
+	<wsdl:message name="ConsultarSolicitudPagoSoapIn">
+		<wsdl:part name="parameters" element="tns:ConsultarSolicitudPago" />
+	</wsdl:message>
+	<wsdl:message name="ConsultarSolicitudPagoSoapOut">
+		<wsdl:part name="parameters" element="tns:ConsultarSolicitudPagoResponse" />
+	</wsdl:message>
+	<wsdl:portType name="WSCIPSoap">
+		<wsdl:operation name="GenerarCIP">
+			<wsdl:input message="tns:GenerarCIPSoapIn" />
+			<wsdl:output message="tns:GenerarCIPSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="EliminarCIP">
+			<wsdl:input message="tns:EliminarCIPSoapIn" />
+			<wsdl:output message="tns:EliminarCIPSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarCIPConciliados">
+			<wsdl:input message="tns:ConsultarCIPConciliadosSoapIn" />
+			<wsdl:output message="tns:ConsultarCIPConciliadosSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarCIP">
+			<wsdl:input message="tns:ConsultarCIPSoapIn" />
+			<wsdl:output message="tns:ConsultarCIPSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="SolicitarPago">
+			<wsdl:input message="tns:SolicitarPagoSoapIn" />
+			<wsdl:output message="tns:SolicitarPagoSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarSolicitudPago">
+			<wsdl:input message="tns:ConsultarSolicitudPagoSoapIn" />
+			<wsdl:output message="tns:ConsultarSolicitudPagoSoapOut" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="WSCIPSoap" type="tns:WSCIPSoap">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="GenerarCIP">
+			<soap:operation soapAction="http://tempuri.org/GenerarCIP"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="EliminarCIP">
+			<soap:operation soapAction="http://tempuri.org/EliminarCIP"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarCIPConciliados">
+			<soap:operation soapAction="http://tempuri.org/ConsultarCIPConciliados"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarCIP">
+			<soap:operation soapAction="http://tempuri.org/ConsultarCIP"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="SolicitarPago">
+			<soap:operation soapAction="http://tempuri.org/SolicitarPago"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarSolicitudPago">
+			<soap:operation soapAction="http://tempuri.org/ConsultarSolicitudPago"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="WSCIPSoap12" type="tns:WSCIPSoap">
+		<soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="GenerarCIP">
+			<soap12:operation soapAction="http://tempuri.org/GenerarCIP"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="EliminarCIP">
+			<soap12:operation soapAction="http://tempuri.org/EliminarCIP"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarCIPConciliados">
+			<soap12:operation soapAction="http://tempuri.org/ConsultarCIPConciliados"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarCIP">
+			<soap12:operation soapAction="http://tempuri.org/ConsultarCIP"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="SolicitarPago">
+			<soap12:operation soapAction="http://tempuri.org/SolicitarPago"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ConsultarSolicitudPago">
+			<soap12:operation soapAction="http://tempuri.org/ConsultarSolicitudPago"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="WSCIP">
+		<wsdl:port name="WSCIPSoap" binding="tns:WSCIPSoap">
+			<soap:address
+				location="https://cip.pagoefectivo.pe/PagoEfectivoWSGeneralv2/service.asmx" />
+		</wsdl:port>
+		<wsdl:port name="WSCIPSoap12" binding="tns:WSCIPSoap12">
+			<soap12:address
+				location="https://cip.pagoefectivo.pe/PagoEfectivoWSCrypto/WSCrypto.asmx" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

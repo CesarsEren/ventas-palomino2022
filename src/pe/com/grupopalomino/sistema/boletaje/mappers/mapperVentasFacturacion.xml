@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<update id="SQL_UPDATE_VENTAS_FACTURACION_ERROR" statementType="CALLABLE"
+		parameterType="map">
+
+		EXECUTE USP_UPDATE_VENTAS_FACTURACION_ERROR_SQL
+		#{nro},#{tipoOperacion},#{codigoError}
+
+	</update>
+
+	<update id="SQL_UPDATE_VENTAS_FACTURACION_IMAGES" parameterType="map"
+		statementType="CALLABLE">
+
+		EXECUTE USP_UPDATE_VENTAS_FACTURACION_IMAGES_SQL
+		#{nro},#{tipoOperacion},#{codigohash},#{imageBarras},#{imageQR}
+
+	</update>
+
+
+
+	<select id="SQL_SELECT_VENTAS_IMAGES_FACTURACION" resultType="ventasfacturacionBeanIbatis"
+		parameterType="map" statementType="CALLABLE">
+
+		EXECUTE USP_SELECT_VENTAS_IMAGES_FACTURADOR_SQL #{nro},#{tipoOperacion}
+	</select>
+
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="cuponBeanIbatis" id="resultcupon">
+		<result property="idcupon" column="idcupon" />
+		<result property="codigocupon" column="codigocupon" />
+		<result property="Detalle" column="Detalle" />
+		<result property="FechaCreacion" column="fechacreacion" />
+		<result property="tipocupon" column="tipocupon" />
+		<result property="paracupon" column="paracupon" />
+		<result property="FechaVigInicio" column="fechainicio" />
+		<result property="FechaVigFin" column="fechafin" />
+		<result property="horainicio" column="horainicio" />
+		<result property="horafin" column="horafin" />
+		<result property="FechaComIdaIni" column="fechaEmbinicio" />
+		<result property="FechaComIdaFin" column="fechaEmbfin" />
+		<result property="FechaCompVuIni" column="fechaRetinicio" />
+		<result property="FechaCompVuFin" column="fechaRetfin" />
+		<result property="Descuento" column="porcentaje" />
+		<result property="activo" column="activo" />
+
+	</resultMap>
+	<select id="SQL_VALIDAR_CUPON" resultMap="resultcupon"
+		statementType="CALLABLE" parameterType="map">
+		EXEC USP_VALIDACIONCUPON
+		#{codigocupon},#{paracupon},#{fechaida},#{fecharetorno}
+	</select>
+</mapper>

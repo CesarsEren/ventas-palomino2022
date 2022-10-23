@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="boletoBeanIbatis" id="insertMapBoletaje">
+		<id property="Nro" column="Nro" />
+		<result property="Salida" column="Salida" />
+		<result property="Destino" column="Destino" />
+		<result property="DestinoD" column="DestinoD" />
+		<result property="FechaViaje" column="FechaViaje" />
+		<result property="HoraViaje" column="HoraViaje" />
+		<result property="HoraViajeIni" column="HoraViajeIni" />
+		<result property="FechaEmision" column="FechaEmision" />
+		<result property="Empresa" column="Empresa" />
+		<result property="EmpresaD" column="EmpresaD" />
+		<result property="Serie" column="Serie" />
+		<result property="Numero" column="Numero" />
+		<result property="Origen" column="Origen" />
+		<result property="OrigenD" column="OrigenD" />
+		<result property="Destino1" column="Destino1" />
+		<result property="Destino1D" column="Destino1D" />
+		<result property="Tipo" column="Tipo" />
+		<result property="TipoD" column="TipoD" />
+		<result property="Asiento" column="Asiento" />
+		<result property="Retorno" column="Retorno" />
+		<result property="PrecioAct" column="PrecioAct" />
+		<result property="Autorizo" column="Autorizo" />
+		<result property="Codigo" column="Codigo" />
+		<result property="Precio" column="Precio" />
+		<result property="Identidad" column="Identidad" />
+		<result property="IdentidadD" column="IdentidadD" />
+		<result property="DNI" column="DNI" />
+		<result property="Edad" column="Edad" />
+		<result property="Telefono" column="Telefono" />
+		<result property="Ruc" column="Ruc" />
+		<result property="Razon" column="Razon" />
+		<result property="Usuario" column="Usuario" />
+		<result property="Terminal" column="Terminal" />
+		<result property="Agencia" column="Agencia" />
+		<result property="AgenciaD" column="AgenciaD" />
+		<result property="otro" column="otro" />
+		<result property="Comentario" column="Comentario" />
+		<result property="Intermedio" column="Intermedio" />
+		<result property="Comida" column="Comida" />
+		<result property="Voucher" column="Voucher" />
+		<result property="Nombre" column="Nombre" />
+		<result property="agenciaembarque" column="agenciaembarque" />
+		<result property="agenciaembarqued" column="agenciaembarqued" />
+		<result property="EstadoWeb" column="EstadoWeb" />
+		<result property="UsuarioVisa" column="UsuarioVisa" />
+	</resultMap>
+
+	<resultMap type="boletoBeanIbatis" id="selectMapBoletaje">
+		<id property="Nro" column="Nro" />
+		<result property="Salida" column="Salida" />
+		<result property="Destino" column="Destino" />
+		<result property="DestinoD" column="DestinoD" />
+		<result property="Origen" column="Origen" />
+		<result property="OrigenD" column="OrigenD" />
+		<result property="Destino1" column="Destino1" />
+		<result property="Destino1D" column="Destino1D" />
+		<result property="Tipo" column="Tipo" />
+		<result property="TipoD" column="TipoD" />
+		<result property="Asiento" column="Asiento" />
+
+	</resultMap>
+	
+	<resultMap type="boletoBeanIbatis" id="selectMapDescuento">
+		<id property="PorcentajeDescuento" column="PorcentajeDescuento" />
+	</resultMap>
+
+	<resultMap type="boletoBeanIbatis" id="asientoBoletoResultado">
+		<id property="Nro" column="Nro"></id>
+		<result property="Identidad" column="Identidad" />
+		<result property="IdentidadD" column="IdentidadD" />
+		<result property="DNI" column="DNI" />
+		<result property="Edad" column="Edad" />
+		<result property="Telefono" column="Telefono" />
+		<result property="Ruc" column="Ruc" />
+		<result property="agenciaembarque" column="agenciaembarque" />
+		<result property="Nombre" column="Nombre" />
+		<result property="PrecioAct" column="PrecioAct" />
+		<result property="Origen" column="Origen" />
+		<result property="OrigenD" column="OrigenD" />
+		<result property="Destino1" column="Destino1" />
+		<result property="nroDestino" column="Destino" />
+		<result property="nroServicio" column="nroServicio" />
+		<result property="Destino1D" column="Destino1D" />
+
+		<result property="nroServiciocodigo" column="ServicioCodigo" />
+		<result property="nroDestinocodigo" column="destinocodigo" />
+	</resultMap>
+
+	<insert id="SQL_RegistroVentaBoletaje" statementType="CALLABLE"
+		parameterType="boletoBeanIbatis">
+
+		USP_INSERT_VENTA_B_VENTA_SQL_WEB
+
+		#{Nro},#{Salida},#{Destino},#{DestinoD},#{FechaViaje},#{HoraViaje},#{HoraViajeIni},#{FechaEmision},#{Empresa},#{EmpresaD},
+		#{Serie},#{Numero},#{Origen},#{OrigenD},#{Destino1},#{Destino1D},#{Tipo},#{TipoD},#{Asiento},#{Retorno},
+		#{PrecioAct},#{Autorizo},#{Codigo},#{Precio},#{Identidad},#{IdentidadD},#{DNI},#{Edad},#{Telefono},#{Ruc},
+		#{Razon},#{Usuario},#{Terminal},#{Agencia},#{AgenciaD},#{otro},#{Comentario},#{Intermedio},#{Comida},#{Voucher},#{Nombre},
+		#{agenciaembarque},#{agenciaembarqued},#{EstadoWeb},#{UsuarioVisa},#{token_movil_app},#{Eticket},#{promocionWeb}
+
+	</insert>
+
+	<update id="SQL_UpdateKilometrajePasajero" statementType="CALLABLE">
+
+		USP_INCREMENTA_KILOMETRAJE_PASAJEROS_V_PASAJEROS_SQL
+
+	</update>
+
+	<select id="SQL_Obtiene_Venta_Asiento_Ocupado" resultMap="selectMapBoletaje"
+		statementType="CALLABLE" parameterType="map">
+
+		USP_SELECT_ASIENTO_OCUPADO_B_Venta_Web_SQL_WEB
+		#{nroProgramacion},#{asiento}
+	</select>
+
+	<select id="SQL_Cuenta_Asiento_Ocupados_Por_Venta" resultType="int"
+		parameterType="int" statementType="CALLABLE">
+		cuenta_asientos_ocupados_por_venta #{salida}
+	</select>
+
+	<select id="SQL_getVentasRealizadasView" statementType="CALLABLE"
+		resultMap="asientoBoletoResultado" parameterType="map">
+		USP_LIST_VENTAS_REALIZADAS_B_Venta_SQL #{usuario},#{offset},#{limit}
+	</select>
+
+	<select id="SQL_getCountVentasRealizadasImprimir" statementType="CALLABLE"
+		resultType="int" parameterType="map">
+		USP_LIST_COUNT_VENTAS_REALIZADAS_B_Venta_SQL #{usuario}
+	</select>
+
+	<select id="SQL_getVentasRealizadasReImprimir" statementType="CALLABLE"
+		resultMap="asientoBoletoResultado" parameterType="map">
+		USP_LIST_VENTAS_REALIZADAS_REIMPRIMIR_B_Venta_SQL
+		#{usuario},#{Nro},#{Salida}
+	</select>
+
+	<select id="SQL_getVentasRealizadasImprimir" statementType="CALLABLE"
+		resultMap="asientoBoletoResultado" parameterType="map">
+		USP_LIST_VENTAS_REALIZADAS_IMPRIMIR_B_Venta_SQL
+		#{usuario},#{Nro},#{Salida}
+	</select>
+
+	<select id="SQL_getVentasRealizadasVisaImprimir" statementType="CALLABLE"
+		resultMap="asientoBoletoResultado" parameterType="map">
+		USP_LIST_VENTAS_REALIZADAS_VISA_IMPRIMIR_B_Venta_SQL #{EticketVisa}
+	</select>
+
+
+	<delete id="SQL_DeleteVentaBoletaje" statementType="CALLABLE"
+		parameterType="map">
+		USP_DELETE_VENTA_B_VENTA_SQL_WEB #{Nro},#{Salida}
+	</delete>
+
+	<delete id="SQL_DeleteVentaBoletajeXestado" statementType="CALLABLE"
+		parameterType="map">
+		USP_DELETE_VENTA_ESTADO_B_VENTA_SQL_WEB #{EstadoWeb}
+	</delete>
+
+	<update id="SQL_UpdateVentaBoletaje" statementType="CALLABLE"
+		parameterType="map">
+		USP_UPDATE_VENTA_B_VENTA_SQL_WEB
+		#{Nro},#{Salida},#{Identidad},#{IdentidadD},#{DNI},#{Nombre},#{Edad},#{Telefono},#{Ruc},#{Razon},
+		#{Origen},#{OrigenD},#{Destino1},#{Destino1D},#{HoraViaje}
+	</update>
+
+	<update id="SQL_UpdateVentaBoletajeConfirmado" statementType="CALLABLE"
+		parameterType="map">
+		USP_UPDATE_VENTA_CONFIRMADA_B_VENTA_SQL_WEB
+		#{Nro},#{Salida},#{EstadoWeb},#{EticketVisa},#{Usuario},#{NumeroTarjeta},#{TarjetaHabiente},#{Eticket},#{Medio_Pago}
+
+	</update>
+
+	<update id="SQL_UpdateTiempoVisa_Venta" statementType="CALLABLE"
+		parameterType="map">
+		USP_UPDATE_TIEMPO_VISA_B_VENTA_SQL_WEB #{Nro},#{Salida},#{ClienteVisa}
+	</update>
+
+	<update id="SQL_UpdateTicket_Venta" statementType="CALLABLE"
+		parameterType="map">
+		USP_UPDATE_TICKET_B_VENTA_SQL_WEB #{Nro},#{Salida},#{Eticket}
+	</update>
+
+	<select id="SQL_Select_Venta_Visa" statementType="CALLABLE"
+		parameterType="map" resultMap="asientoBoletoResultado">
+		USP_SELECT_VENTA_VISA_B_VENTA_SQL_WEB #{Nro},#{Salida}
+	</select>
+
+	<select id="SQL_Select_Venta_Openpay" statementType="CALLABLE"
+		parameterType="map" resultMap="asientoBoletoResultado">
+		USP_SELECT_VENTA_OPENPAY_B_VENTA_SQL_WEB #{Nro},#{Salida}
+	</select>
+
+	<select id="SQL_Select_Venta_Embarcar" statementType="CALLABLE"
+		parameterType="map" resultMap="asientoBoletoResultado">
+		USP_SELECT_VENTAS_EMBARCAR_B_VENTA_SQL_WEB
+	</select>
+
+	<select id="SQL_Select_Imprimir_Voucher_Cliente_B_Venta"
+		statementType="CALLABLE" parameterType="map" resultMap="asientoBoletoResultado">
+		USP_LIST_IMPRIMIR_VOUCHER_CLIENTE_B_Venta_SQL #{Nro},#{Salida}
+	</select>
+	
+	<select id="SQL_Select_Buscar_promocion" statementType="CALLABLE"
+		parameterType="map" resultMap="selectMapDescuento">
+		busParametrosPromocion #{fecha}
+	</select>
+
+	<update id="SQL_UpdateVentaBoletajeNoConfirmado" statementType="CALLABLE"
+		parameterType="map">
+		USP_UPDATE_VENTA_NO_CONFIRMADA_B_VENTA_SQL_WEB #{EstadoWeb}
+
+	</update>
+
+	<update id="SQL_UpdateVentaBoletajePagoEfectivo" statementType="CALLABLE"
+		parameterType="map">
+
+		USP_UPDATE_VENTA_PAGOEFECTIVO_V_B_VENTA_SQL_WEB #{Nro},#{Salida},#{NroCIP},#{EstadoWeb},#{Usuario},#{NroOrden}
+
+	</update>
+	<update id="SQL_UpdateTiempoPagoEfectivo" statementType="CALLABLE"
+		parameterType="map">
+
+		USP_UPDATE_TIEMPO_VENTA_PAGOEFECTIVO_B_VENTA_SQL_WEB #{NroCIP}
+
+	</update>
+
+	<update id="SQL_UpdateVentaBoletajePagoEfectivoConfirmacion"
+		statementType="CALLABLE" parameterType="map">
+
+		USP_UPDATE_VENTA_PAGOEFECTIVO_CONFIRMACION_V_B_VENTA_SQL_WEB
+		#{Nro},#{Salida},#{EstadoWeb},#{MedioPago},#{EstadoCIP}
+
+	</update>
+
+	<update id="SQL_UpdateVentaBoletajePagoEfectivoVerificaConfirmacion"
+		statementType="CALLABLE" parameterType="map">
+
+		USP_UPDATE_VENTA_PAGOEFECTIVO_VERIFICA_CONFIRMACION_V_B_VENTA_SQL_WEB
+		#{Nro},#{Salida},#{EstadoWeb},#{MedioPago},#{EstadoCIP}
+
+	</update>
+
+	<select id="SQL_SelectListVentaBoletajePagoEfectivo"
+		statementType="CALLABLE" parameterType="map" resultMap="asientoBoletoResultado">
+
+		USP_SELECT_LIST_VENTA_PAGOEFECTIVO_V_B_VENTA_SQL_WEB #{NroCIP}
+
+	</select>
+
+	<select id="SQL_Select_Venta_PagoEfectivo" statementType="CALLABLE"
+		parameterType="map" resultMap="asientoBoletoResultado">
+
+		USP_SELECT_VENTA_PAGOEFECTIVO_V_B_VENTA_SQL_WEB #{Nro},#{Salida}
+
+	</select>
+
+	<select id="SQL_Select_Venta_Datos_PagoEfectivo" statementType="CALLABLE"
+		parameterType="map" resultMap="asientoBoletoResultado">
+
+		USP_SELECT_VENTA_DATOS_PAGOEFECTIVO_B_VENTA_SQL_WEB
+		#{Nro},#{Salida},#{TokenCIP}
+
+	</select>
+
+	<select id="SQL_Select_Venta_Datos_OpenPay" statementType="CALLABLE"
+		parameterType="map" resultMap="asientoBoletoResultado">
+
+		USP_SELECT_VENTA_DATOS_OPENPAY_B_VENTA_SQL_WEB
+		#{Nro},#{Salida},#{TokenCIP}
+
+	</select>
+
+	<select id="SQL_Select_Venta_Imprimir_PagoEfectivo"
+		statementType="CALLABLE" parameterType="map" resultMap="asientoBoletoResultado">
+
+		USP_SELECT_VENTA_IMPRIMIR_PAGOEFECTIVO_B_VENTA_SQL_WEB #{NroCIP}
+
+	</select>
+
+	<delete id="SQL_DeleteVentaExotrnoPagoEfectivo" statementType="CALLABLE"
+		parameterType="map">
+		USP_DELETE_VENTA_EXTORNO_PAGOEFECTIVO_B_VENTA_SQL_WEB
+		#{Nro},#{Salida},#{Eticket},#{FechaHora},#{Medio_Pago}
+	</delete>
+
+	<select id="SQL_getVentasRealizadasAgenteAdmin" statementType="CALLABLE"
+		parameterType="map" resultMap="asientoBoletoResultado">
+
+		USP_SELECT_VENTA_AGENTE_ADMIN_B_VENTA_SQL_WEB
+		#{Ruc},#{offset},#{limit}
+
+	</select>
+
+	<select id="SQL_getCountVentasRealizadasAgenteAdminImprimir"
+		statementType="CALLABLE" resultType="int" parameterType="map">
+		USP_LIST_COUNT_VENTAS_AGENTE_ADMIN_REALIZADAS_B_Venta_SQL #{Ruc}
+	</select>
+
+	<update id="SQL_UpdateTiempoVentaCliente" statementType="CALLABLE"
+		parameterType="map">
+
+		USP_UPDATE_TIEMPO_VENTA_CLIENTE_SQL_WEB #{Nro},#{Salida}
+
+	</update>
+
+	<select id="SQL_Select_Verifica_Venta_No_Confirmada_Visa"
+		statementType="CALLABLE" parameterType="map" resultMap="asientoBoletoResultado">
+
+
+		USP_SELECT_VENTA_NO_CONFIRMADA_VISA_B_venta_SQL_WEB #{Eticket}
+
+	</select>
+
+	<select id="SQL_Select_Ventas_Pendientes_Visa" statementType="CALLABLE"
+		resultMap="asientoBoletoResultado">
+
+
+		USP_SELECT_VENTAS_PENDIENTES_VISA_B_venta_SQL_WEB
+
+	</select>
+
+	<select id="SQL_Select_Ventas_Pendientes_PagoEfectivo"
+		statementType="CALLABLE" resultMap="asientoBoletoResultado">
+
+
+		USP_SELECT_VENTAS_PENDIENTES_PAGOEFECTIVO_B_venta_SQL_WEB
+
+	</select>
+
+	<select id="SQL_Select_Ventas_Pendientes_OpenPay" statementType="CALLABLE"
+		resultMap="asientoBoletoResultado">
+
+		USP_SELECT_VENTAS_PENDIENTES_OPENPAY_B_venta_SQL_WEB
+
+	</select>	
+	
+
+	<update id="SQL_Update_Ventas_Visa_Auditoria" statementType="CALLABLE"
+		parameterType="map">
+
+
+		USP_UPDATE_VENTAS_VISA_AUDITORIA_B_Venta_AUDI_SQL_WEB #{Eticket}
+
+	</update>
+	<!-- AÑADIDO PARA CUPONES -->
+	<update id="SQL_UpdatePrecioXCupon" statementType="CALLABLE"
+		parameterType="map">
+		exec USP_UPDATEPRECIOXCUPON_VENTA_B_VENTA_SQL_WEB
+		#{Nro},#{Salida},#{precio},#{cupon}
+	</update>
+
+	<update id="SQL_LiberarAsiento" statementType="CALLABLE"
+		parameterType="map">
+		exec USP_POST_LiberarAsiento #{nro},#{username}
+	</update>
+
+	<!-- <update id="SQL_LiberarAsientoWeb" statementType="CALLABLE" parameterType="map"> 
+		exec USP_POST_LiberarAsientoWeb #{nro},#{username} </update> -->
+
+	<select id="GetVentasTelefonicasXUsuario" parameterType="map"
+		resultType="pe.com.grupopalomino.sistema.boletaje.bean.B_VentaBean"
+		statementType="CALLABLE">
+		execute USP_GetVentasTelefonicasXUsuario
+		#{todos},#{usuario},#{limit},#{offset}
+	</select>
+
+	<select id="SQL_GetIsVentaWeb" parameterType="map"
+		resultType="pe.com.grupopalomino.sistema.boletaje.bean.B_VentaBean"
+		statementType="CALLABLE">
+		execute USP_GetIsAsientoWeb #{Nro},#{DNI}
+	</select>
+	<select id="GetCounVentasTelefonicasXUsuario" parameterType="map"
+		resultType="int" statementType="CALLABLE">
+		execute
+		USP_GetCountVentaTelefonicaXUsuario #{todos},#{usuario}
+	</select>
+
+	<select id="SQL_GetIsVentaRedBus"
+		resultType="pe.com.grupopalomino.sistema.boletaje.bean.B_VentaBean"
+		parameterType="long" statementType="CALLABLE">
+		execute USP_GetIsVentaRedBus #{nro}
+	</select>
+
+	<select id="SQL_GetVentasPagoEfectivoReconfirmar"
+		resultType="pe.com.grupopalomino.sistema.boletaje.bean.B_VentaBean"
+		parameterType="String" statementType="CALLABLE">
+		execute USP_GetVentasXEticketCIP
+		#{eticket}
+	</select>
+
+	<select id="SQL_getEticketPagoEfectivoPorConfirmar" resultType="String"
+		statementType="CALLABLE">
+		execute usp_getEticketPagoEfectivoPorConfirmar
+	</select>
+
+	<insert id="InsertBoletosRedBusLiberados"
+		parameterType="pe.com.grupopalomino.sistema.boletaje.bean.B_BoletosRedBusEliminados"
+		statementType="CALLABLE">
+		execute USP_InsertBoletosRedBusLiberados
+		#{Nro},#{CodigoMesaAyuda},#{Motivo},#{Usuario}
+	</insert>
+
+</mapper>	
+	
+	
+

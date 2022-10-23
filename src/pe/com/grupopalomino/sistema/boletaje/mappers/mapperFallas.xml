@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<!-- <resultMap type="fallasBeanIbatis" id="resultfallas"> <result property="id" 
+		column="id"/> <result property="nrobus" column="nrobus"/> <result property="idruta" 
+		column="idruta"/> <result property="rutaD" column="rutaD"/> <result property="Asunto" 
+		column="asunto"/> <result property="tipofalla" column="tipofalla"/> <result 
+		property="Detalle" column="Detalle"/> <result property="fechacreacion" column="fechacreacion"/> 
+		<result property="foto" column="foto"/> <result property="estado" column="estado"/> 
+		<result property="resolvio" column="resolvio"/> </resultMap> -->
+
+
+
+	<resultMap type="fallasBeanIbatis" id="resultfallasTabla">
+		<result property="id" column="id" />
+		<result property="asunto" column="asunto" />
+		<result property="detalle" column="detalle" />
+		<result property="rutaD" column="rutaD" />
+		<result property="categoriaD" column="Categoria" />
+		<result property="SubcategoriaD" column="SubCategoria" />
+		<result property="foto" column="foto" />
+		<result property="nrobus" column="nrobus" />
+		<result property="falladetalle" column="tipofallaD" />
+		<result property="fechacreacion" column="fechacreacion" />
+		<result property="estado" column="estado" />
+		<result property="registro" column="registro" />
+		<result property="resolvio" column="resolvio" />
+	</resultMap>
+
+	<resultMap type="fallasBeanIbatis" id="resultfallaComplete">
+		<result property="id" column="id" />
+		<result property="asunto" column="asunto" />
+		<result property="detalle" column="detalle" />
+		<result property="detalleenproceso" column="detalleenproceso" />
+		<result property="detallesolucionado" column="detallesolucionado" />
+		<result property="nrobus" column="nrobus" />
+		<result property="rutaD" column="RutaD" />
+		<result property="categoriaD" column="Categoria" />
+		<result property="SubcategoriaD" column="SubCategoria" />
+		<result property="foto" column="foto" />
+		<result property="registro" column="registro" />
+		<result property="fechacreacion" column="fechacreacion" />
+		<result property="resolvio" column="resolvio" />
+		<result property="fecharesolucion" column="fecharesolucion" />
+		<result property="fechaenproceso" column="fechaenproceso" />
+		<result property="estado" column="estado" />
+	</resultMap>
+
+
+	<select id="SQL_GET_V_ListBitacoraFallas_Bitacora" resultMap="resultfallasTabla"
+		statementType="CALLABLE" parameterType="map">
+		EXEC USP_GET_V_ListBitacoraFallas_Bitacora #{estado},#{offset},#{limit}
+	</select>
+
+	<select id="SQL_GET_V_ListBitacoraFallas_BitacoraTodos"
+		resultType="int" statementType="CALLABLE" parameterType="String">
+		EXEC USP_GET_V_ListBitacoraFallas_BitacoraTodos #{estado}
+	</select>
+
+	<!-- Este no se esta usando \*/ -->
+	<select id="SQL_GET_V_ListBitacoraFallas_BitacoraXBus"
+		resultMap="resultfallasTabla" statementType="CALLABLE" parameterType="fallasBeanIbatis">
+		EXEC USP_GET_V_ListBitacoraFallas_BitacoraXBus #{nrobus}
+	</select>
+	<!-- Este no se esta usando \*/ -->
+
+	<select id="SQL_GET_V_BitacoraFalla_BitacoraX_ID" resultMap="resultfallaComplete"
+		statementType="CALLABLE" parameterType="int">
+		EXEC USP_GET_V_BitacoraFalla_BitacoraX_ID #{id}
+	</select>
+
+	<select id="SQL_ConsultaFallasXnroBus_Estado_Bitacora"
+		resultMap="resultfallasTabla" statementType="CALLABLE" parameterType="map">
+		EXEC USP_ConsultaFallasXnroBus_Estado_Bitacora
+		#{estado},#{nrobus},#{offset},#{limit}
+	</select>
+
+	<select id="SQL_ConsultaFallasXnroBus_Estado_BitacoraTotal"
+		resultMap="resultfallasTabla" statementType="CALLABLE" parameterType="map">
+		EXEC USP_ConsultaFallasXnroBus_Estado_BitacoraTotal
+		#{estado},#{nrobus},#{offset},#{limit}
+	</select>
+
+	<insert id="SQL_INSERT_V_Falla_Bitacora" parameterType="fallasBeanIbatis"
+		statementType="CALLABLE">
+		EXEC USP_INSERT_V_Falla_Bitacora
+		#{nrobus},#{idruta},#{asunto},#{detalle},#{idsubcategoria},#{foto},#{registro}
+	</insert>
+
+
+	<update id="SQL_UPDATE_V_BitacoraFalla_Estado_Bitacora"
+		parameterType="map" statementType="CALLABLE">
+		EXEC
+		USP_UPDATE_V_BitacoraFalla_Estado_Bitacora
+		#{id},#{estado},#{resolvio},#{contenido}
+	</update>
+
+</mapper>

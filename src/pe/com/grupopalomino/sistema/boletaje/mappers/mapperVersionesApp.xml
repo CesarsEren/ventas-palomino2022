@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="versionesappBeanIbatis" id="resultVersiones">
+		<id property="id" column="id" />
+		<result property="Plataforma" column="Plataforma" />
+		<result property="Fecha" column="Fecha" />
+		<result property="Version_App" column="Version_App" />
+		<result property="Critico" column="Critico" />
+
+	</resultMap>
+
+	<insert id="SQL_RegistroVersionesApp" parameterType="versionesappBeanIbatis"
+		statementType="CALLABLE">
+
+		USP_INSERT_VERSIONES_APP_B_VersionesApp_SQL #{Plataforma},#{Fecha},#{Version_App},#{Critico}
+
+	</insert>
+
+	<select id="SQL_MuestraVersionesApp" resultMap="resultVersiones"
+		statementType="CALLABLE">
+
+		USP_SELECT_LISTA_VERSIONES_APP_B_VersionesApp_SQL #{offset},#{limit}
+
+	</select>
+
+
+	<select id="SQL_SelectVersionesApp" resultMap="resultVersiones"
+		statementType="CALLABLE">
+
+		USP_SELECT_VERSIONES_APP_B_VersionesApp_SQL #{id}
+
+	</select>
+
+
+	<select id="SQL_count_B_VersionesApp" statementType="CALLABLE"
+		resultType="int">
+
+		EXECUTE USP_SELECT_COUNT_VERSIONES_APP_B_VersionesApp_SQL
+
+	</select>
+
+	<update id="SQL_update_versionesapp_web" statementType="CALLABLE"
+		parameterType="map">
+
+		USP_UPDATE_VERSIONES_APP_B_VersionesApp_SQL #{id},#{Plataforma},#{Fecha},#{Version_App},#{Critico}
+
+	</update>
+
+	<delete id="SQL_delete_versionesapp_web" statementType="CALLABLE"
+		parameterType="map">
+
+		USP_DELETE_VERSIONES_APP_B_VersionesApp_SQL #{id}
+
+	</delete>
+
+
+
+</mapper>

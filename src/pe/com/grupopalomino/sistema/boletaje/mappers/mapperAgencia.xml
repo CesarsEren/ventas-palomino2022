@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="agenciasBeanIbatis" id="resultAgencia">
+
+		<result property="AgenciaVje" column="AgenciaVje" />
+		<result property="Ciudad" column="Ciudad" />
+		<result property="CiudadD" column="CiudadD" />
+		<result property="Codigo" column="Codigo" />
+		<result property="CodigoWeb" column="CodigoWeb" />
+		<result property="CodLiq" column="CodLiq" />
+		<result property="Color" column="Color" />
+		<result property="Destino" column="Destino" />
+		<result property="Detalle" column="Detalle" />
+		<result property="Direccion" column="Direccion" />
+		<result property="GiroRadial" column="GiroRadial" />
+		<result property="Intermedio" column="Intermedio" />
+		<result property="ManejaCodSecreto" column="ManejaCodSecreto" />
+		<result property="Sistema" column="Sistema" />
+		<result property="Telefono" column="Telefono" />
+		<result property="longitud" column="longitud" />
+		<result property="latitud" column="latitud" />
+
+	</resultMap>
+	<resultMap type="agenciasBeanIbatis" id="resultVentasAgencia">
+		<result property="Detalle" column="Detalle" />
+		<result property="cantidad" column="cantidad" />
+	</resultMap>
+
+	<select id="SQL_getListaAsientoOcupadoXAgenciaView" resultMap="resultVentasAgencia"
+		statementType="CALLABLE">
+		USP_ASIENTOS_OCUPADOS_V_AGENCIAS_SQL #{nroProgramacion}
+	</select>
+	<select id="SQL_getListaAsientoReservadoXAgenciaView" resultMap="resultVentasAgencia"
+		statementType="CALLABLE">
+		USP_ASIENTOS_RESERVADOS_V_AGENCIAS_SQL #{nroProgramacion}
+	</select>
+	<select id="SQL_ObtenerAgencias" resultMap="resultAgencia"
+		statementType="CALLABLE">
+		USP_OBTENER_AGENCIAS_V_Agencias_Web #{Codigo}
+	</select>
+	<select id="SQL_ObtenerComidas" resultMap="resultAgencia"
+		statementType="CALLABLE">
+		USP_TIPOS_COMIDAS_V_AGENCIAS_SQL #{Salida}
+	</select>
+	<select id="SQL_ObtenerAgenciasDisponibles" resultMap="resultAgencia"
+		statementType="CALLABLE" parameterType="map">
+		USP_AGENCIAS_DISPONIBLES_V_AGENCIAS_SQL #{ciudad},#{tipo}
+	</select>
+
+	<select id="SQL_SELECT_AGENCIAS" resultMap="resultAgencia"
+		statementType="CALLABLE">
+		USP_SELECT_AGENCIAS_V_Agencias_SQL
+	</select>
+
+</mapper>

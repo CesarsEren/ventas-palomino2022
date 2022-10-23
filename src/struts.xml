@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" 
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- Nombre del proyecto -->
+	<package name="BoletajePalomino03" namespace="/"
+		extends="struts-default,json-default">
+
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="excludeProperties">
+					actionErrors,
+					actionMessages,
+					advisors,
+					targetSource,
+					callbacks,
+					exposeProxy,
+					fieldErrors,
+					frozen,
+					locale,
+					targetClass,
+					proxyTargetClass,
+					proxiedInterfaces,
+					preFiltered
+				</param>
+			</result-type>
+		</result-types>
+
+		<global-results>
+			<result name="NOLOGUEADO" type="redirect">/a_Inicio</result>
+			<result name="ACCESODENEGADO" type="redirect">/accesodenegado</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping result="ACCESODENEGADO"
+				exception="org.springframework.security.access.AccessDeniedException">
+			</exception-mapping>
+		</global-exception-mappings>
+
+	</package>
+
+	<constant name="struts.action.excludePattern" value="^ws://.+$"></constant>
+
+</struts>
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="ciudadesBeanIbatis" id="resultCiudades">
+
+		<result property="codigo" column="codigo" />
+		<result property="detalle" column="detalle" />
+		<result property="sistema" column="sistema" />
+		<result property="codLiq" column="codLiq" />
+		<result property="depositoAgencia" column="depositoAgencia" />
+		<result property="TDP" column="TDP" />
+
+	</resultMap>
+
+	<select id="SQL_LIST_CIUDADES_DISPONIBLES" resultMap="resultCiudades"
+		statementType="CALLABLE">
+
+		EXEC USP_CIUDADES_DISPONIBLES_V_Ciudades_SQL #{tipo}
+
+	</select>
+
+	<select id="SQL_GET_COUNT_CIUDADES" statementType="CALLABLE"
+		resultType="int">
+		EXECUTE USP_GET_COUNT_CIUDADES
+	</select>
+	<select id="SQL_LIST_CIUDADES" resultMap="resultCiudades"
+		statementType="CALLABLE">
+		EXEC USP_CIUDADES_V_Ciudades_SQL
+	</select>
+
+	<select id="SQL_LIST_CIUDADES_TRANSPORTE_DE_PERSONAL" resultMap="resultCiudades"
+		parameterType="map" statementType="CALLABLE">
+		EXEC USP_ALL_CIUDADES_TRANSPORTE_DE_PERSONAL #{offset},#{limit}
+	</select>
+	<update id="SQL_UPDATE_ESTADO_CIUDAD_TRANSPORTE_DE_PERSONAL"
+		parameterType="String" statementType="CALLABLE">
+		EXEC USP_UPDATE_ESTADO_TRANSPORTE_DE_PERSONAL #{codigo}
+	</update>
+
+	<insert id="SQL_INSERT_CIUDAD_TRANSPORTE_DE_PERSONAL"
+		parameterType="String" statementType="CALLABLE">
+		EXEC USP_INSERT_CIUDAD_TRANSPORTE_DE_PERSONAL #{detalle}
+	</insert>
+
+</mapper>

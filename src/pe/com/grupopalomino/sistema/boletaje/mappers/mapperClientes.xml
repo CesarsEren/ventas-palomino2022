@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="clientesBeanIbatis" id="resultCliente">
+
+		<result property="Ruc" column="Ruc" />
+		<result property="Razon" column="Razon" />
+		<result property="Direccion" column="Direccion" />
+		<result property="Credito" column="Credito" />
+		<result property="Responsable" column="Responsable" />
+		<result property="Correo" column="Correo" />
+		<result property="Telefono" column="Telefono" />
+		<result property="Tipo" column="Tipo" />
+	</resultMap>
+
+	<select id="SQL_ObtenerClienteRUC" resultMap="resultCliente"
+		statementType="CALLABLE">
+
+		EXEC USP_OBTENER_CLIENTE_EXISTENTE_Web #{DNI}
+
+	</select>
+
+	<select id="SQL_Lista_Historial_Compras" statementType="CALLABLE"
+		resultType="map">
+
+		EXEC USP_LIST_HISTORIAL_COMPRAS #{username}
+
+	</select>
+
+	<insert id="SQL_RegistroCliente" parameterType="clientesBeanIbatis"
+		statementType="CALLABLE">
+
+		EXEC USP_INSERT_CLIENTES_V_Clientes_SQL_WEB
+		#{Ruc},#{Razon},#{Direccion},#{Credito},#{Responsable},
+		#{Correo},#{Telefono},#{Tipo}
+
+	</insert>
+
+	<update id="SQL_UPDATE_ESTADO_TRANSPORTE_DE_PERSONAL"
+		parameterType="map" statementType="CALLABLE">
+
+		EXEC USP_UPDATE_ESTADO_TRANSPORTE_DE_PERSONAL #{id},#{TDP}
+
+	</update>
+
+</mapper>

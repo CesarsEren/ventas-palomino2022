@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="usuarioshorariosBeanIbatis" id="resultHorarios">
+		<result property="Id" column="Id" />
+		<result property="Usuario" column="Usuario" />
+		<result property="LunesDesde" column="LunesDesde" />
+		<result property="LunesHasta" column="LunesHasta" />
+		<result property="MartesDesde" column="MartesDesde" />
+		<result property="MartesHasta" column="MartesHasta" />
+		<result property="MiercolesDesde" column="MiercolesDesde" />
+		<result property="MiercolesHasta" column="MiercolesHasta" />
+		<result property="JuevesDesde" column="JuevesDesde" />
+		<result property="JuevesHasta" column="JuevesHasta" />
+		<result property="ViernesDesde" column="ViernesDesde" />
+		<result property="ViernesHasta" column="ViernesHasta" />
+		<result property="SabadoDesde" column="SabadoDesde" />
+		<result property="SabadoHasta" column="SabadoHasta" />
+		<result property="DomingoDesde" column="DomingoDesde" />
+		<result property="DomingoHasta" column="DomingoHasta" />
+
+	</resultMap>
+
+	<insert id="SQL_Insert_UsuariosHorarios_SQL" statementType="CALLABLE">
+
+		USP_INSERT_HORARIO_V_UsuarioHorarios_Web_SQL_WEB
+		#{Usuario},#{LunesDesde},#{LunesHasta},#{MartesDesde},#{MartesHasta},#{MiercolesDesde},#{MiercolesHasta},#{JuevesDesde},#{JuevesHasta},#{ViernesDesde},#{ViernesHasta},
+		#{SabadoDesde},#{SabadoHasta},#{DomingoDesde},#{DomingoHasta}
+	</insert>
+
+	<update id="SQL_Update_UsuarioHorarios_SQL" statementType="CALLABLE">
+
+		USP_UPDATE_HORARIO_V_UsuarioHorarios_Web_SQL_WEB
+		#{Usuario},#{LunesDesde},#{LunesHasta},#{MartesDesde},#{MartesHasta},#{MiercolesDesde},#{MiercolesHasta},#{JuevesDesde},#{JuevesHasta},#{ViernesDesde},#{ViernesHasta},
+		#{SabadoDesde},#{SabadoHasta},#{DomingoDesde},#{DomingoHasta}
+	</update>
+
+	<select id="SQL_Select_List_UsuarioHorarios_SQL" resultMap="resultHorarios"
+		statementType="CALLABLE" parameterType="map">
+
+		EXECUTE USP_SELECT_LIST_HORARIO_V_UsuarioHorarios_Web_SQL_WEB #{offset},
+		#{limit}
+
+	</select>
+
+	<select id="SQL_SelectUsuarioHorariosCount" resultType="int"
+		statementType="CALLABLE">
+
+		USP_SELECT_COUNT_HORARIO_V_UsuarioHorarios_Web_SQL_WEB
+
+	</select>
+
+	<select id="SQL_SelectIdUsuarioHorarios_SQL" resultMap="resultHorarios"
+		statementType="CALLABLE" parameterType="map">
+
+		EXECUTE USP_SELECT_Id_HORARIO_V_UsuarioHorarios_Web_SQL_WEB #{Id}
+
+	</select>
+
+	<select id="SQL_SelectUsuarioHorarios_SQL" resultMap="resultHorarios"
+		statementType="CALLABLE" parameterType="map">
+
+		EXECUTE USP_SELECT_HORARIO_V_UsuarioHorarios_Web_SQL_WEB #{Usuario}
+
+	</select>
+
+	<select id="SQL_SelectVerificaUsuarioHorarios_SQL" resultMap="resultHorarios"
+		statementType="CALLABLE" parameterType="map">
+
+		EXECUTE USP_VERIFICAR_HORARIO_V_UsuarioHorarios_Web_SQL_WEB #{Usuario}
+
+	</select>
+
+</mapper>

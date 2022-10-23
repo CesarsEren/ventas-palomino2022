@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<select id="SQL_ObtenerFechaServidor" resultType="String"
+		statementType="CALLABLE">
+		USP_OBTENER_FECHA_SERVIDOR_Web
+	</select>
+	<select id="SQL_ValidaRangoFecha" resultType="String"
+		statementType="CALLABLE" parameterType="map">
+		USP_LIST_VALIDA_RANGO_FECHAS_SQL #{fechaInicial},#{fechaFinal}
+	</select>
+
+
+
+</mapper>

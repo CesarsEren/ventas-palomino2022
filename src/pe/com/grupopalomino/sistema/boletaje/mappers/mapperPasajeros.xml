@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="pasajerosBeanIbatis" id="resultPasajero">
+
+		<result property="Codigo" column="Codigo" />
+		<result property="DNI" column="DNI" />
+		<result property="Nombre" column="Nombre" />
+		<result property="Edad" column="Edad" />
+		<result property="Telefono" column="Telefono" />
+		<result property="Kilometraje" column="Kilometraje" />
+		<result property="KilometrajeAct" column="KilometrajeAct" />
+	</resultMap>
+
+	<select id="SQL_ObtenerPasajeroDNI" resultMap="resultPasajero"
+		parameterType="map" statementType="CALLABLE">
+
+		USP_OBTENER_PASAJERO_EXISTENTE_Web #{DNI},#{Codigo}
+
+	</select>
+	<insert id="SQL_RegistroPasajero" parameterType="pasajerosBeanIbatis"
+		statementType="CALLABLE">
+
+		USP_INSERT_PASAJEROS_V_Pasajeros_SQL_WEB
+		#{Codigo},#{DNI},#{Nombre},#{Edad},#{Telefono},#{Kilometraje},#{KilometrajeAct}
+
+	</insert>
+
+</mapper>

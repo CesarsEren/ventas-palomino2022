@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="preguntasfrecuentesBeanIbatis" id="resultPreguntas">
+		<result property="Nro" column="Nro" />
+		<result property="Fecha" column="Fecha" />
+		<result property="Nombre" column="Nombre" />
+		<result property="Email" column="Email" />
+		<result property="Telefono" column="Telefono" />
+		<result property="Pregunta" column="Pregunta" />
+		<result property="Mensaje" column="Mensaje" />
+
+	</resultMap>
+
+	<insert id="SQL_RegistroPreguntasFrecuentes" parameterType="preguntasfrecuentesBeanIbatis"
+		statementType="CALLABLE">
+
+		USP_INSERT_PREGUNTAS_B_PreguntasFrecuentes_Web_SQL_WEB #{Nombre},#{Email},#{Telefono},#{Pregunta}
+	</insert>
+
+	<select id="SQL_VerificaPreguntas" resultType="preguntasfrecuentesBeanIbatis"
+		parameterType="map" statementType="CALLABLE">
+
+		USP_LISTA_VERIFICA_PREGUNTAS_X_USUARIO_B_PreguntasFrecuentes_Web_SQL_WEB
+		#{Email}
+
+	</select>
+
+
+</mapper>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- Es un registro de tipo de datos en MyBatis -->
+	<typeAliases>
+		<typeAlias alias="usuarioBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.spring.security.SpringSecurityUser" />
+		<typeAlias alias="clienteBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.spring.security.SpringSecurityClient" />
+		<typeAlias alias="agenciaWebBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_AgenciasWebBean" />
+		<typeAlias alias="boletoBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.B_VentaBean" />
+		<typeAlias alias="menuBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_MenusBean" />
+		<typeAlias alias="pRutaBusBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.B_ProgramacionRutaBusBean" />
+		<typeAlias alias="pSalidaBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.B_ProgramacionSalidaBean" />
+		<typeAlias alias="Precio_DesdeBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.Precio_Desde" />
+		<typeAlias alias="destinosBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_DestinosBean" />
+		<typeAlias alias="correlativoBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.B_Correlativos" />
+		<typeAlias alias="croquisBusBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_CroquisBusBean" />
+		<typeAlias alias="pasajerosBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_PasajerosBean" />
+		<typeAlias alias="clientesBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_ClientesBean" />
+		<typeAlias alias="cuentaCorrienteBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.B_CuentaCorrienteBean" />
+		<typeAlias alias="computerBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_ComputerBean" />
+		<typeAlias alias="agenciasBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_AgenciasBean" />
+		<typeAlias alias="serviciosBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_ServiciosBean" />
+		<typeAlias alias="rutasBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_RutasBean" />
+		<typeAlias alias="variosBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_Varios" />
+		<typeAlias alias="clienteRutasBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_Clientes_RutaPrecioBean" />
+		<typeAlias alias="usuarioshorariosBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_UsuarioHorariosBean" />
+		<typeAlias alias="programacionpagosBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_ProgramacionPagosBean" />
+		<typeAlias alias="reclamoBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.B_ReclamosBean" />
+		<typeAlias alias="reclamodetalleBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.B_ReclamosBeanDetalle" />
+		<typeAlias alias="motivoBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.B_MotivoBean" />
+		<typeAlias alias="empresasBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_EmpresasBean" />
+		<typeAlias alias="tipodocumentosBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_TipoDocumentosBean" />
+		<typeAlias alias="encomiendasBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.B_EncomiendasBean" />
+		<typeAlias alias="reclamocorrelativoBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.B_ReclamosCorrelativoBean" />
+		<typeAlias alias="versionesappBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.B_VersionesAppBean" />
+		<typeAlias alias="destinosClienteBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_DestinosClienteWebBean" />
+		<typeAlias alias="ciudadesBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_CiudadesBean" />
+		<typeAlias alias="destinosmapaBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_DestinosMapaBean" />
+		<typeAlias alias="destinosagenciasBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_DestinosAgenciasWebBean" />
+		<typeAlias alias="preguntasfrecuentesBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.B_PreguntasFrecuentesBean" />
+		<typeAlias alias="atencionreclamoBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.B_AtencionReclamosBean" />
+		<typeAlias alias="atencionreclamodetalleBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.B_AtencionReclamosBeanDetalle" />
+		<typeAlias alias="variosfacturacionBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_Varios_FacturacionBean" />
+		<typeAlias alias="facturacionBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.B_FacturacionBean" />
+		<typeAlias alias="ventasfacturacionBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_Ventas_FacturacionBean" />
+		<typeAlias alias="tipopromocionretornoBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_Promo_RetornoCBean" />
+		<typeAlias alias="cuponBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.Cupon" />
+		<typeAlias alias="fallasBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_Fallas" />
+		<typeAlias alias="categoriafallasBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_CategoriaFalla" />
+		<typeAlias alias="subcategoriaFallasBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.V_SubCategoriaFalla" />
+		<typeAlias alias="reporteContabilidadBeanIbatis"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.ReporteContabilidad" />
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="UNPOOLED">
+				<property name="driver"
+					value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+				<property name="url"
+					value="jdbc:sqlserver://172.16.10.200;database=Empresa" />
+				<property name="username" value="sa" />
+				<property name="password" value="palomino.123" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<!-- Registro de los mappers -->
+	<mappers>
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperLogin.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperSelectTravel.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperDestinos.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperProgramacionSalidas.xml" />
+		<mapper resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperMenu.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperGeneraCorrelativo.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperVentaBoletaje.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperFuncionesGenerales.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperPasajeros.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperClientes.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperCuentaCorriente.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperComputer.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperAgencia.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperServicio.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperRutas.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperV_Varios.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperAgenciaWeb.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperClientesRutas.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperUsuarioHorarios.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperProgramacionPagos.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperReclamos.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperEmpresa.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperEncomiendas.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperReclamosCorrelativo.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperVersionesApp.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperDestinosClienteWeb.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperCiudades.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperDestinosMapa.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperDestinosAgenciasWeb.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperPreguntasFrecuentes.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperAtencionReclamos.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperVariosFacturacion.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperFacturacion.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperVentasFacturacion.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperPromo_RetornoC.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperCupon.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperFallas.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperCategoriaFalla.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperSubCategoriaFalla.xml" />
+		<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperContabilidad.xml" />
+
+	</mappers>
+</configuration>

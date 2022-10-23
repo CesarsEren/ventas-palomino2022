@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="destinosmapaBeanIbatis" id="resultDestinosMapa">
+		<id property="Id" column="Id" />
+		<result property="Destino" column="Destino" />
+		<result property="DestinoD" column="DestinoD" />
+		<result property="hc_key" column="hc_key" />
+		<result property="href" column="href" />
+		<result property="img" column="img" />
+		<result property="coordenadas" column="coordenadas" />
+		<result property="disponible" column="disponible" />
+	</resultMap>
+
+	<select id="SQL_LIST_DESTINOS_MAPA" resultMap="resultDestinosMapa"
+		statementType="CALLABLE">
+
+		EXEC USP_DESINOS_MAPA_V_DestinosMapa_SQL
+
+	</select>
+
+
+</mapper>

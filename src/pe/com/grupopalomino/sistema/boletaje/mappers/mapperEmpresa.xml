@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="empresasBeanIbatis" id="resultEmpresas">
+
+		<id property="Codigo" column="Codigo" />
+		<result property="Ruc" column="Ruc" />
+		<result property="Razon" column="Razon" />
+		<result property="Direccion" column="Direccion" />
+		<result property="Telefono" column="Telefono" />
+		<result property="TicketAutoriza" column="TicketAutoriza" />
+		<result property="Correo" column="Correo" />
+		<result property="MTC_Usuario" column="MTC_Usuario" />
+		<result property="MTC_Password" column="MTC_Password" />
+		<result property="MTC_Partida" column="MTC_Partida" />
+	</resultMap>
+
+	<select id="SQL_Select_Empresas" resultMap="resultEmpresas"
+		statementType="CALLABLE">
+		USP_SELECT_EMPRESAS_V_EMPRESAS_SQL
+	</select>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="correlativoBeanIbatis" id="resultCorrelativo">
+		<result property="BusContratado" column="BusContratado" />
+		<result property="CorrelativoBol" column="CorrelativoBol" />
+		<result property="CorrelativoCtaCte" column="CorrelativoCtaCte" />
+		<result property="CorrelativoDesChofer" column="CorrelativoDesChofer" />
+		<result property="CorrelativoDoc" column="CorrelativoDoc" />
+		<result property="CorrelativoEnc" column="CorrelativoEnc" />
+		<result property="CorrelativoLiq" column="CorrelativoLiq" />
+		<result property="CorrelativoLiqHoja" column="CorrelativoLiqHoja" />
+		<result property="CorrelativoPago" column="CorrelativoPago" />
+		<result property="CorrelativoReserva" column="CorrelativoReserva" />
+		<result property="CorrelativoRuta" column="CorrelativoRuta" />
+		<result property="CorrelativoTriplng" column="CorrelativoTriplng" />
+	</resultMap>
+
+	<select id="SQL_GeneraCorrelativo" resultMap="resultCorrelativo"
+		statementType="CALLABLE">
+
+		USP_GENERA_CORRELATIVO_b_Correlativos_Web
+
+	</select>
+
+</mapper>

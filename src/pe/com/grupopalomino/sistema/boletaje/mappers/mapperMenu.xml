@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoletajePalomino03">
+	<resultMap type="menuBeanIbatis" id="resultMenu">
+		<id property="Menu" column="Menu" />
+		<result property="Descripcion" column="Descripcion" />
+		<result property="Niveles" column="Niveles" />
+		<result property="orden" column="orden" />
+	</resultMap>
+
+	<select id="SQL_getAccessView" parameterType="menuBeanIbatis"
+		resultMap="resultMenu" statementType="CALLABLE">
+
+		<!-- LLAMANDO AL PROCEDIMIENTO ALMACENADO DEL MENU -->
+		<!-- NOTA: LA LLAMADA AL PROCEDIMIENTO DEPENDE DE LAS BASE DE DATOS QUE 
+			SE TRABAJA -->
+
+		EXECUTE USP_LIST_INICIO_MENUS_V_Menus_SQL #{Niveles}
+	</select>
+</mapper>

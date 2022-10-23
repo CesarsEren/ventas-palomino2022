@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="agenciaWebBeanIbatis" id="resultAgenciaWeb">
+		<result property="id" column="id" />
+		<result property="codigo" column="codigo" />
+		<result property="direccion" column="direccion" />
+		<result property="razonSocial" column="razonSocial" />
+		<result property="ruc" column="ruc" />
+		<result property="correo" column="correo" />
+		<result property="telefono" column="telefono" />
+		<result property="estado" column="estado" />
+		<result property="personaContacto" column="personaContacto" />
+		<result property="limiteCredito" column="limiteCredito" />
+		<result property="telefono2" column="telefono2" />
+		<result property="documentoIdentidad" column="documentoIdentidad" />
+
+	</resultMap>
+
+	<select id="SQL_list_agencias_web" resultMap="resultAgenciaWeb"
+		statementType="CALLABLE">
+		EXECUTE USP_LIST_V_AGENCIAS_WEB_SQL #{limit}, #{offset}
+	</select>
+
+	<select id="SQL_obtiene_agencia_web_x_id" statementType="CALLABLE"
+		resultMap="resultAgenciaWeb">
+		EXECUTE USP_LIST_V_AGENCIA_WEB_X_ID_SQL #{id}
+	</select>
+
+	<select id="SQL_obtiene_agencia_web_x_Codigo" statementType="CALLABLE"
+		resultMap="resultAgenciaWeb">
+		EXECUTE USP_LIST_V_AGENCIA_WEB_X_CODIGO_SQL #{Codigo}
+	</select>
+
+	<select id="SQL_LIST_AGENCIA_X_CODIGO_AGENCIA_WEB"
+		statementType="CALLABLE" resultMap="resultAgenciaWeb">
+		EXECUTE
+		USP_LIST_V_AGENCIA_WEB_X_CODIGO_SQL #{Codigo}
+	</select>
+
+	<select id="SQL_LIST_AGENCIA_X_RUC_AGENCIA_WEB" statementType="CALLABLE"
+		resultMap="resultAgenciaWeb">
+		EXECUTE USP_LIST_AGENCIA_X_RUC_V_AGENCIA_WEB_SQL #{ruc}
+	</select>
+
+	<select id="SQL_count_agencia_web" statementType="CALLABLE"
+		resultType="int">
+		EXECUTE USP_LIST_COUNT_V_AGENCIA_WEB_SQL
+	</select>
+
+	<insert id="SQL_insert_agencia_web" statementType="CALLABLE">
+		EXECUTE
+		USP_INSERT_V_AGENCIAS_WEB_SQL
+		#{direccion},#{razonSocial},#{ruc},#{correo},
+		#{telefono},#{estado},#{personaContacto},#{limiteCredito},#{Detalle},
+		#{telefono2},#{documentoIdentidad}
+	</insert>
+
+	<update id="SQL_update_agencia_web" statementType="CALLABLE">
+		EXECUTE
+		USP_UPDATE_V_AGENCIAS_WEB_SQL
+		#{id},#{direccion},#{razonSocial},#{ruc},#{correo},
+		#{telefono},#{estado},#{personaContacto},#{limiteCredito},#{Detalle},
+		#{telefono2},#{documentoIdentidad}
+	</update>
+
+	<update id="SQL_update_monto_venta_actual_agencia_web"
+		statementType="CALLABLE">
+		EXECUTE USP_UPDATE_MONTO_VENTA_ACTUAL_V_AGENCIAS_WEB_SQL
+		#{Codigo},#{montoVentaActual}
+	</update>
+
+	<update id="SQL_update_monto_venta_confirmada_agencia_web"
+		statementType="CALLABLE">
+		EXECUTE
+		USP_UPDATE_MONTO_VENTA_CONFIRMADA_V_AGENCIAS_WEB_SQL
+		#{Codigo},#{montoVentaConfirmada}
+	</update>
+
+	<update id="SQL_update_cambia_estado_agencia_web" statementType="CALLABLE">
+		EXECUTE USP_ACTIVA_DESACTIVA_AGENCIAS_WEB_V_AGENCIAS_WEB_SQL_WEB #{id}
+	</update>
+
+</mapper>

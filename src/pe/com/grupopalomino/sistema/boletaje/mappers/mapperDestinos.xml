@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<!-- paramtype - tipo de parametro del metodo resultype - tipo de salida 
+		del metodo -->
+	<!-- Consulta SQL del Ibaitis -->
+	<!-- <select id=[nombre.de.llamado] parameterType=[ConfigIbatis.typeAliases.item] 
+		resultType=[ConfigIbatis.typeAliases.item]>SQL</select> -->
+	<!-- manejo de variables #{[def.variable.objeto]} -->
+
+	<resultMap type="destinosBeanIbatis" id="resultDestino">
+		<id property="nro" column="nro" />
+		<result property="Agencia" column="Agencia" />
+		<result property="AgenciaD" column="AgenciaD" />
+		<result property="CodLiq" column="CodLiq" />
+		<result property="Destino" column="Destino" />
+		<result property="Descripcion" column="Descripcion" />
+		<result property="DestinoD" column="DestinoD" />
+		<result property="DireccionDestino" column="DireccionDestino" />
+		<result property="DireccionOrigen" column="DireccionOrigen" />
+		<result property="Kilometraje" column="Kilometraje" />
+		<result property="Origen" column="Origen" />
+		<result property="OrigenD" column="OrigenD" />
+	</resultMap>
+
+	<resultMap type="destinosBeanIbatis" id="resultDestinoVuelta">
+		<id property="nro" column="nro" />
+		<result property="Agencia" column="Agencia" />
+		<result property="AgenciaD" column="AgenciaD" />
+		<result property="CodLiq" column="CodLiq" />
+		<result property="Destino" column="Destino" />
+		<result property="Descripcion" column="Descripcion" />
+		<result property="DestinoD" column="DestinoD" />
+		<result property="DireccionDestino" column="DireccionDestino" />
+		<result property="DireccionOrigen" column="DireccionOrigen" />
+		<result property="Kilometraje" column="Kilometraje" />
+		<result property="Origen" column="Origen" />
+		<result property="OrigenD" column="OrigenD" />
+	</resultMap>
+
+	<resultMap type="destinosBeanIbatis" id="resultDestinoSelect2">
+		<id property="nro" column="nro" />
+		<result property="Agencia" column="Agencia" />
+		<result property="AgenciaD" column="AgenciaD" />
+		<result property="CodLiq" column="CodLiq" />
+		<result property="Destino" column="Destino" />
+		<result property="Descripcion" column="Descripcion" />
+		<result property="DestinoD" column="DestinoD" />
+		<result property="DireccionDestino" column="DireccionDestino" />
+		<result property="DireccionOrigen" column="DireccionOrigen" />
+		<result property="Kilometraje" column="Kilometraje" />
+		<result property="Origen" column="Origen" />
+		<result property="OrigenD" column="OrigenD" />
+	</resultMap>
+
+	<resultMap type="destinosBeanIbatis" id="resultDestinoSelectId">
+		<id property="nro" column="nro" />
+		<result property="Agencia" column="Agencia" />
+		<result property="AgenciaD" column="AgenciaD" />
+		<result property="CodLiq" column="CodLiq" />
+		<result property="Destino" column="Destino" />
+		<result property="Descripcion" column="Descripcion" />
+		<result property="DestinoD" column="DestinoD" />
+		<result property="DireccionDestino" column="DireccionDestino" />
+		<result property="DireccionOrigen" column="DireccionOrigen" />
+		<result property="Kilometraje" column="Kilometraje" />
+		<result property="Origen" column="Origen" />
+		<result property="OrigenD" column="OrigenD" />
+	</resultMap>
+	<resultMap type="destinosBeanIbatis" id="resultDestinoSelectXId">
+		<id property="nro" column="nro" />
+		<result property="Agencia" column="Agencia" />
+		<result property="AgenciaD" column="AgenciaD" />
+		<result property="CodLiq" column="CodLiq" />
+		<result property="Destino" column="Destino" />
+		<result property="Descripcion" column="Descripcion" />
+		<result property="DestinoD" column="DestinoD" />
+		<result property="DireccionDestino" column="DireccionDestino" />
+		<result property="DireccionOrigen" column="DireccionOrigen" />
+		<result property="Kilometraje" column="Kilometraje" />
+		<result property="Origen" column="Origen" />
+		<result property="OrigenD" column="OrigenD" />
+	</resultMap>
+
+	<resultMap type="destinosBeanIbatis" id="resultDestinoSelectTodos">
+		<id property="nro" column="nro" />
+		<result property="OrigenD" column="OrigenD" />
+		<result property="DestinoD" column="DestinoD" />
+	</resultMap>
+
+	<resultMap type="destinosBeanIbatis" id="resultDestinoXorigen">
+		<id property="nro" column="nro" />
+		<result property="Origen" column="Origen" />
+		<result property="OrigenD" column="OrigenD" />
+		<result property="Destino" column="Destino" />
+		<result property="DestinoD" column="DestinoD" />
+	</resultMap>
+
+	<resultMap type="destinosBeanIbatis" id="resultDestinoPorIdaYVuelta">
+		<id property="nro" column="nro" />
+		<result property="Origen" column="Origen" />
+		<result property="OrigenD" column="OrigenD" />
+		<result property="Destino" column="Destino" />
+		<result property="DestinoD" column="DestinoD" />
+	</resultMap>
+
+
+	<select id="SQL_getDestinosView" resultType="destinosBeanIbatis"
+		resultMap="resultDestino" statementType="CALLABLE">
+
+		<!-- LLAMANDO AL PROCEDIMIENTO ALMACENADO DEL LOGIN -->
+
+		<!-- NOTA: LA LLAMADA AL PROCEDIMIENTO DEPENDE DE LAS BASE DE DATOS QUE 
+			SE TRABAJA -->
+
+		EXECUTE USP_LIST_DESTINOS_V_Destinos_SQL
+
+	</select>
+	<select id="SQL_getDestinosViewNro" resultType="destinosBeanIbatis"
+		resultMap="resultDestino" statementType="CALLABLE">
+
+		<!-- LLAMANDO AL PROCEDIMIENTO ALMACENADO DEL LOGIN -->
+
+		<!-- NOTA: LA LLAMADA AL PROCEDIMIENTO DEPENDE DE LAS BASE DE DATOS QUE 
+			SE TRABAJA -->
+
+		EXECUTE USP_LIST_DESITNO_NRO_V_Destinos_SQL #{Nro}
+
+	</select>
+
+	<select id="SQL_getListaDestinosVuelta" statementType="CALLABLE"
+		resultType="destinosBeanIbatis" resultMap="resultDestinoVuelta"
+		parameterType="map">
+		USP_LIST_DESTINOS_VUELTA_V_Destinos_SQL #{DESTINO},
+		#{ORIGEN}
+	</select>
+
+
+	<select id="SQL_getDestinosViewSelectXorigen" statementType="CALLABLE"
+		resultType="destinosBeanIbatis" resultMap="resultDestinoXorigen">
+
+		USP_LIST_DESTINOS_X_ORIGEN_MULTIPLE_V_Destinos_SQL #{Origen}
+
+
+	</select>
+
+
+
+
+
+
+	<select id="SQL_getDestinosViewSelect" statementType="CALLABLE"
+		resultType="destinosBeanIbatis" resultMap="resultDestinoSelect2">
+		USP_LIST_COMBO_DESTINOS_V_Destinos_SQL #{OrigenD}
+	</select>
+
+	<select id="SQL_getDestinosViewSelectId" statementType="CALLABLE"
+		resultType="destinosBeanIbatis" resultMap="resultDestinoSelectId">
+		USP_LIST_DESTINOS_ID_V_Destinos_SQL_WEB #{destino}
+	</select>
+
+	<select id="SQL_getDestinosViewSelectXId" statementType="CALLABLE"
+		resultType="destinosBeanIbatis" resultMap="resultDestinoSelectXId">
+		USP_LIST_DESTINOS_X_ORIGEN_Destinos_SQL_WEB #{destino}
+	</select>
+
+	<select id="SQL_getDestinosViewTodosSelect" statementType="CALLABLE"
+		resultType="destinosBeanIbatis" resultMap="resultDestinoSelectTodos">
+		EXECUTE USP_LIST_TODOS_DESTINOS_V_Destinos_SQL
+	</select>
+
+	<select id="SQL_getDestinosViewXIdaYVuelta" statementType="CALLABLE"
+		resultType="destinosBeanIbatis" resultMap="resultDestinoPorIdaYVuelta">
+		EXECUTE USP_LIST_DESTINOS_X_IDA_Y_VUELTA_V_Destinos_SQL #{origen},
+		#{destino}
+	</select>
+
+
+</mapper>

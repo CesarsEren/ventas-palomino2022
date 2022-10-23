@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="serviciosBeanIbatis" id="resultServicio">
+		<result property="Codigo" column="Codigo" />
+		<result property="Detalle" column="Detalle" />
+		<result property="Tipo" column="Tipo" />
+		<result property="Comida" column="Comida" />
+		<result property="Tarifa" column="Tarifa" />
+		<result property="BusPlantilla" column="BusPlantilla" />
+
+	</resultMap>
+
+	<select id="SQL_ObtenerServicioCodigo" resultMap="resultServicio"
+		statementType="CALLABLE">
+
+		USP_OBTENER_SERVICIO_CODIGO_V_Servicios_Web #{Codigo}
+
+	</select>
+
+	<select id="SQL_ListarServicio" resultMap="resultServicio"
+		statementType="CALLABLE">
+
+		USP_LISTAR_SERVICIO_V_Servicios_Web
+
+	</select>
+	<select id="SQL_ServiciosXCupon" resultMap="resultServicio"
+		statementType="CALLABLE" parameterType="map">
+		USP_ServiciosXCupon #{detalle}
+	</select>
+
+</mapper>

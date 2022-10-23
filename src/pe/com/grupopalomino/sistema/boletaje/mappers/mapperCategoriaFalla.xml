@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="categoriafallasBeanIbatis" id="resultcatfallas">
+		<result property="idcategoria" column="idcategoria" />
+		<result property="detalle" column="detalle" />
+		<result property="estado" column="estado" />
+	</resultMap>
+
+	<select id="SQL_GET_Categorias_Bitacora" resultMap="resultcatfallas"
+		statementType="CALLABLE" parameterType="int">
+		EXEC
+		USP_GET_Categorias_Bitacora #{estado}
+	</select>
+
+	<insert id="SQL_INSERT_V_CategoriaFalla_Bitacora" statementType="CALLABLE"
+		parameterType="categoriafallasBeanIbatis" useGeneratedKeys="true">
+		EXEC
+		USP_INSERT_V_CategoriaFalla_Bitacora #{detalle}
+	</insert>
+
+	<update id="SQL_UPDATE_V_CategoriaFalla_Bitacora" parameterType="categoriafallasBeanIbatis"
+		statementType="CALLABLE">
+		EXEC USP_UPDATE_V_CategoriaFalla_Bitacora
+		#{idcategoria},#{estado}
+	</update>
+
+</mapper>

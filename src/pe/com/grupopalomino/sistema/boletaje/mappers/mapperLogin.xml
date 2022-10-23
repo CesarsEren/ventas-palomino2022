@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<!-- paramtype - tipo de parametro del metodo resultype - tipo de salida 
+		del metodo -->
+	<!-- Consulta SQL del Ibaitis -->
+	<!-- <select id=[nombre.de.llamado] parameterType=[ConfigIbatis.typeAliases.item] 
+		resultType=[ConfigIbatis.typeAliases.item]>SQL</select> -->
+	<!-- manejo de variables #{[def.variable.objeto]} -->
+
+	<resultMap type="usuarioBeanIbatis" id="loginEmpleado">
+		<id property="id" column="id" />
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+		<result property="nombres" column="nombres" />
+		<result property="apellidoPaterno" column="apellidoPaterno" />
+		<result property="apellidoMaterno" column="apellidoMaterno" />
+		<result property="nivel" column="nivel" />
+		<result property="ruc" column="ruc" />
+		<result property="razonSocial" column="razonSocial" />
+		<result property="identidad" column="identidad" />
+		<result property="numerodocumento" column="numerodocumento" />
+		<result property="correo" column="correo" />
+		<result property="telefono" column="telefono" />
+		<result property="estado" column="estado" />
+		<result property="limiteCredito" column="limiteCredito" />
+
+	</resultMap>
+
+	<resultMap type="clienteBeanIbatis" id="loginCliente">
+		<id property="id" column="id" />
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+		<result property="codigo" column="codigo" />
+		<result property="numeroTelefono" column="numeroTelefono" />
+		<result property="fechaCreacion" column="fechaCreacion" />
+		<result property="fechaCaducidad" column="fechaCaducidad" />
+		<result property="horaFinSesion" column="horaFinSesion" />
+		<result property="numeroIntentos" column="numeroIntentos" />
+		<result property="nivel" column="nivel" />
+		<result property="codigoAgencia" column="codigoAgencia" />
+	</resultMap>
+
+	<insert id="SQL_insert_empleado" statementType="CALLABLE">
+		EXECUTE USP_INSERT_USUARIOS_V_Usuarios_Web_SQL_WEB
+		#{username},#{password},#{nombres},#{apellidoPaterno},#{apellidoMaterno},
+		#{nivel},#{ruc},#{razonSocial},#{correo},
+		#{telefono},#{estado},#{limiteCredito},#{direccion},
+		#{representante},#{telefono2},#{localidad},#{centroCosto},#{porcentajeComision},#{medio_Pago},
+		#{ciudad},#{ciudadd},#{latitud},#{longitud},#{agencia},#{agenciaD}
+	</insert>
+
+
+	<insert id="SQL_insert_usuarios_transporte_de_personal"
+		statementType="CALLABLE">
+		EXECUTE USP_INSERT_USUARIOS_V_Usuarios_Web_SQL_WEB_TRANSPORTE_DE_PERSONAL
+		#{username},#{password},#{nombres},#{apellidoPaterno},#{apellidoMaterno},#{nivel},#{ruc},#{razonSocial},#{correo},#{telefono},#{estado},#{direccion},#{telefono2}
+	</insert>
+
+	<insert id="SQL_insert_client" statementType="CALLABLE">
+		EXECUTE
+		USP_INSERT_CLIENT_V_Usuarios_SMS_Web_SQL_WEB #{username} ,#{email},
+		#{nombres}, #{apellidos}, #{telefono},
+		#{identidad},#{numerodocumento},#{fechacreacion},#{password},
+		#{token}, #{confirmado}
+	</insert>
+
+	<update id="SQL_activa_desactiva_usuarios" statementType="CALLABLE">
+		EXECUTE USP_ACTIVA_DESACTIVA_USUARIOS_B_USUARIOS_WEB_SQL_WEB #{id}
+	</update>
+
+	<update id="SQL_update_usuario_web" statementType="CALLABLE">
+		EXECUTE
+		USP_UPDATE_USUARIO_B_USUARIOS_WEB_SQL_WEB #{id}, #{password},#{nivel},
+		#{ruc},#{razonSocial},
+		#{correo},#{telefono},#{estado},#{nombres},
+		#{apellidoPaterno},#{apellidoMaterno},#{limiteCredito},#{direccion},
+		#{representante},#{telefono2},#{localidad},#{centroCosto},#{ciudad},#{ciudadd},#{latitud},#{longitud},#{agencia},#{agenciaD}
+	</update>
+
+	<update id="SQL_update_cliente_sms_web" statementType="CALLABLE">
+		EXECUTE
+		USP_UPDATE_CLIENTE_SMS_WEB #{numeroTelefono}, #{codigo},
+		#{numeroIntentos}, #{fechaCreacion}
+	</update>
+
+	<update id="SQL_update_monto_venta_actual_usuario_web"
+		statementType="CALLABLE">
+		EXECUTE USP_UPDATE_MONTO_VENTA_ACTUAL_V_USUARIOS_WEB_SQL
+		#{username}, #{montoVentaActual}
+	</update>
+
+	<update id="SQL_update_monto_venta_confirmada_usuario_web"
+		statementType="CALLABLE">
+		EXECUTE
+		USP_UPDATE_MONTO_VENTA_CONFIRMADA_V_USUARIOS_WEB_SQL #{username},
+		#{montoVentaConfirmada}
+	</update>
+
+	<update id="SQL_update_Token_ClienteSMS" statementType="CALLABLE">
+		EXECUTE
+		USP_UPDATE_TOKEN_CLIENTE_V_Cliente_SMS_Web #{username},
+		#{tokencuenta},#{confirmadocuenta}
+	</update>
+
+	<update id="SQL_update_Cuenta_ClienteSMS" statementType="CALLABLE">
+		EXECUTE
+		USP_UPDATE_CUENTA_V_Cliente_SMS_Web #{username}, #{password}
+	</update>
+
+	<select id="SQL_login_usuario_web" statementType="CALLABLE"
+		resultType="usuarioBeanIbatis">
+		EXECUTE USP_SELECT_LOGIN_V_USUARIOS_WEB_SQL #{username}
+	</select>
+
+	<select id="SQL_limite_credito_usuario_web" statementType="CALLABLE"
+		resultType="usuarioBeanIbatis">
+		EXECUTE USP_SELECT_LIMITE_CREDITO_V_USUARIOS_WEB_SQL
+		#{username}
+	</select>
+
+	<select id="SQL_login_cliente_web" statementType="CALLABLE"
+		resultType="clienteBeanIbatis">
+		EXECUTE USP_LOGIN_CLIENTESMS #{username}
+	</select>
+
+	<select id="SQL_list_usuario_x_id_usuarios_web" statementType="CALLABLE"
+		resultType="usuarioBeanIbatis">
+		EXECUTE USP_LIST_USUARIO_X_ID_B_USUARIOS_WEB_SQL_WEB #{id}
+	</select>
+
+	<select id="SQL_list_count_usuarios_web" statementType="CALLABLE"
+		resultType="int">
+		EXECUTE USP_LIST_COUNT_USUARIOS_B_USUARIOS_WEB_SQL_WEB
+	</select>
+
+	<select id="SQL_list_count_usuarios_web_transporte_de_personal"
+		statementType="CALLABLE" resultType="int">
+		EXECUTE
+		USP_LIST_COUNT_USUARIOS_B_USUARIOS_WEB_SQL_WEB_TRANSPORTE_DE_PERSONAL
+	</select>
+
+
+	<select id="SQL_list_verifica_agencia_existente_usuarios_web"
+		statementType="CALLABLE" resultType="usuarioBeanIbatis">
+		EXECUTE USP_LIST_VERIFICA_AGENCIA_EXISTENTE_V_USUARIOS_WEB_SQL_WEB
+		#{codigoAgencia}
+	</select>
+
+	<select id="SQL_verificaRucExistente" statementType="CALLABLE"
+		resultType="usuarioBeanIbatis">
+		EXECUTE USP_LIST_VERIFICA_RUC_EXISTENTE_V_USUARIOS_WEB_SQL_WEB #{Ruc}
+	</select>
+
+	<select id="SQL_list_usuarios_web" statementType="CALLABLE"
+		resultType="usuarioBeanIbatis" parameterType="map">
+		EXECUTE
+		USP_LIST_USUARIOS_B_USUARIOS_WEB_SQL_WEB #{offset}, #{limit}
+	</select>
+
+	<select id="SQL_list_usuarios_web_transporte_de_personal"
+		statementType="CALLABLE" resultType="usuarioBeanIbatis" parameterType="map">
+		EXECUTE
+		USP_LIST_USUARIOS_B_USUARIOS_WEB_SQL_WEB_TRANSPORTE_DE_PERSONAL
+		#{offset}, #{limit}
+	</select>
+
+	<select id="SQL_list_usuarios_rutas_web" statementType="CALLABLE"
+		resultType="usuarioBeanIbatis">
+
+		EXECUTE USP_LIST_USUARIOS_RUTAS_B_USUARIOS_WEB_SQL_WEB
+
+	</select>
+
+	<select id="SQL_list_usuarios_web_ruc" statementType="CALLABLE"
+		resultType="usuarioBeanIbatis" parameterType="map">
+		EXECUTE
+		USP_LIST_USUARIOS_RUC_B_USUARIOS_WEB_SQL #{Ruc}
+	</select>
+
+	<select id="SQL_list_cliente_sms_web" statementType="CALLABLE"
+		resultType="clienteBeanIbatis" parameterType="map">
+		EXECUTE
+		USP_OBTIENE_CREARSMS_CLIENTE_SMS #{email}
+	</select>
+
+	<select id="SQL_confirmacionClienteSMS" statementType="CALLABLE"
+		resultType="clienteBeanIbatis" parameterType="map">
+		EXECUTE
+		USP_CONFIRMACION_CLIENTE_SMS #{token}
+	</select>
+
+	<select id="SQL_list_usuarios_programacion_pago_web"
+		statementType="CALLABLE" resultType="usuarioBeanIbatis" parameterType="map">
+
+		EXECUTE USP_LIST_USUARIOS_PROGRAMACION_PAGO_B_USUARIOS_WEB_SQL
+
+	</select>
+
+	<select id="SQL_list_usuarios_agentes_autorizados"
+		statementType="CALLABLE" resultType="usuarioBeanIbatis">
+
+		EXECUTE USP_LIST_USUARIOS_AGENTES_B_USUARIOS_WEB_SQL
+
+	</select>
+
+	<select id="SQL_list_usuarios_agentes_autorizados_ciudad"
+		statementType="CALLABLE" resultType="usuarioBeanIbatis" parameterType="map">
+
+		EXECUTE USP_LIST_USUARIOS_AGENTES_CIUDAD_B_USUARIOS_WEB_SQL #{ciudad}
+
+	</select>
+
+	<select id="SQL_Lista_Usuarios_VentaTelefonica"
+		resultType="pe.com.grupopalomino.sistema.boletaje.bean.V_Cliente_SMS_Web"
+		statementType="STATEMENT">
+		EXECUTE USP_GetUsuarios_Ventatelefonica
+	</select>
+</mapper>

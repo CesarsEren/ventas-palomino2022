@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="encomiendasBeanIbatis" id="resultEncomienda">
+
+		<id property="Nro" column="Nro" />
+		<result property="Salida" column="Salida" />
+		<result property="Destino" column="Destino" />
+		<result property="DestinoD" column="DestinoD" />
+		<result property="HoraViaje" column="HoraViaje" />
+		<result property="HoraViajeIni" column="HoraViajeIni" />
+		<result property="Empresa" column="Empresa" />
+		<result property="EmpresaD" column="EmpresaD" />
+		<result property="Documento" column="Documento" />
+		<result property="DocumentoD" column="DocumentoD" />
+		<result property="Serie" column="Serie" />
+		<result property="Numero" column="Numero" />
+		<result property="Destino1" column="Destino1" />
+		<result property="Destino1D" column="Destino1D" />
+		<result property="OtraOficina" column="OtraOficina" />
+		<result property="Transaccion" column="Transaccion" />
+		<result property="Pago" column="Pago" />
+		<result property="Valija" column="Valija" />
+		<result property="Ruc" column="Ruc" />
+		<result property="DNIGiro" column="DNIGiro" />
+		<result property="Razon" column="Razon" />
+		<result property="Remitente" column="Remitente" />
+		<result property="RemitenteD" column="RemitenteD" />
+		<result property="Consignado" column="Consignado" />
+		<result property="ConsignadoD" column="ConsignadoD" />
+		<result property="Cantidad1" column="Cantidad1" />
+		<result property="Descripcion1" column="Descripcion1" />
+		<result property="Cantidad2" column="Cantidad2" />
+		<result property="Descripcion2" column="Descripcion2" />
+		<result property="Cantidad3" column="Cantidad3" />
+		<result property="Descripcion3" column="Descripcion3" />
+		<result property="MontoGiro" column="MontoGiro" />
+		<result property="Kilos" column="Kilos" />
+		<result property="Total" column="Total" />
+		<result property="Usuario" column="Usuario" />
+		<result property="Terminal" column="Terminal" />
+		<result property="Agencia" column="Agencia" />
+		<result property="AgenciaD" column="AgenciaD" />
+		<result property="Comentario" column="Comentario" />
+		<result property="Anulado" column="Anulado" />
+		<result property="Sistema" column="Sistema" />
+		<result property="Bus" column="Bus" />
+		<result property="Pagado" column="Pagado" />
+		<result property="FechaCancelacion" column="FechaCancelacion" />
+		<result property="Usuario1" column="Usuario1" />
+		<result property="Terminal1" column="Terminal1" />
+		<result property="Agencia1" column="Agencia1" />
+		<result property="AgenciaD1" column="AgenciaD1" />
+		<result property="DNI" column="DNI" />
+		<result property="NombreApellido" column="NombreApellido" />
+		<result property="Observacion" column="Observacion" />
+		<result property="HoraReg" column="HoraReg" />
+		<result property="Desechado" column="Desechado" />
+		<result property="Otro" column="Otro" />
+		<result property="estado" column="estado" />
+		<result property="Domicilio" column="Domicilio" />
+		<result property="SalidaR" column="SalidaR" />
+		<result property="AgenciaR" column="AgenciaR" />
+		<result property="AgenciaDR" column="AgenciaDR" />
+		<result property="DestinoR" column="DestinoR" />
+		<result property="CodigoSecreto" column="CodigoSecreto" />
+		<result property="Bus_Carga" column="Bus_Carga" />
+		<!-- Agregado por JCHC -->
+		<result property="NroOrdenRef" column="NroOrdenRef" />
+		<!-- Hasta aqui -->
+	</resultMap>
+
+	<select id="SQL_Obtiene_Encomienda" resultMap="resultEncomienda"
+		statementType="CALLABLE">
+		USP_SELECT_ENCOMIENDAS_B_Encomiendas_SQL #{serie},#{numero},#{documento},#{empresa}
+	</select>
+
+	<!-- para viajes especiales -->
+
+	<select
+		resultType="pe.com.grupopalomino.sistema.boletaje.bean.B_Encomiendas_Detalles"
+		id="SQL_Obtiene_DetalleEncomienda" parameterType="map">
+
+		USP_OBTENER_DETALLE_ENCOMIENDAS #{nro}
+
+	</select>
+
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+
+	<resultMap type="reporteContabilidadBeanIbatis" id="resultReporteContabilidad">
+		<result property="FechaEmision" column="FechaEmision" />
+		<result property="EmpresaD" column="EmpresaD" />
+		<result property="documentos" column="documentos" />
+	</resultMap>
+
+	<!-- Consulta de documentos por enviar y rechazados between getdate-3 and 
+		getdate-18 -->
+
+	<select id="SQL_getReporteDocumentosPorEnviar" resultMap="resultReporteContabilidad"
+		statementType="CALLABLE">
+		USP_GetReporteDocumentosPorEnviar
+	</select>
+	<select id="SQL_getReporteDocumentosRechazados" resultMap="resultReporteContabilidad"
+		statementType="CALLABLE">
+		USP_GetReporteDocumentosRechazados
+	</select>
+	<select id="SQL_View_documentosSinPDF417" resultType="String"
+		statementType="STATEMENT">
+		select Nro from View_documentosSinPDF417
+	</select>
+
+</mapper>

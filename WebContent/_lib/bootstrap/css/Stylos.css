@@ -1,0 +1,393 @@
+/*IMAGENES GIF DE LA NAVEGACION EN EL WIZARD*/
+
+/***************************************************************************************************/
+
+/*GIF DE IDA*/
+#CargaAgregaIda {
+	position: relative;
+	top: 10px;
+	left: 20px;
+	width: 30px;
+}
+
+#cargaBusIda {
+	position: relative;
+	top: 170px;
+	left: 90px;
+	width: 50px;
+}
+
+#cargaGrabarIda {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	width: 30px;
+}
+/***************************************************************************************************/
+
+/*GIF DE IDA Y VUELTA*/
+#CargaAgregaIdaVuelta {
+	position: relative;
+	top: 10px;
+	left: 20px;
+	width: 30px;
+}
+
+#cargaTabla1Vuelta {
+	position: relative;
+	top: 180px;
+	left: 500px;
+	width: 50px;
+}
+
+#cargaTabla2Vuelta {
+	position: relative;
+	top: 180px;
+	left: 500px;
+	width: 50px;
+}
+
+#cargaGrabarVuelta {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	width: 30px;
+}
+
+/***************************************************************************************************/
+
+/*STYLOS DE TABLAS EN LA RESERVA DE IDA Y VUELTA SE GENERAN LOS MISMOS STYLOS PARA LAS TABLAS(BOOTSTRAP), PANEL(BOOTSTRAP)
+ASI COMO PARA EL REGISTRO DE BOLETAJE TANTO COMO EL DE IDA Y EL DE IDA Y VUELTA*/
+
+/***************************************************************************************************/
+
+/*
+div.ui-datepicker, ui-datepicker-title {
+      font-size: 100.5%;
+}
+*/
+
+/*  STYLOS DE LAS TABLAS DE BOOTSTRAP (LETRA , TAMAÑO , COLOR )*/
+/*
+div.th-inner {
+    background-color: #009045;
+    color: white;
+    background: linear-gradient(#33AD45, #327d3d), #D5DC93;
+    
+}*/
+.keep-open {
+	display: none !important;
+}
+/*
+th.bs-checkbox{
+	
+background-color: #009045;
+background: linear-gradient(#33AD45, #33AD45), #D5DC93;
+	
+}
+*/
+/*
+#btnWizardSiguienteIda ,#btnWizardAtrasIda{
+	background-color: #337ab7;
+	color: white;
+}
+#pnlReservaIda{
+
+	height: 446px;
+
+}*/
+/*.fixed-table-container{
+
+ 	height:190px;
+
+}
+
+div.fixed-table-header{
+	height:28px;
+}
+
+.table td {
+   font-size:11px; 
+   font-family: Century Gothic;
+   width: 3px;
+   height: 3px;
+  
+}
+.table th {
+   font-size:11px; 
+   font-family: Century Gothic;
+   width: 3px;
+   height: 3px;
+}
+*/
+.legend {
+	list-style: none;
+}
+
+.legend li {
+	float: left;
+	margin-right: 10px;
+	display: block;
+}
+
+.legend span {
+	border: 1px solid #0080ff;
+	float: left;
+	width: 12px;
+	height: 12px;
+	margin: 2px;
+}
+
+.legend .libre {
+	background-color: rgb(53, 172, 25);
+}
+
+.legend .ocupado {
+	background-color: #ef2929 /*#C34653*/;
+}
+
+.legend .seleccionado {
+	background-color: rgb(30, 144, 255) /*#35ac19*/;
+}
+
+.legend .tv {
+	background-color: #000000;
+}
+
+.legend .bar {
+	background-color: #000000;
+}
+
+.legend .escaleras {
+	background-color: #000000;
+}
+
+/***************************************************************************************************/
+
+/*
+#btnWizardSiguienteIdaVuelta ,#btnWizardAtrasIdaVuelta{
+	background-color: #337ab7;
+	color: white;
+}
+#pnlReservaVuelta{
+
+height: 446px;
+
+}
+*/
+/*****************************************************************************************************/
+
+/*IDS USADOS EN LA VENTA NORMAL Y EN LA PRIMERA SELECCION DE IDA  DE LOS BUSES (IDA Y VUELTA)*/
+
+/*
+.legend-titulo{
+font-size: 15px;
+height:20px;
+}
+
+#idSelecAgenciaEmbarques{
+width:205px;
+
+}
+#idTextIdentidad{
+
+	width: 100px;
+	padding-left: 15px;
+}
+
+#idTextPrecioActual {
+	font-size: 20px;
+	color: red;
+	width: 60px;
+	
+	
+}*/
+
+/*
+#idTextNombApe{
+	/*width: 200px;*/
+}
+* /
+	/*
+#idSelecIdentidad{
+	width:145px;
+}*/ 
+
+
+.modal-header {
+	background-color: #009045;
+	/*border-color: #4cae4c;*/
+}
+
+.modal-header-voucher {
+	background-color: #009045;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	height: 54px;
+	/*border-color: #4cae4c;*/
+}
+
+.modal-title-voucher {
+	padding-left: 5px;
+	background-color: #009045;
+	display: inline-block;
+	color: white;
+}
+
+/*
+h4{
+color:gold;
+}*/
+
+/*
+.bootstrap-dialog.type-success .modal-header {
+    background-color: #0F8E13;
+}
+.bootstrap-dialog .bootstrap-dialog-title {
+    color: #FFD700;
+    display: inline-block;
+    font-size: 16px;
+}	
+
+#idSelecAsiento{
+	font-size: 30px;
+	text-align: center;
+	color: red;
+	height: 56px;
+	width: 75px;
+}
+*/
+/***************************************************************************************************/
+/*IDS USADOS EN LA VENTA DE IDA Y VUELTA*/
+
+/*
+#idSelecAsientoVuelta{
+	font-size: 30px;
+	text-align: center;
+	color: red;
+	height: 56px;
+	width: 60px;
+}
+#idSelecAgenciaEmbarquesVuelta{
+width:205px;
+
+}
+#idTextPrecioActualVuelta {
+	font-size: 20px;
+	color: red;
+	width: 60px;
+}
+#idSelecIdentidadVuelta{
+	width:130px;
+}
+/* .modal-header{
+background-color:#5cb85c;
+border-color: #4cae4c;
+}*/
+
+/*
+h4{
+color:gold;
+}
+
+*/
+.TextoVertical1Piso {
+	writing-mode: tb-rl;
+	filter: flipv fliph;
+	float: left;
+	color: #337ab7;
+	padding-top: 120px;
+	padding-left: 5px;
+	font-size: 15px;
+	text-align: left;
+	font-family: inherit;
+}
+
+.TextoVertical1PisoAlt {
+	writing-mode: tb-rl;
+	filter: flipv fliph;
+	float: left;
+	color: #337ab7;
+	padding-top: 120px;
+	padding-left: 5px;
+	font-size: 25px;
+	text-align: left;
+	margin-top: 8rem;
+	margin-left: -5rem;
+	font-family: inherit;
+}
+
+.TextoVertical2Piso {
+	writing-mode: tb-rl;
+	float: left;
+	filter: flipv fliph;
+	color: #337ab7;
+	padding-top: 100px;
+	padding-left: 5px;
+	font-size: 15px;
+	font-family: inherit;
+}
+
+.venta-pasajes {
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	background-color: #FEEE00;
+	color: #009045;
+	letter-spacing: 0.05em;
+	background: linear-gradient(#FEEE00, #ccc97e), #D5DC93;
+	font-family: MyriadPro-SemiCnIt;
+}
+
+.oferta-compra {
+	background-image: url("../../img/oferta.png");
+	background-repeat: no-repeat;
+	color: #00822E;
+	min-height: 20px;
+	min-width: 20px;
+	text-align: center;
+	position-image: left;
+	width: 100%;
+	font-size: 1em;
+	font-family: MyriadPro-SemiCnIt;
+}
+
+@font-face {
+	font-family: 'MyriadPro-SemiCnBoltIt';
+	src: url("../../fonts/MyriadPro-SemiCnBoltIt.otf");
+}
+
+@font-face {
+	font-family: 'MyriadPro-Regular';
+	src: url("../../fonts/MyriadPro-Regular.otf");
+}
+
+@font-face {
+	font-family: 'MyriadPro-SemiCnIt';
+	src: url("../../fonts/MyriadPro-SemiCnIt.otf");
+}
+
+@font-face {
+	font-family: 'MyriadPro-SemiCnBold';
+	src: url("../../fonts/MyriadPro-SemiCnBold.otf");
+}
+
+@font-face {
+	font-family: 'MyriadPro-SemiCn';
+	src: url("../../fonts/MyriadPro-SemiCn.otf");
+}
+
+@font-face {
+	font-family: 'MyriadPro-BoldIt';
+	src: url("../../fonts/MyriadPro-BoldIt.otf");
+}
+
+@font-face {
+	font-family: 'MyriadPro-Bold';
+	src: url("../../fonts/MyriadPro-Bold.otf");
+}
+
+@font-face {
+	font-family: 'MyriadPro-It';
+	src: url("../../fonts/MyriadPro-It.otf");
+}

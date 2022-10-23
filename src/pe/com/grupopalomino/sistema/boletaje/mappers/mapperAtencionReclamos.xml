@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="atencionreclamoBeanIbatis" id="atencionreclamoMapBoletaje">
+		<id property="Nro" column="Nro" />
+		<result property="Empresa" column="Empresa" />
+		<result property="EmpresaD" column="EmpresaD" />
+		<result property="FechaReclamo" column="FechaReclamo" />
+		<result property="Identidad" column="Identidad" />
+		<result property="IdentidadD" column="IdentidadD" />
+		<result property="DNI" column="DNI" />
+		<result property="Nombres" column="Nombres" />
+		<result property="ApePaterno" column="ApePaterno" />
+		<result property="ApeMaterno" column="ApeMaterno" />
+		<result property="Telefono" column="Telefono" />
+		<result property="Email" column="Email" />
+		<result property="Domicilio" column="Domicilio" />
+		<result property="PadreMenor" column="PadreMenor" />
+		<result property="FechaIncidente" column="FechaIncidente" />
+		<result property="Servicio" column="Servicio" />
+		<result property="MotivoReclamo" column="MotivoReclamo" />
+		<result property="MotivoReclamoD" column="MotivoReclamoD" />
+		<result property="Documento" column="Documento" />
+		<result property="Serie" column="Serie" />
+		<result property="Numero" column="Numero" />
+		<result property="TipoReclamo" column="TipoReclamo" />
+		<result property="Detalle" column="Detalle" />
+		<result property="Pedido" column="Pedido" />
+		<result property="Periodo" column="Periodo" />
+		<result property="Usuario" column="Usuario" />
+		<result property="DetalleAtencion" column="DetalleAtencion" />
+		<result property="Atendido" column="Atendido" />
+	</resultMap>
+
+	<resultMap type="motivoBeanIbatis" id="AtencionmotivoMapBoletaje">
+		<id property="MotivoReclamo" column="MotivoReclamo" />
+		<result property="MotivoReclamoD" column="MotivoReclamoD" />
+		<result property="Tipo" column="Tipo" />
+
+	</resultMap>
+
+	<resultMap type="tipodocumentosBeanIbatis" id="AtenciontipodocumentosMapBoletaje">
+		<id property="Codigo" column="Codigo" />
+		<result property="Detalle" column="Detalle" />
+		<result property="Tipo" column="Tipo" />
+
+	</resultMap>
+
+	<resultMap type="atencionreclamodetalleBeanIbatis" id="AtencionreclamodetalleMapBoletaje">
+		<id property="Nro" column="Nro" />
+		<result property="Salida" column="Salida" />
+		<result property="Destino" column="Destino" />
+		<result property="DestinoD" column="DestinoD" />
+		<result property="FechaViaje" column="FechaViaje" />
+		<result property="HoraViaje" column="HoraViaje" />
+		<result property="HoraViajeIni" column="HoraViajeIni" />
+		<result property="FechaEmision" column="FechaEmision" />
+		<result property="Empresa" column="Empresa" />
+		<result property="EmpresaD" column="EmpresaD" />
+		<result property="Serie" column="Serie" />
+		<result property="Numero" column="Numero" />
+		<result property="Destino1" column="Destino1" />
+		<result property="Destino1D" column="Destino1D" />
+		<result property="Agencia" column="Agencia" />
+		<result property="AgenciaD" column="AgenciaD" />
+		<!-- VENTA -->
+		<result property="Origen" column="Origen" />
+		<result property="OrigenD" column="OrigenD" />
+		<result property="Asiento" column="Asiento" />
+		<result property="OrigenD" column="OrigenD" />
+		<result property="Precio" column="Precio" />
+		<result property="Identidad" column="Identidad" />
+		<result property="IdentidadD" column="IdentidadD" />
+		<result property="DNI" column="DNI" />
+		<result property="Usuario" column="Usuario" />
+		<result property="Nombre" column="Nombre" />
+		<!-- ENCOMIENDA -->
+		<result property="Documento" column="Documento" />
+		<result property="DocumentoD" column="DocumentoD" />
+		<result property="Remitente" column="Remitente" />
+		<result property="Consignado" column="Consignado" />
+		<result property="FechaCancelacion" column="FechaCancelacion" />
+		<result property="Agencia1" column="Agencia1" />
+		<result property="Agencia1D" column="Agencia1D" />
+	</resultMap>
+
+	<insert id="SQL_RegistroAtencionReclamos" statementType="CALLABLE"
+		parameterType="atencionreclamoBeanIbatis">
+
+		USP_INSERT_ATENCION_RECLAMOS_B_RECLAMOS_WEB
+
+		#{Nro},#{Periodo},#{Empresa},#{EmpresaD},#{FechaReclamo},#{Identidad},#{IdentidadD},#{DNI},#{Nombres},#{ApePaterno},#{ApeMaterno},#{Telefono},
+		#{Email},#{Domicilio},#{PadreMenor},#{FechaIncidente},#{Servicio},#{MotivoReclamo},#{Documento},#{Serie},#{Numero},
+		#{TipoReclamo},#{Detalle},#{Pedido},#{Usuario},#{Agencia},#{AgenciaD},#{DetalleAtencion},#{Atendido}
+
+
+
+
+	</insert>
+
+	<select id="SQL_ObtenerAtencionReclamos" resultMap="atencionreclamoMapBoletaje"
+		statementType="CALLABLE" parameterType="map">
+
+		USP_SELECT_ATENCION_RECLAMOS_B_Reclamos_Web_SQL_WEB
+		#{Nro},#{Periodo},#{Empresa}
+	</select>
+
+	<select id="SQL_ObtenerAtencionReclamosDetalle" resultMap="AtencionreclamodetalleMapBoletaje"
+		statementType="CALLABLE" parameterType="map">
+
+		USP_SELECT_ATENCION_RECLAMOS_DETALLE_B_Reclamos_Web_SQL_WEB
+		#{Serie},#{Numero},#{Documento},#{Empresa}
+	</select>
+
+	<select id="SQL_AtencionMuestraMotivos" statementType="CALLABLE"
+		parameterType="map" resultMap="AtencionmotivoMapBoletaje">
+
+		USP_MUESTRA_ATENCION_MOTIVOS_B_RECLAMOS_WEB #{MotivoReclamo}
+
+	</select>
+
+	<select id="SQL_AtencionMuestraTipoDocumentos" statementType="CALLABLE"
+		parameterType="map" resultMap="AtenciontipodocumentosMapBoletaje">
+
+		USP_MUESTRA_ATENCION_TIPODOCUMENTOS_V_TipoDocumentos_WEB
+		#{TipoDocumento}
+
+	</select>
+
+	<select id="SQL_ObtenerAtencionListaReclamos" statementType="CALLABLE"
+		resultType="atencionreclamoBeanIbatis" parameterType="map">
+		EXECUTE
+		USP_SELECT_LISTA_ATENCION_RECLAMOS_SQL #{offset},
+		#{limit},#{tipo},#{agencia},#{servicio}
+	</select>
+
+	<!-- pe.com.grupopalomino.sistema.boletaje.bean.B_AtencionReclamosBean -->
+	<select id="SQL_ObtenerAtencionListaReclamosRpte" statementType="CALLABLE"
+		resultType="map" parameterType="map">
+		<!-- EXECUTE USP_SELECT_LISTA_ATENCION_RECLAMOS_SQL_RPTE -->
+		select rw.Nro [Nro],rw.Periodo [Periodo],rw.EmpresaD
+		[Empresa],convert(date,rw.FechaReclamo)[Fecha Registro],rw.IdentidadD
+		[Tipo Documento],rw.DNI [Documento],rw.Nombres
+		[Nombres],rw.ApePaterno+','+rw.ApeMaterno [Apellidos],
+		rw.Telefono [Teléfono],rw.Email [Correo],rw.Domicilio
+		[Domicilio],convert(date,rw.FechaIncidente) [Fecha
+		Incidente],rw.Servicio [Tipo Servicio],rw.Documento [Tipo Documento
+		Empresa],rw.Serie [Serie],rw.Numero[Correlativo],RW.Atendido [Estado
+		Atención],convert(date,rw.FechaAtencion) [Fecha
+		Atención],MotivoReclamoD [Motivo Reclamo],rw.AgenciaD [Agencia
+		Registro] from B_Atencion_Reclamos_Web rw left join B_Motivos_Web
+		on rw.MotivoReclamo = B_Motivos_Web.MotivoReclamo
+	</select>
+
+	<select id="SQL_ObtenerAtencionListaReclamosDni" statementType="CALLABLE"
+		resultType="atencionreclamoBeanIbatis" parameterType="map">
+		EXECUTE
+		USP_SELECT_LISTA_ATENCION_RECLAMOS_SQL_DNI #{offset},
+		#{limit},#{tipo},#{agencia},#{servicio},#{dni}
+	</select>
+
+	<select id="SQL_ListaAtencionReclamosReporteTabla"
+		statementType="CALLABLE" resultType="atencionreclamoBeanIbatis"
+		parameterType="map">
+		EXECUTE USP_SELECT_LISTA_ATENCION_RECLAMOS_TABLA_SQL
+		#{offset}, #{limit}
+	</select>
+
+	<select id="SQL_ListaAtencionReclamosReporte" statementType="CALLABLE"
+		resultType="atencionreclamoBeanIbatis" parameterType="map">
+		EXECUTE
+		USP_SELECT_LISTA_ATENCION_RECLAMOS_REPORTE_SQL #{tiporeclamo}
+	</select>
+
+	<select id="SQL_list_count_atencionreclamos_web" statementType="CALLABLE"
+		resultType="int">
+		EXECUTE USP_SELECT_LISTA_COUNT_ATENCION_RECLAMOS_SQL
+		#{tipo}
+	</select>
+
+	<update id="SQL_update_atencion_reclamos" statementType="CALLABLE">
+
+		EXECUTE USP_UPDATE_ESTADO_ATENCION_RECLAMOS_SQL #{Id},#{detalle}
+	</update>
+
+	<select id="SQL_SELECT_AGENCIAS_USUARIOS" statementType="CALLABLE"
+		resultType="map">
+
+		EXECUTE USP_SELECT_AGENCIAS_USUARIOS_V_Usuarios_Web_SQL
+
+	</select>
+
+</mapper>	
+	
+	
+

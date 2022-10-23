@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="destinosClienteBeanIbatis" id="resultDestinosCliente">
+		<id property="nro" column="nro" />
+		<result property="Origen" column="Origen" />
+		<result property="OrigenD" column="OrigenD" />
+		<result property="Destino" column="Destino" />
+		<result property="DestinoD" column="DestinoD" />
+	</resultMap>
+
+	<select id="SQL_ObtieneOrigenClienteWeb" resultType="destinosClienteBeanIbatis"
+		parameterType="map" resultMap="resultDestinosCliente" statementType="CALLABLE">
+
+		EXECUTE USP_LIST_ORIGEN_V_DestinosClienteWeb_SQL #{Ruc}
+
+	</select>
+
+	<select id="SQL_ObtieneDestinoClienteWeb" resultType="destinosClienteBeanIbatis"
+		parameterType="map" resultMap="resultDestinosCliente" statementType="CALLABLE">
+
+		EXECUTE USP_LIST_DESTINO_V_DestinosClienteWeb_SQL #{Origen},#{Ruc}
+
+	</select>
+
+</mapper>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="programacionpagosBeanIbatis" id="resultProgramacionPagos">
+		<result property="Id" column="Id" />
+		<result property="Periodo" column="Periodo" />
+		<result property="Usuario" column="Usuario" />
+		<result property="Enero" column="Enero" />
+		<result property="Febrero" column="Febrero" />
+		<result property="Marzo" column="Marzo" />
+		<result property="Abril" column="Abril" />
+		<result property="Mayo" column="Mayo" />
+		<result property="Junio" column="Junio" />
+		<result property="Julio" column="Julio" />
+		<result property="Agosto" column="Agosto" />
+		<result property="Septiembre" column="Septiembre" />
+		<result property="Octubre" column="Octubre" />
+		<result property="Noviembre" column="Noviembre" />
+		<result property="Diciembre" column="Diciembre" />
+
+	</resultMap>
+
+	<insert id="SQL_Insert_ProgramacionPagos_SQL" statementType="CALLABLE">
+
+		USP_INSERT_PROGRAMACIONPAGOS_V_ProgramacionPagos_Web_SQL_WEB
+		#{Periodo},#{Usuario},#{Enero},#{Febrero},#{Marzo},#{Abril},#{Mayo},#{Junio},#{Julio},#{Agosto},#{Septiembre},#{Octubre},
+		#{Noviembre},#{Diciembre}
+	</insert>
+
+	<update id="SQL_Update_ProgramacionPagos_SQL" statementType="CALLABLE">
+
+		USP_UPDATE_PROGRAMACIONPAGOS_V_ProgramacionPagos_Web_SQL_WEB
+		#{Periodo},#{Usuario},#{Enero},#{Febrero},#{Marzo},#{Abril},#{Mayo},#{Junio},#{Julio},#{Agosto},#{Septiembre},#{Octubre},
+		#{Noviembre},#{Diciembre}
+	</update>
+
+	<select id="SQL_Select_List_ProgramacionPagos_SQL" resultMap="resultProgramacionPagos"
+		statementType="CALLABLE" parameterType="map">
+
+		EXECUTE USP_SELECT_LIST_PROGRAMACIONPAGOS_V_ProgramacionPagos_Web_SQL_WEB
+		#{offset}, #{limit}
+
+	</select>
+
+	<select id="SQL_SelectProgramacionPagosCount" resultType="int"
+		statementType="CALLABLE">
+
+		USP_SELECT_COUNT_PROGRAMACIONPAGOS_V_ProgramacionPagos_Web_SQL_WEB
+
+	</select>
+
+	<select id="SQL_SelectIdProgramacionPagos_SQL" resultMap="resultProgramacionPagos"
+		statementType="CALLABLE" parameterType="map">
+
+		EXECUTE USP_SELECT_Id_PROGRAMACIONPAGOS_V_ProgramacionPagos_Web_SQL_WEB #{Id}
+
+	</select>
+
+	<select id="SQL_SelectProgramacionPagos_SQL" resultMap="resultProgramacionPagos"
+		statementType="CALLABLE" parameterType="map">
+
+		EXECUTE USP_SELECT_PROGRAMACIONPAGOS_V_ProgramacionPagos_web_SQL_WEB
+		#{Usuario},#{Periodo}
+
+	</select>
+
+	<select id="SQL_VerificaProgramacionPagos_SQL" resultMap="resultProgramacionPagos"
+		statementType="CALLABLE" parameterType="map">
+
+		EXECUTE USP_VERIFICA_PROGRAMACIONPAGOS_V_ProgramacionPagos_Web_SQL_WEB
+		#{Usuario}
+
+	</select>
+
+</mapper>

@@ -1,0 +1,160 @@
+@import url('../bootstrap/css/Stylos.css');
+
+#mapa {
+	position: relative;
+	background-color: rgba(92, 184, 92, 0.26) /*#404040*/;
+	display: block;
+	height: 555px;
+	font-family: MyriadPro-SemiCnIt;
+}
+
+.televisor-class {
+	position: relative;
+	background-color: aqua;
+	border: none;
+}
+
+.bar-class {
+	position: relative;
+	background-color: orange;
+	border: none;
+}
+
+.escalera-class {
+	position: relative;
+	background-color: yellow;
+	border: none;
+}
+
+#piso1 {
+	position: relative;
+}
+
+#piso2 {
+	position: relative;
+}
+
+.silla {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background-image: url('img/ic_libre.png');
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+
+.silla-numero {
+	font-size: 0.8em;
+	text-align: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	z-index: 10;
+	padding: 1px 2px 0px 2px;
+	color: white;
+}
+
+.silla-numero input {
+	display: none;
+}
+
+.silla-seleccionada {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background-image: url('img/ic_seleccionado.png');
+	background-repeat: no-repeat;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.silla-separada {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background-image: url('img/ic_ocupado.png');
+	background-repeat: no-repeat;
+	overflow: hidden;
+	cursor: not-allowed;
+}
+
+.varios {
+	position: absolute;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	background-color: #90b6dc;
+	border-color: #90b6dc;
+	box-shadow: 0px 0px 6px #90b6dc;
+	overflow: hidden;
+	cursor: not-allowed;
+}
+
+.television {
+	border: none;
+	text-indent: -9999px;
+	width: 17px;
+	background-image: url(img/tv.png);
+	background-color: transparent;
+	border-radius: 10%;
+	cursor: not-allowed;
+	box-shadow: 0px 0px 0px;
+}
+
+.bar {
+	border: none;
+	text-indent: -9999px;
+	width: 19px;
+	background-image: url(img/bar.png);
+	background-color: transparent;
+	cursor: not-allowed;
+	box-shadow: 0px 0px 0px;
+}
+
+.escalera {
+	border: none;
+	text-indent: -9999px;
+	width: 19px;
+	background-image: url(img/escaleras.png);
+	background-color: transparent;
+	cursor: not-allowed;
+	box-shadow: 0px 0px 0px;
+}
+
+.logo_visa {
+	background-image: url(img/Visa.png);
+	width: 100px;
+}
+
+.silla-televisor {
+	position: absolute;
+	border: none;
+	/*border-radius: 50%;*/
+	width: 17px;
+	height: 22px;
+	background-image: url(img/tv.png);
+	/*	background-color:rgb(53, 172, 25) /* #fff */;
+	cursor: not-allowed;
+}
+
+.silla-escalera {
+	position: absolute;
+	border: none;
+	/*border-radius: 50%;*/
+	width: 19px;
+	height: 22px;
+	background-image: url(img/escaleras.png);
+	/*	background-color:rgb(53, 172, 25) /* #fff */;
+	cursor: not-allowed;
+}
+
+.silla-bar {
+	position: absolute;
+	border: none;
+	/*border-radius: 50%;*/
+	width: 19px;
+	height: 22px;
+	background-image: url(img/bar.png);
+	/*	background-color:rgb(53, 172, 25) /* #fff */;
+	cursor: not-allowed;
+}

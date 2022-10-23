@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="rutasBeanIbatis" id="resultRutas">
+		<result property="Ciudad" column="Ciudad" />
+		<result property="CiudadD" column="CiudadD" />
+		<result property="Nro" column="Nro" />
+		<result property="NroDetalle" column="NroDetalle" />
+		<result property="NroRuta" column="NroRuta" />
+		<result property="Precio" column="Precio" />
+
+	</resultMap>
+
+	<select id="SQL_ObtenerRutasNro" resultMap="resultRutas"
+		statementType="CALLABLE">
+
+		USP_LIST_RUTAS_NRO_V_Rutas_SQL #{Nro}
+
+	</select>
+
+	<select id="SQL_SelectRutas_V_Rutas" resultMap="resultRutas"
+		statementType="CALLABLE">
+
+		USP_LIST_RUTAS_V_Rutas_SQL
+
+	</select>
+	<select id="SQL_RutasXCupon" resultMap="resultRutas"
+		statementType="CALLABLE" parameterType="map">
+		USP_RutasXCupon #{codigocupon}
+	</select>
+</mapper>
+ 

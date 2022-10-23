@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="cuentaCorrienteBeanIbatis" id="resultMapCuentaCorriente">
+
+		<result property="Nro" column="Nro" />
+		<result property="NroDoc" column="NroDoc" />
+		<result property="NroAplic" column="NroAplic" />
+		<result property="FechaEmision" column="FechaEmision" />
+		<result property="Empresa" column="Empresa" />
+		<result property="EmpresaD" column="EmpresaD" />
+		<result property="Documento" column="Documento" />
+		<result property="DocumentoD" column="DocumentoD" />
+		<result property="Serie" column="Serie" />
+		<result property="Numero" column="Numero" />
+		<result property="Ruc" column="Ruc" />
+		<result property="Razon" column="Razon" />
+		<result property="IdDoc" column="IdDoc" />
+		<result property="Referencia" column="Referencia" />
+		<result property="Monto" column="Monto" />
+		<result property="Pago" column="Pago" />
+		<result property="Usuario" column="Usuario" />
+		<result property="Terminal" column="Terminal" />
+		<result property="Agencia" column="Agencia" />
+		<result property="AgenciaD" column="AgenciaD" />
+		<result property="NroBol" column="NroBol" />
+		<result property="ChLeTr" column="ChLeTr" />
+		<result property="Destino" column="Destino" />
+		<result property="DestinoD" column="DestinoD" />
+		<result property="Servicio" column="Servicio" />
+		<result property="ServicioD" column="ServicioD" />
+		<result property="Entregado" column="Entregado" />
+		<result property="FechaEntrega" column="FechaEntrega" />
+		<result property="Voucher" column="Voucher" />
+		<result property="Flag" column="Flag" />
+		<result property="EstadoWeb" column="EstadoWeb" />
+		<result property="UsuarioVisa" column="UsuarioVisa" />
+	</resultMap>
+
+	<resultMap type="cuentaCorrienteBeanIbatis" id="resultEstadoCuenta">
+		<result property="Nro" column="Nro" />
+		<result property="NroDoc" column="NroDoc" />
+		<result property="NroAplic" column="NroAplic" />
+		<result property="FechaEmision" column="FechaEmision" />
+		<result property="Ruc" column="Ruc" />
+		<result property="Monto" column="Monto" />
+		<result property="Pago" column="Pago" />
+		<result property="NroBol" column="NroBol" />
+		<result property="Destino" column="Destino" />
+		<result property="DestinoD" column="DestinoD" />
+		<result property="Voucher" column="Voucher" />
+	</resultMap>
+
+
+
+	<insert id="SQL_RegistroCuentaCorriente" statementType="CALLABLE"
+		parameterType="cuentaCorrienteBeanIbatis">
+
+		USP_INSERT_CUENTA_CORRIENTE_B_CuentaCorriente_SQL_WEB
+
+		#{Nro},#{NroDoc},#{NroAplic},#{FechaEmision},#{Empresa},#{EmpresaD},#{Documento},#{DocumentoD},#{Serie},#{Numero},
+		#{Ruc},#{Razon},#{IdDoc},#{Referencia},#{Monto},#{Pago},#{Usuario},#{Terminal},#{Agencia},#{AgenciaD},
+		#{NroBol},#{ChLeTr},#{Destino},#{DestinoD},#{Servicio},#{ServicioD},#{Entregado},#{FechaEntrega},
+		#{Voucher},#{Flag},#{EstadoWeb},#{EticketVisa},#{UsuarioVisa},#{Eticket}
+
+
+	</insert>
+
+	<select id="SQL_getEstadoCuentaView" statementType="CALLABLE"
+		resultMap="resultEstadoCuenta">
+		USP_LIST_ESTADO_CUENTA_b_cuentacorriente_WEB_SQL
+		#{RUC},#{Tipo},#{FechaInicial},#{FechaFinal},#{offset},#{limit},#{Usuario}
+
+	</select>
+
+	<select id="SQL_getCountEstadoCuentaView" statementType="CALLABLE"
+		resultType="int">
+		USP_COUNT_ESTADO_CUENTA_b_cuentacorriente_WEB_SQL #{RUC},#{Tipo},#{FechaInicial},#{FechaFinal},#{Usuario}
+
+	</select>
+
+	<select id="SQL_getVentasrealizadas" statementType="CALLABLE"
+		resultType="double">
+		USP_VENTAS_REALIZADAS_b_cuentacorriente_WEB_SQL #{RUC},#{Usuario}
+
+	</select>
+
+	<delete id="SQL_DeleteCuentaCorriente" parameterType="map">
+		USP_DELETE_CUENTA_CORRIENTE_B_CuentaCorriente_Web_SQL_WEB
+		#{Nro},#{NroBol}
+	</delete>
+
+	<delete id="SQL_DeleteCuentaCorrientePagoEfectivo"
+		parameterType="map">
+		USP_DELETE_CUENTA_CORRIENTE_PAGOEFECTIVO_B_CuentaCorriente_Web_SQL_WEB
+		#{NroBol}
+	</delete>
+
+	<update id="SQL_UpdateCuentaCorrienteConfirmada" parameterType="map">
+
+		USP_UPDATE_CUENTA_CORRIENTE_CONFIRMADA_B_CuentaCorriente_Web_SQL_WEB
+		#{Nro},#{NroBol},#{estado}
+
+	</update>
+
+	<select id="SQL_SelectVentaPagoEfectivoCuentaCorriente"
+		statementType="CALLABLE" resultMap="resultEstadoCuenta">
+		USP_SELECT_VENTA_PAGOEFECTIVO_B_CUENTACORRIENTE_SQL_WEB #{NroBol}
+
+	</select>
+
+</mapper>

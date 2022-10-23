@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="reclamocorrelativoBeanIbatis" id="reclamocorrelativoMapBoletaje">
+		<id property="Periodo" column="Periodo" />
+		<result property="CorrelativoRec" column="CorrelativoRec" />
+	</resultMap>
+
+
+	<select id="SQL_ObtenerReclamosCorrelativo" resultMap="reclamocorrelativoMapBoletaje"
+		parameterType="map" statementType="CALLABLE">
+
+		USP_GENERA_CORRELATIVO_RECLAMOS_B_Reclamos_Correlativo_Web
+		#{Empresa},#{atencionreclamos}
+	</select>
+
+
+
+</mapper>	
+	
+	
+
