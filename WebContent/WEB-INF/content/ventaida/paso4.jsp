@@ -229,7 +229,7 @@
 											FULLCARGA.
 										</div>
 									</div>
-									<hr style="width: 100%" align="left">
+									<!-- hr style="width: 100%" align="left">
 									<div class="row">
 										<div class="col-lg-3 col-md-3 col-xs-10">
 											<input id="openpay" type="radio" name="medioPago" value="3" />
@@ -240,7 +240,7 @@
 											style="font-size: 12px">
 											<b>Paga con tu tarjeta de crédito o débito</b><br>
 										</div>
-									</div>
+									</div-->
 								</div>
 							</div>
 						</div>

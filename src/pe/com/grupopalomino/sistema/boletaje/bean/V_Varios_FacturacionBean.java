@@ -19,8 +19,17 @@ public class V_Varios_FacturacionBean {
 	private String PrivateKeyAlias;
 	private String UsernameSunat;
 	private String PasswordSunat;
+
+	private String OSE;
 	
 	
+	
+	public String getOSE() {
+		return OSE;
+	}
+	public void setOSE(String oSE) {
+		OSE = oSE;
+	}
 	public String getEmpresa() {
 		return empresa;
 	}
@@ -124,17 +133,15 @@ public class V_Varios_FacturacionBean {
 	public String getRutaEnvioSunatBackup() {
 		return rutaEnvioSunatBackup;
 	}
-	
 	@Override
 	public String toString() {
-		return "V_Varios_FacturacionBean [empresa=" + empresa + ", empresaD=" + empresaD + ", ruc=" + ruc + ", razon="
-				+ razon + ", direccion=" + direccion + ", ubigeo=" + ubigeo + ", codigoPais=" + codigoPais
-				+ ", codigoMoneda=" + codigoMoneda + ", codigoUnidadMedida=" + codigoUnidadMedida + ", rutaEnvioSunat="
-				+ rutaEnvioSunat + ", rutaEnvioSunatBackup=" + rutaEnvioSunatBackup + ", rutaRespuestaSunat="
-				+ rutaRespuestaSunat + ", keystoreFile=" + keystoreFile + ", keystorePassword=" + keystorePassword
-				+ ", PrivateKeyAlias=" + PrivateKeyAlias + ", UsernameSunat=" + UsernameSunat + ", PasswordSunat="
-				+ PasswordSunat + "]";
+		return "V_Varios_FacturacionBean [empresa=" + empresa + ", empresaD=" + empresaD + ", ruc=" + ruc + ", razon=" + razon + ", direccion=" + direccion + ", ubigeo=" + ubigeo + ", codigoPais=" + codigoPais
+				+ ", codigoMoneda=" + codigoMoneda + ", codigoUnidadMedida=" + codigoUnidadMedida + ", rutaEnvioSunat=" + rutaEnvioSunat + ", rutaEnvioSunatBackup=" + rutaEnvioSunatBackup + ", rutaRespuestaSunat="
+				+ rutaRespuestaSunat + ", keystoreFile=" + keystoreFile + ", keystorePassword=" + keystorePassword + ", PrivateKeyAlias=" + PrivateKeyAlias + ", UsernameSunat=" + UsernameSunat + ", PasswordSunat="
+				+ PasswordSunat + ", OSE=" + OSE + "]";
 	}
 	
+
+
 
 }

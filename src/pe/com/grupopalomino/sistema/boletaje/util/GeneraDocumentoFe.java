@@ -59,10 +59,8 @@ import pe.com.grupopalomino.sistema.boletaje.dao.B_EncomiendasIDao;
 public class GeneraDocumentoFe {
 
 	private static final Log log = LogFactory.getLog(GeneraDocumentoFe.class);
-	
 
-	public static void/* Map<String, Object> */ GeneraDocumentoFacturaXML(
-			Map<String, Object> map/* B_VentaBean venta */, V_Varios_FacturacionBean empresa) {
+	public static void/* Map<String, Object> */ GeneraDocumentoFacturaXML(Map<String, Object> map/* B_VentaBean venta */, V_Varios_FacturacionBean empresa) {
 
 		// Map<String, Object> respuesta = new HashMap<>();
 
@@ -143,16 +141,16 @@ public class GeneraDocumentoFe {
 			Element cbcIDGravadas = doc.createElement("cbc:ID");
 			cbcIDGravadas.appendChild(doc.createTextNode(map.get("CodigoTotalVenta").toString()));// CODIGO
 																									// 1003
-													
+
 			// ES
-																									// PARA
-																									// PASAJES
-																									// -
-																									// CODIGO
-																									// PARA
-																									// ENCOMIENDAS
-																									// ES
-																									// 1001
+			// PARA
+			// PASAJES
+			// -
+			// CODIGO
+			// PARA
+			// ENCOMIENDAS
+			// ES
+			// 1001
 			sacAdditionalMonetaryTotalGravadas.appendChild(cbcIDGravadas);
 
 			Element cbcPayableAmountGravadas = doc.createElement("cbc:PayableAmount");
@@ -328,9 +326,7 @@ public class GeneraDocumentoFe {
 			rootElementInvoice.appendChild(cacAccountingCustomerParty);
 
 			Element cbcCustomerAssignedAccountIDReceptor = doc.createElement("cbc:CustomerAssignedAccountID");
-			cbcCustomerAssignedAccountIDReceptor
-					.appendChild(doc.createTextNode((map.get("TipoDocumento").toString().trim().equals("01")
-							? map.get("Ruc").toString() : map.get("DNI").toString()))); // "20341198217"
+			cbcCustomerAssignedAccountIDReceptor.appendChild(doc.createTextNode((map.get("TipoDocumento").toString().trim().equals("01") ? map.get("Ruc").toString() : map.get("DNI").toString()))); // "20341198217"
 			cacAccountingCustomerParty.appendChild(cbcCustomerAssignedAccountIDReceptor);
 
 			Element cbcAdditionalAccountIDReceptor = doc.createElement("cbc:AdditionalAccountID");
@@ -344,17 +340,15 @@ public class GeneraDocumentoFe {
 			cacPartyReceptor.appendChild(cacPartyLegalEntityReceptor);
 
 			Element cbcRegistrationNameReceptor = doc.createElement("cbc:RegistrationName");
-			cbcRegistrationNameReceptor
-					.appendChild(doc.createCDATASection((map.get("TipoDocumento").toString().trim().equals("01")
-							? map.get("Razon").toString() : map.get("Nombre").toString())));// "VISANET
-																							// -
-																							// CIA
-																							// PERUANA
-																							// DE
-																							// MEDIOS
-																							// DE
-																							// PAGO
-																							// SAC"
+			cbcRegistrationNameReceptor.appendChild(doc.createCDATASection((map.get("TipoDocumento").toString().trim().equals("01") ? map.get("Razon").toString() : map.get("Nombre").toString())));// "VISANET
+																																																	// -
+																																																	// CIA
+																																																	// PERUANA
+																																																	// DE
+																																																	// MEDIOS
+																																																	// DE
+																																																	// PAGO
+																																																	// SAC"
 			cacPartyLegalEntityReceptor.appendChild(cbcRegistrationNameReceptor);
 
 			// *******************************************************************************************
@@ -569,42 +563,39 @@ public class GeneraDocumentoFe {
 			cacTaxtCategory.appendChild(cacTaxScheme);
 
 			Element cacTaxSchemeID = doc.createElement("cbc:ID");
-			cacTaxSchemeID.appendChild(doc.createTextNode(map.get("Servicio").equals("B")
-					? Utils.CODIGO_TIPO_TRIBUTO_PASAJES : Utils.CODIGO_INTERNACIONAL_TRIBUTO_ENCOMIENDA));// VERIFICAR
-																											// CATALOGO
-																											// Nï¿½
-																											// 5
-																											// (CODIGO
-																											// 1000)
-																											// //codigo
-																											// para
-																											// pasajes
-																											// o
-																											// encimiendas
-																											// NUMERO
-																											// 100
-																											// |
-																											// 9997
+			cacTaxSchemeID.appendChild(doc.createTextNode(map.get("Servicio").equals("B") ? Utils.CODIGO_TIPO_TRIBUTO_PASAJES : Utils.CODIGO_INTERNACIONAL_TRIBUTO_ENCOMIENDA));// VERIFICAR
+																																												// CATALOGO
+																																												// Nï¿½
+																																												// 5
+																																												// (CODIGO
+																																												// 1000)
+																																												// //codigo
+																																												// para
+																																												// pasajes
+																																												// o
+																																												// encimiendas
+																																												// NUMERO
+																																												// 100
+																																												// |
+																																												// 9997
 			cacTaxScheme.appendChild(cacTaxSchemeID);
 
 			Element cbcTaxSchemeName = doc.createElement("cbc:Name");
-			cbcTaxSchemeName.appendChild(doc.createTextNode(
-					map.get("Servicio").equals("B") ? Utils.NOMBRE_TRIBUTO_PASAJES : Utils.NOMBRE_TRIBUTO_ENCOMIENDA));// VERIFICAR
-																														// CATALOGO
-																														// Nï¿½
-																														// 5
-																														// (CODIGO
-																														// 1000)
+			cbcTaxSchemeName.appendChild(doc.createTextNode(map.get("Servicio").equals("B") ? Utils.NOMBRE_TRIBUTO_PASAJES : Utils.NOMBRE_TRIBUTO_ENCOMIENDA));// VERIFICAR
+																																								// CATALOGO
+																																								// Nï¿½
+																																								// 5
+																																								// (CODIGO
+																																								// 1000)
 			cacTaxScheme.appendChild(cbcTaxSchemeName);
 
 			Element cbcTaxTypeCode = doc.createElement("cbc:TaxTypeCode");
-			cbcTaxTypeCode.appendChild(doc.createTextNode(map.get("Servicio").equals("B")
-					? Utils.CODIGO_INTERNACIONAL_TRIBUTO_PASAJES : Utils.CODIGO_INTERNACIONAL_TRIBUTO_ENCOMIENDA));// VERIFICAR
-																													// CATALOGO
-																													// Nï¿½
-																													// 5
-																													// (CODIGO
-																													// 1000)
+			cbcTaxTypeCode.appendChild(doc.createTextNode(map.get("Servicio").equals("B") ? Utils.CODIGO_INTERNACIONAL_TRIBUTO_PASAJES : Utils.CODIGO_INTERNACIONAL_TRIBUTO_ENCOMIENDA));// VERIFICAR
+																																															// CATALOGO
+																																															// Nï¿½
+																																															// 5
+																																															// (CODIGO
+																																															// 1000)
 			cacTaxScheme.appendChild(cbcTaxTypeCode);
 
 			// DESCRIPCION DEL ITEM
@@ -614,29 +605,22 @@ public class GeneraDocumentoFe {
 			Element cbcDescription = doc.createElement("cbc:Description");
 
 			if (map.get("Servicio").toString().trim().equals("B")) {
-				cbcDescription.appendChild(doc.createCDATASection("SERVICIO DE TRANSPORTE EN LA RUTA: "
-						+ map.get("DestinoD") /* venta.getDestinoD() */));
+				cbcDescription.appendChild(doc.createCDATASection("SERVICIO DE TRANSPORTE EN LA RUTA: " + map.get("DestinoD") /* venta.getDestinoD() */));
 				cacItem.appendChild(cbcDescription);
 			} else {
 
 				String Descripcion = "";
-				if (!map.get("Cantidad1").toString().trim().equals("")
-						&& !map.get("Descripcion1").toString().trim().equals("")) {
+				if (!map.get("Cantidad1").toString().trim().equals("") && !map.get("Descripcion1").toString().trim().equals("")) {
 
-					Descripcion = map.get("Cantidad1").toString().trim() + " "
-							+ map.get("Descripcion1").toString().trim();
+					Descripcion = map.get("Cantidad1").toString().trim() + " " + map.get("Descripcion1").toString().trim();
 				}
-				if (!map.get("Cantidad2").toString().trim().equals("")
-						&& !map.get("Descripcion2").toString().trim().equals("")) {
+				if (!map.get("Cantidad2").toString().trim().equals("") && !map.get("Descripcion2").toString().trim().equals("")) {
 
-					Descripcion = Descripcion + "/" + map.get("Cantidad2").toString().trim() + " "
-							+ map.get("Descripcion2").toString().trim();
+					Descripcion = Descripcion + "/" + map.get("Cantidad2").toString().trim() + " " + map.get("Descripcion2").toString().trim();
 				}
-				if (!map.get("Cantidad3").toString().trim().equals("")
-						&& !map.get("Descripcion3").toString().trim().equals("")) {
+				if (!map.get("Cantidad3").toString().trim().equals("") && !map.get("Descripcion3").toString().trim().equals("")) {
 
-					Descripcion = Descripcion + "/" + map.get("Cantidad3").toString().trim() + " "
-							+ map.get("Descripcion3").toString().trim();
+					Descripcion = Descripcion + "/" + map.get("Cantidad3").toString().trim() + " " + map.get("Descripcion3").toString().trim();
 				}
 
 				cbcDescription.appendChild(doc.createCDATASection("SERVICIO DE ENVIO DE ENCOMIENDA: " + Descripcion));
@@ -665,20 +649,17 @@ public class GeneraDocumentoFe {
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File(empresa.getRutaEnvioSunat() + empresa.getRuc() + "-"
-					+ map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico") + ".xml"));
+			StreamResult result = new StreamResult(new File(empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico") + ".xml"));
 			// StreamResult result = new StreamResult(new
 			// File(empresa.getRutaEnvioSunat()+empresa.getRuc()+"-"+map.get("TipoDocumento")+"-"+map.get("DocumentoElectronicoXml")+".xml"));
 
 			transformer.transform(source, result);
 
-			String RutaXML = empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-"
-					+ map.get("DocumentoElectronico");
+			String RutaXML = empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico");
 			// String RutaXML =
 			// empresa.getRutaEnvioSunat()+empresa.getRuc()+"-"+map.get("TipoDocumento")+"-"+map.get("DocumentoElectronicoXml");
 
-			String NombreFile = empresa.getRuc() + "-" + map.get("TipoDocumento") + "-"
-					+ map.get("DocumentoElectronico");
+			String NombreFile = empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico");
 			// String NombreFile =
 			// empresa.getRuc()+"-"+map.get("TipoDocumento")+"-"+map.get("DocumentoElectronicoXml");
 			// String RutaZip =
@@ -703,8 +684,7 @@ public class GeneraDocumentoFe {
 
 			System.out.println("LINEA 2");
 			// Obtenemos la clave privada, pues la necesitaremos para encriptar.
-			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(),
-					empresa.getKeystorePassword().toCharArray());
+			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(), empresa.getKeystorePassword().toCharArray());
 			File signatureFile = new File(RutaXML + ".xml");
 			// @SuppressWarnings("deprecation")
 			String baseURI = signatureFile.toString(); // BaseURI para las URL
@@ -740,13 +720,12 @@ public class GeneraDocumentoFe {
 			os.close();
 
 			/*
-			 * NodeList nodeListhash =
-			 * doc1.getElementsByTagName("ds:DigestValue"); Node nodohash =
-			 * nodeListhash.item(0);
+			 * NodeList nodeListhash = doc1.getElementsByTagName("ds:DigestValue"); Node
+			 * nodohash = nodeListhash.item(0);
 			 * 
 			 * if (nodohash instanceof Element){ respuesta.put("codehash",
-			 * nodohash.getTextContent().trim()); System.out.println(
-			 * "CODIGO HASH --> "+ nodohash.getTextContent().trim()); }
+			 * nodohash.getTextContent().trim()); System.out.println( "CODIGO HASH --> "+
+			 * nodohash.getTextContent().trim()); }
 			 */
 
 			crearZip(RutaXML, signatureFile, NombreFile/* ,RutaZip */);
@@ -759,8 +738,7 @@ public class GeneraDocumentoFe {
 
 	}
 
-	public static void/* Map<String, Object> */ GeneraDocumentoNotaCreditoXML(Map<String, Object> map,
-			V_Varios_FacturacionBean empresa) {
+	public static void/* Map<String, Object> */ GeneraDocumentoNotaCreditoXML(Map<String, Object> map, V_Varios_FacturacionBean empresa) {
 
 		// Map<String, Object> respuesta = new HashMap<>();
 
@@ -1191,21 +1169,20 @@ public class GeneraDocumentoFe {
 			cacTaxSubtotalGlobalCredit.appendChild(cacTaxtCategoryGlobalCredit);
 
 			Element cbcTaxExemptionReasonCodeGlobalCredit = doc.createElement("cbc:TaxExemptionReasonCode");
-			cbcTaxExemptionReasonCodeGlobalCredit
-					.appendChild(doc.createTextNode(map.get("CodigoAfectacionIGV").toString()));// VERIFICAR
-																								// CATALOGO
-																								// Nï¿½
-																								// 7
-																								// (
-																								// CODIGO
-																								// 20
-																								// PARA
-																								// PASAJES
-																								// -
-																								// CODIGO
-																								// 10
-																								// PARA
-																								// ENCOMIENDAS)
+			cbcTaxExemptionReasonCodeGlobalCredit.appendChild(doc.createTextNode(map.get("CodigoAfectacionIGV").toString()));// VERIFICAR
+																																// CATALOGO
+																																// Nï¿½
+																																// 7
+																																// (
+																																// CODIGO
+																																// 20
+																																// PARA
+																																// PASAJES
+																																// -
+																																// CODIGO
+																																// 10
+																																// PARA
+																																// ENCOMIENDAS)
 			cacTaxtCategoryGlobalCredit.appendChild(cbcTaxExemptionReasonCodeGlobalCredit);
 
 			Element cacTaxSchemeGlobalCredit = doc.createElement("cac:TaxScheme");
@@ -1236,19 +1213,16 @@ public class GeneraDocumentoFe {
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File(empresa.getRutaEnvioSunat() + empresa.getRuc() + "-"
-					+ map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico") + ".xml"));
+			StreamResult result = new StreamResult(new File(empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico") + ".xml"));
 			// StreamResult result = new StreamResult(new
 			// File(empresa.getRutaEnvioSunat()+empresa.getRuc()+"-"+map.get("TipoDocumento")+"-"+map.get("DocumentoElectronicoXml")+".xml"));
 
 			transformer.transform(source, result);
 
-			String RutaXML = empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-"
-					+ map.get("DocumentoElectronico");
+			String RutaXML = empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico");
 			// String RutaXML =
 			// empresa.getRutaEnvioSunat()+empresa.getRuc()+"-"+map.get("TipoDocumento")+"-"+map.get("DocumentoElectronicoXml");
-			String NombreFile = empresa.getRuc() + "-" + map.get("TipoDocumento") + "-"
-					+ map.get("DocumentoElectronico");
+			String NombreFile = empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico");
 			// String NombreFile =
 			// empresa.getRuc()+"-"+map.get("TipoDocumento")+"-"+map.get("DocumentoElectronicoXml");
 			// String RutaZip =
@@ -1273,8 +1247,7 @@ public class GeneraDocumentoFe {
 
 			System.out.println("LINEA 2");
 			// Obtenemos la clave privada, pues la necesitaremos para encriptar.
-			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(),
-					empresa.getKeystorePassword().toCharArray());
+			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(), empresa.getKeystorePassword().toCharArray());
 			File signatureFile = new File(RutaXML + ".xml");
 			// @SuppressWarnings("deprecation")
 			String baseURI = signatureFile.toString(); // BaseURI para las URL
@@ -1310,9 +1283,8 @@ public class GeneraDocumentoFe {
 			os.close();
 
 			/*
-			 * NodeList nodeListhash =
-			 * doc1.getElementsByTagName("ds:DigestValue"); Node nodohash =
-			 * nodeListhash.item(0);
+			 * NodeList nodeListhash = doc1.getElementsByTagName("ds:DigestValue"); Node
+			 * nodohash = nodeListhash.item(0);
 			 * 
 			 * if (nodohash instanceof Element){ respuesta.put("codehash",
 			 * nodohash.getTextContent().trim()); }
@@ -1328,8 +1300,7 @@ public class GeneraDocumentoFe {
 
 	}
 
-	public static void/* Map<String, Object> */ GeneraDocumentoNotaDebitoXML(Map<String, Object> map,
-			V_Varios_FacturacionBean empresa) {
+	public static void/* Map<String, Object> */ GeneraDocumentoNotaDebitoXML(Map<String, Object> map, V_Varios_FacturacionBean empresa) {
 
 		// Map<String, Object> respuesta = new HashMap<>();
 
@@ -1744,15 +1715,12 @@ public class GeneraDocumentoFe {
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File(empresa.getRutaEnvioSunat() + empresa.getRuc() + "-"
-					+ map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico") + ".xml"));
+			StreamResult result = new StreamResult(new File(empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico") + ".xml"));
 
 			transformer.transform(source, result);
 
-			String RutaXML = empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-"
-					+ map.get("DocumentoElectronico");
-			String NombreFile = empresa.getRuc() + "-" + map.get("TipoDocumento") + "-"
-					+ map.get("DocumentoElectronico");
+			String RutaXML = empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico");
+			String NombreFile = empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico");
 
 			Init.init();
 
@@ -1773,8 +1741,7 @@ public class GeneraDocumentoFe {
 
 			System.out.println("LINEA 2");
 			// Obtenemos la clave privada, pues la necesitaremos para encriptar.
-			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(),
-					empresa.getKeystorePassword().toCharArray());
+			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(), empresa.getKeystorePassword().toCharArray());
 			File signatureFile = new File(RutaXML + ".xml");
 			// @SuppressWarnings("deprecation")
 			String baseURI = signatureFile.toString(); // BaseURI para las URL
@@ -1810,9 +1777,8 @@ public class GeneraDocumentoFe {
 			os.close();
 
 			/*
-			 * NodeList nodeListhash =
-			 * doc1.getElementsByTagName("ds:DigestValue"); Node nodohash =
-			 * nodeListhash.item(0);
+			 * NodeList nodeListhash = doc1.getElementsByTagName("ds:DigestValue"); Node
+			 * nodohash = nodeListhash.item(0);
 			 * 
 			 * if (nodohash instanceof Element){ respuesta.put("codehash",
 			 * nodohash.getTextContent().trim()); }
@@ -1902,12 +1868,10 @@ public class GeneraDocumentoFe {
 			ublExtension.appendChild(extExtensionContent);
 
 			/*
-			 * Element ublExtensionSignature =
-			 * doc.createElement("ext:UBLExtension");
+			 * Element ublExtensionSignature = doc.createElement("ext:UBLExtension");
 			 * ublExtensions.appendChild(ublExtensionSignature);
 			 * 
-			 * Text texto = doc.createTextNode(" "); Element
-			 * ublExtensionContentSignature =
+			 * Text texto = doc.createTextNode(" "); Element ublExtensionContentSignature =
 			 * doc.createElement("ext:ExtensionContent");
 			 * ublExtensionContentSignature.appendChild(texto);
 			 * ublExtensionSignature.appendChild(ublExtensionContentSignature);
@@ -2052,8 +2016,7 @@ public class GeneraDocumentoFe {
 			sacVoidedDocumentsLine.appendChild(cbcDocumentTypeCode);
 
 			Element cbcDocumentID = doc.createElement("cbc:ID");
-			cbcDocumentID
-					.appendChild(doc.createTextNode(map.get("Serie").toString() + "-" + map.get("Numero").toString()));
+			cbcDocumentID.appendChild(doc.createTextNode(map.get("Serie").toString() + "-" + map.get("Numero").toString()));
 			sacVoidedDocumentsLine.appendChild(cbcDocumentID);
 
 			Element cacAccountingCustomerParty = doc.createElement("cac:AccountingCustomerParty");
@@ -2182,8 +2145,7 @@ public class GeneraDocumentoFe {
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File(
-					empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("DocumentoElectronico") + ".xml"));
+			StreamResult result = new StreamResult(new File(empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("DocumentoElectronico") + ".xml"));
 
 			transformer.transform(source, result);
 
@@ -2207,8 +2169,7 @@ public class GeneraDocumentoFe {
 			ks.load(new FileInputStream(empresa.getKeystoreFile()), empresa.getKeystorePassword().toCharArray());
 
 			// Obtenemos la clave privada, pues la necesitaremos para encriptar.
-			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(),
-					empresa.getKeystorePassword().toCharArray());
+			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(), empresa.getKeystorePassword().toCharArray());
 			File signatureFile = new File(RutaXML + ".xml");
 			// @SuppressWarnings("deprecation")
 			String baseURI = signatureFile.toString(); // BaseURI para las URL
@@ -2304,12 +2265,10 @@ public class GeneraDocumentoFe {
 			ublExtension.appendChild(extExtensionContent);
 
 			/*
-			 * Element ublExtensionSignature =
-			 * doc.createElement("ext:UBLExtension");
+			 * Element ublExtensionSignature = doc.createElement("ext:UBLExtension");
 			 * ublExtensions.appendChild(ublExtensionSignature);
 			 * 
-			 * Text texto = doc.createTextNode(" "); Element
-			 * ublExtensionContentSignature =
+			 * Text texto = doc.createTextNode(" "); Element ublExtensionContentSignature =
 			 * doc.createElement("ext:ExtensionContent");
 			 * ublExtensionContentSignature.appendChild(texto);
 			 * ublExtensionSignature.appendChild(ublExtensionContentSignature);
@@ -2480,8 +2439,7 @@ public class GeneraDocumentoFe {
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File(
-					empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("DocumentoElectronico") + ".xml"));
+			StreamResult result = new StreamResult(new File(empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("DocumentoElectronico") + ".xml"));
 
 			transformer.transform(source, result);
 
@@ -2505,8 +2463,7 @@ public class GeneraDocumentoFe {
 			ks.load(new FileInputStream(empresa.getKeystoreFile()), empresa.getKeystorePassword().toCharArray());
 
 			// Obtenemos la clave privada, pues la necesitaremos para encriptar.
-			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(),
-					empresa.getKeystorePassword().toCharArray());
+			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(), empresa.getKeystorePassword().toCharArray());
 			File signatureFile = new File(RutaXML + ".xml");
 			// @SuppressWarnings("deprecation")
 			String baseURI = signatureFile.toString(); // BaseURI para las URL
@@ -2548,8 +2505,7 @@ public class GeneraDocumentoFe {
 
 	}
 
-	public static void crearZip(String rutaXML, File signatureFile,
-			String nombreFile/* ,String RutaZip */) {
+	public static void crearZip(String rutaXML, File signatureFile, String nombreFile/* ,String RutaZip */) {
 
 		byte[] buffer = new byte[1024];
 
@@ -2586,18 +2542,14 @@ public class GeneraDocumentoFe {
 
 	}
 
-	public static byte[] CodigoQR(V_Varios_FacturacionBean facturacion, Map<String, Object> ventas,
-			Map<String, Object> respuestaXML) {
+	public static byte[] CodigoQR(V_Varios_FacturacionBean facturacion, Map<String, Object> ventas, Map<String, Object> respuestaXML) {
 
 		// ByteArrayInputStream inputStream = null;
 		byte[] imageBytes = null;
 
-		String datos = facturacion.getRuc() + "|" + ventas.get("TipoDocumento") + "|" + ventas.get("SerieElectronica")
-				+ "|" + ventas.get("Numero") + "|" + ventas.get("IGV") + "|" + ventas.get("Total") + "|"
-				+ ventas.get("FechaEmision").toString().replace("-", "") + "|" + ventas.get("TipoDocumentoReceptor")
-				+ "|" + (ventas.get("TipoDocumentoReceptor").toString().trim().equals("6") ? ventas.get("Ruc")
-						: ventas.get("DNI"))
-				+ "|" + respuestaXML.get("codehash");
+		String datos = facturacion.getRuc() + "|" + ventas.get("TipoDocumento") + "|" + ventas.get("SerieElectronica") + "|" + ventas.get("Numero") + "|" + ventas.get("IGV") + "|" + ventas.get("Total") + "|"
+				+ ventas.get("FechaEmision").toString().replace("-", "") + "|" + ventas.get("TipoDocumentoReceptor") + "|"
+				+ (ventas.get("TipoDocumentoReceptor").toString().trim().equals("6") ? ventas.get("Ruc") : ventas.get("DNI")) + "|" + respuestaXML.get("codehash");
 
 		try {
 
@@ -2622,34 +2574,34 @@ public class GeneraDocumentoFe {
 
 	}
 
-	public static byte[] CodigoBarras(V_Varios_FacturacionBean facturacion, Map<String, Object> ventas,
-			Map<String, Object> respuestaXML) {
-		//facturacion.getRuc() + "'" + 
-		String datos = ventas.get("TipoDocumento") + "'" +  ventas.get("SerieElectronica") + "'" +  ventas.get("Numero"); /*+ "'" + ventas.get("IGV") + "'" + ventas.get("Total") + "'"
-				+ ventas.get("FechaEmision").toString().replace("-", "") + "'" + ventas.get("TipoDocumentoReceptor")
-				+ "'"
-				+ (ventas.get("TipoDocumentoReceptor").toString().trim().equals("6") ? ventas.get("Ruc")
-						: ventas.get("DNI"))
-				+ "'" + respuestaXML.get("codehash") + "'" + respuestaXML.get("signaturevalue");*/
+	public static byte[] CodigoBarras(V_Varios_FacturacionBean facturacion, Map<String, Object> ventas, Map<String, Object> respuestaXML) {
+		// facturacion.getRuc() + "'" +
+		String datos = ventas.get("TipoDocumento") + "'" + ventas.get("SerieElectronica") + "'" + ventas.get("Numero"); /*
+																														 * + "'" + ventas.get("IGV") + "'" + ventas.get("Total") + "'" +
+																														 * ventas.get("FechaEmision").toString().replace("-", "") + "'" +
+																														 * ventas.get("TipoDocumentoReceptor") + "'" +
+																														 * (ventas.get("TipoDocumentoReceptor").toString().trim().equals("6") ?
+																														 * ventas.get("Ruc") : ventas.get("DNI")) + "'" + respuestaXML.get("codehash") +
+																														 * "'" + respuestaXML.get("signaturevalue");
+																														 */
 
 		BarcodePDF417 barcode = new BarcodePDF417();
 		// ByteArrayInputStream inputStream = null;
 		byte[] pngImageData = null;
 
-		barcode.setText(datos);		
+		barcode.setText(datos);
 		ByteArrayOutputStream bytesOut = new ByteArrayOutputStream();
 		;
 		try {
-			com.itextpdf.text.Image image = barcode.getImage();			
+			com.itextpdf.text.Image image = barcode.getImage();
 			image.scaleAbsolute(184, 72);
-			
+
 			Image img = barcode.createAwtImage(Color.BLACK, Color.WHITE);
-			//com.itextpdf.text.Image img = barcode.getImage();
-			BufferedImage outImage = new BufferedImage(img.getWidth(null), img.getHeight(null),
-					BufferedImage.TYPE_INT_RGB);
+			// com.itextpdf.text.Image img = barcode.getImage();
+			BufferedImage outImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB);
 
 			barcode.setErrorLevel(5);
-			
+
 			barcode.setLenCodewords(BarcodePDF417.PDF417_FORCE_BINARY);
 			outImage.getGraphics().drawImage(img, 0, 0, null);
 
@@ -2680,12 +2632,12 @@ public class GeneraDocumentoFe {
 	 * public static final String CODIGO_TIPO_TRIBUTO_EXCENTO = "9996"; public
 	 * static final String NOMBRE_TRIBUTO_EXCENTO = "GRA"; public static final
 	 * String CODIGO_INTERNACIONAL_EXCENTO = "FRE"; public static final String
-	 * CODIGO_TIPO_TRIBUTO_PASAJES = "9997";//para factura y para boleta /**
-	 * CODIGO TIPO DE TRIBUTO (CATALOGO 5 - cac:TaxScheme/cbc:Name) public
-	 * static final String NOMBRE_TRIBUTO_PASAJES = "EXO";//para factura y para
-	 * boleta //CODIGO TIPO DE TRIBUTO (CATALOGO 5 -
-	 * cac:TaxScheme/cbc:TaxTypeCode) public static final String
-	 * CODIGO_INTERNACIONAL_TRIBUTO_PASAJES = "VAT";//para factura y para boleta
+	 * CODIGO_TIPO_TRIBUTO_PASAJES = "9997";//para factura y para boleta /** CODIGO
+	 * TIPO DE TRIBUTO (CATALOGO 5 - cac:TaxScheme/cbc:Name) public static final
+	 * String NOMBRE_TRIBUTO_PASAJES = "EXO";//para factura y para boleta //CODIGO
+	 * TIPO DE TRIBUTO (CATALOGO 5 - cac:TaxScheme/cbc:TaxTypeCode) public static
+	 * final String CODIGO_INTERNACIONAL_TRIBUTO_PASAJES = "VAT";//para factura y
+	 * para boleta
 	 */
 	public static void TributoCondicionubl21(Map<String, Object> Mapa) {
 		System.out.println(Mapa.get("TotalSinIGV").toString());
@@ -2746,52 +2698,51 @@ public class GeneraDocumentoFe {
 			break;
 		}
 	}
-	 public static Date sumarRestarDiasFecha(Date fecha, int dias){
-		       Calendar calendar = Calendar.getInstance();
-		       calendar.setTime(fecha); // Configuramos la fecha que se recibe
-		       calendar.add(Calendar.DAY_OF_YEAR, dias);  // numero de días a añadir, o restar en caso de días<0
-		       return calendar.getTime(); // Devuelve el objeto Date con los nuevos días añadidos
-	}	 
-	
+
+	public static Date sumarRestarDiasFecha(Date fecha, int dias) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fecha); // Configuramos la fecha que se recibe
+		calendar.add(Calendar.DAY_OF_YEAR, dias); // numero de días a añadir, o restar en caso de días<0
+		return calendar.getTime(); // Devuelve el objeto Date con los nuevos días añadidos
+	}
+
 	public static void GeneraDocumentoFacturaXMLPruebaUBL21(Map<String, Object> map, V_Varios_FacturacionBean empresa) {
 
-		//int accion  =0;
-			switch (map.get("CodigoAfectacionIGV").toString()) {
-			case "10":
-				CODIGO_TIPO_TRIBUTO = "1000";
-				NOMBRE_TRIBUTO = "IGV";
-				CODIGO_INTERNACIONAL_TRIBUTO = "VAT";
-				PORCENTAJE = "18.00";
-					/*accion=Integer.parseInt(map.get("Exceso").toString());
-					if (accion ==1) {
-						NOMBRE_TRIBUTO = "EXO";
-						CODIGO_INTERNACIONAL_TRIBUTO = "VAT";
-						PORCENTAJE = "0.00";
-						map.put("CodigoAfectacionIGV",20);		
-						} */
-				map.put("TipoPrecio", "01");
-				map.put("PrecioItem", String.valueOf(map.get("TotalSinIGV")));
-				break;
-			case "20":
-				CODIGO_TIPO_TRIBUTO = "9997";
-				NOMBRE_TRIBUTO = "EXO";
-				CODIGO_INTERNACIONAL_TRIBUTO = "VAT";
-				PORCENTAJE = "0.00";
-				map.put("TipoPrecio", "01");
-				map.put("PrecioItem", String.valueOf(map.get("TotalSinIGV")));
-				break;
-			case "21":
-				CODIGO_TIPO_TRIBUTO = "9996";	
-				NOMBRE_TRIBUTO = "GRA";
-				CODIGO_INTERNACIONAL_TRIBUTO = "FRE";
-				PORCENTAJE = "0.00";
-				map.put("TipoPrecio", "02");
-				map.put("PrecioItem", "0.00");
-				break;
-			}
-			
-			//Exonerado – Transferencia Gratuita
-			
+		// int accion =0;
+		switch (map.get("CodigoAfectacionIGV").toString()) {
+		case "10":
+			CODIGO_TIPO_TRIBUTO = "1000";
+			NOMBRE_TRIBUTO = "IGV";
+			CODIGO_INTERNACIONAL_TRIBUTO = "VAT";
+			PORCENTAJE = "18.00";
+			/*
+			 * accion=Integer.parseInt(map.get("Exceso").toString()); if (accion ==1) {
+			 * NOMBRE_TRIBUTO = "EXO"; CODIGO_INTERNACIONAL_TRIBUTO = "VAT"; PORCENTAJE =
+			 * "0.00"; map.put("CodigoAfectacionIGV",20); }
+			 */
+			map.put("TipoPrecio", "01");
+			map.put("PrecioItem", String.valueOf(map.get("TotalSinIGV")));
+			break;
+		case "20":
+			CODIGO_TIPO_TRIBUTO = "9997";
+			NOMBRE_TRIBUTO = "EXO";
+			CODIGO_INTERNACIONAL_TRIBUTO = "VAT";
+			PORCENTAJE = "0.00";
+			map.put("TipoPrecio", "01");
+			map.put("PrecioItem", String.valueOf(map.get("TotalSinIGV")));
+			break;
+		case "21":
+			CODIGO_TIPO_TRIBUTO = "9996";
+			NOMBRE_TRIBUTO = "GRA";
+			CODIGO_INTERNACIONAL_TRIBUTO = "FRE";
+			PORCENTAJE = "0.00";
+			map.put("TipoPrecio", "02");
+			map.put("PrecioItem", "0.00");
+			break;
+		}
+
+		// Exonerado – Transferencia Gratuita
+
 		try {
 
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -2812,7 +2763,7 @@ public class GeneraDocumentoFe {
 			Attr attrInvoiceCac = doc.createAttribute("xmlns:cac");
 			attrInvoiceCac.setValue("urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
 			rootElementInvoice.setAttributeNode(attrInvoiceCac);
-			
+
 			Attr attrInvoicecacadd = doc.createAttribute("xmlns:cacadd");
 			attrInvoicecacadd.setValue("urn:e-billing:aggregates");
 			rootElementInvoice.setAttributeNode(attrInvoicecacadd);
@@ -2820,7 +2771,7 @@ public class GeneraDocumentoFe {
 			Attr attrInvoiceCbc = doc.createAttribute("xmlns:cbc");
 			attrInvoiceCbc.setValue("urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2");
 			rootElementInvoice.setAttributeNode(attrInvoiceCbc);
-			
+
 			Attr attrInvoicecbcadd = doc.createAttribute("xmlns:cbcadd");
 			attrInvoicecbcadd.setValue("urn:e-billing:basics");
 			rootElementInvoice.setAttributeNode(attrInvoicecbcadd);
@@ -2855,180 +2806,171 @@ public class GeneraDocumentoFe {
 
 			Element ublExtensions = doc.createElement("ext:UBLExtensions");
 			rootElementInvoice.appendChild(ublExtensions);
-			
-			
-			/*JCHC ULTIMO CAMBIO DETRACCIONES
-			if(map.get("TipoDocumentoD").toString().equals("Factura")) {
-				// Extensions XML
-				
 
-				Element ublExtension0 = doc.createElement("ext:UBLExtension");
-				ublExtensions.appendChild(ublExtension0);
+			/*
+			 * JCHC ULTIMO CAMBIO DETRACCIONES
+			 * if(map.get("TipoDocumentoD").toString().equals("Factura")) { // Extensions
+			 * XML
+			 * 
+			 * 
+			 * Element ublExtension0 = doc.createElement("ext:UBLExtension");
+			 * ublExtensions.appendChild(ublExtension0);
+			 * 
+			 * Element extExtensionContent0 = doc.createElement("ext:ExtensionContent");
+			 * ublExtension0.appendChild(extExtensionContent0);
+			 * 
+			 * 
+			 * Element cacaddExtraParameters = doc.createElement("cacadd:ExtraParameters");
+			 * extExtensionContent0.appendChild(cacaddExtraParameters);
+			 * 
+			 * Attr xmlnssac = doc.createAttribute("xmlns:sac"); xmlnssac.setValue(
+			 * "urn:sunat.names.specification.ubl_2_0.2_0.peru:schema:xsd:SunatAggregateComponents-1"
+			 * ); cacaddExtraParameters.setAttributeNode(xmlnssac);
+			 * 
+			 * Date fechaDate; Date nvalfec;
+			 * 
+			 * fechaDate = new
+			 * SimpleDateFormat("yyyy-MM-dd").parse(map.get("FechaEmision").toString());
+			 * nvalfec=sumarRestarDiasFecha(fechaDate,45); DateFormat dateformat = new
+			 * SimpleDateFormat("yyyy-MM-dd"); String
+			 * valnuevafec=dateformat.format(nvalfec);
+			 * 
+			 * if (map.get("Tipo").toString().equals("C") ||
+			 * map.get("Tipo").toString().equals("CR")) {
+			 * 
+			 * map.get("Total").toString(); map.get("Moneda").toString();
+			 * 
+			 * Element cbcaddextra = doc.createElement("cbcadd:extra");
+			 * cbcaddextra.appendChild(doc.createCDATASection("Crédito a 45 días"));
+			 * cacaddExtraParameters.appendChild(cbcaddextra);
+			 * 
+			 * Attr name = doc.createAttribute("name"); name.setValue("Forma de Pago");
+			 * cbcaddextra.setAttributeNode(name);
+			 * 
+			 * Element cbcaddextra1 = doc.createElement("cbcadd:extra");
+			 * cbcaddextra1.appendChild(doc.createCDATASection(map.get("Moneda").toString()
+			 * +" "+map.get("Total").toString()));
+			 * cacaddExtraParameters.appendChild(cbcaddextra1);
+			 * 
+			 * Attr name1 = doc.createAttribute("name");
+			 * name1.setValue("Monto Neto Pendiente de Pago");
+			 * cbcaddextra1.setAttributeNode(name1);
+			 * 
+			 * Element cbcaddextra2 = doc.createElement("cbcadd:extra");
+			 * cbcaddextra2.appendChild(doc.createCDATASection(map.get("Moneda").toString()
+			 * +" "+map.get("Total").toString()+" - "+valnuevafec));
+			 * cacaddExtraParameters.appendChild(cbcaddextra2);
+			 * 
+			 * Attr name2 = doc.createAttribute("name"); name2.setValue("Cuota 001");
+			 * cbcaddextra2.setAttributeNode(name2);
+			 * 
+			 * } else {
+			 * 
+			 * Element cbcaddextra = doc.createElement("cbcadd:extra");
+			 * cbcaddextra.appendChild(doc.createCDATASection("Contado"));
+			 * cacaddExtraParameters.appendChild(cbcaddextra);
+			 * 
+			 * Attr name = doc.createAttribute("name"); name.setValue("Forma de Pago");
+			 * cbcaddextra.setAttributeNode(name);
+			 * 
+			 * Element cbcaddextra1 = doc.createElement("cbcadd:extra");
+			 * cbcaddextra1.appendChild(doc.createCDATASection(map.get("Moneda").toString()
+			 * +" "+map.get("Total").toString()));
+			 * cacaddExtraParameters.appendChild(cbcaddextra1);
+			 * 
+			 * Attr name1 = doc.createAttribute("name");
+			 * name1.setValue("Monto Neto Pendiente de Pago");
+			 * cbcaddextra1.setAttributeNode(name1);
+			 * 
+			 * }
+			 * 
+			 * Element cbcaddextra3 = doc.createElement("cbcadd:extra");
+			 * cbcaddextra3.appendChild(doc.createCDATASection(
+			 * "______________________________"));
+			 * cacaddExtraParameters.appendChild(cbcaddextra3);
+			 * 
+			 * Attr name3 = doc.createAttribute("name");
+			 * name3.setValue("______________________________");
+			 * cbcaddextra3.setAttributeNode(name3);
+			 * 
+			 * 
+			 * 
+			 * if(map.get("CodigoTotalVenta").toString().equals("1003")) {
+			 * 
+			 * DecimalFormat formato1 = new DecimalFormat("#.00"); String
+			 * totaladetra=String.valueOf(formato1.format(Float.parseFloat(map.get("Total").
+			 * toString()) * Float.parseFloat("0.10")));
+			 * 
+			 * Element cbcaddextra4 = doc.createElement("cbcadd:extra");
+			 * cbcaddextra4.appendChild(doc.createCDATASection(
+			 * 
+			 * "Operación sujeta al Sistema de Pago de Obligaciones Tributarias."
+			 * +"Bien o Servicio sujeto a Detracción:"
+			 * +"026 - Otros servicios empresariales "
+			 * +"Depositar a la cuenta del Banco de la Nación" +"Nro. 00005066646."
+			 * +"Medio de Pago: 001 - Depósito en cuenta" +"Monto en Soles: " + totaladetra
+			 * //+"Tipo de Cambio: 3.50000" +"Porcentaje: 10.00%") );
+			 * cacaddExtraParameters.appendChild(cbcaddextra4);
+			 * 
+			 * Attr name4 = doc.createAttribute("name"); name4.setValue("Detracciones");
+			 * cbcaddextra4.setAttributeNode(name4);
+			 * 
+			 * } else {
+			 * 
+			 * DecimalFormat formato1 = new DecimalFormat("#.00"); String
+			 * totaladetra=String.valueOf(formato1.format(Float.parseFloat(map.get("Total").
+			 * toString()) * Float.parseFloat("0.04"))); Element cbcaddextra4 =
+			 * doc.createElement("cbcadd:extra");
+			 * cbcaddextra4.appendChild(doc.createCDATASection(
+			 * "Operación sujeta al Sistema de Pago de Obligaciones Tributarias."
+			 * +"Bien o Servicio sujeto a Detracción:"
+			 * +"027 - Otros servicios empresariales "
+			 * +"Depositar a la cuenta del Banco de la Nación" +"Nro. 00005066646."
+			 * +"Medio de Pago: 001 - Depósito en cuenta" +"Monto en Soles: " + totaladetra
+			 * //+"Tipo de Cambio: 3.50000" +"Porcentaje: 4.00%") );
+			 * cacaddExtraParameters.appendChild(cbcaddextra4);
+			 * 
+			 * Attr name4 = doc.createAttribute("name"); name4.setValue("Detracciones");
+			 * cbcaddextra4.setAttributeNode(name4);
+			 * 
+			 * }
+			 * 
+			 * Element cbcaddextra5 = doc.createElement("cbcadd:extra");
+			 * cbcaddextra5.appendChild(doc.createCDATASection(
+			 * "______________________________"));
+			 * cacaddExtraParameters.appendChild(cbcaddextra5);
+			 * 
+			 * Attr name5 = doc.createAttribute("name");
+			 * name5.setValue("______________________________");
+			 * cbcaddextra5.setAttributeNode(name5);
+			 * 
+			 * Element cbcaddextra6 = doc.createElement("cbcadd:extra");
+			 * cbcaddextra6.appendChild(doc.createCDATASection("00005066646"));
+			 * cacaddExtraParameters.appendChild(cbcaddextra6);
+			 * 
+			 * Attr name6 = doc.createAttribute("name"); name6.setValue("BCP MN:");
+			 * cbcaddextra6.setAttributeNode(name6); }
+			 */
+			// FIN ULTIMO CAMBIO DETRACCIONES JCHC
 
-				Element extExtensionContent0 = doc.createElement("ext:ExtensionContent");
-				ublExtension0.appendChild(extExtensionContent0);
-				
-				
-				Element cacaddExtraParameters = doc.createElement("cacadd:ExtraParameters");
-				extExtensionContent0.appendChild(cacaddExtraParameters);
-			
-				Attr xmlnssac = doc.createAttribute("xmlns:sac");
-				xmlnssac.setValue("urn:sunat.names.specification.ubl_2_0.2_0.peru:schema:xsd:SunatAggregateComponents-1");
-				cacaddExtraParameters.setAttributeNode(xmlnssac);
-				
-				Date fechaDate;
-				Date nvalfec;
-
-				fechaDate = new SimpleDateFormat("yyyy-MM-dd").parse(map.get("FechaEmision").toString());
-				nvalfec=sumarRestarDiasFecha(fechaDate,45);
-				DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");				
-				String valnuevafec=dateformat.format(nvalfec);
-				
-				if (map.get("Tipo").toString().equals("C") || map.get("Tipo").toString().equals("CR")) {
-				
-					map.get("Total").toString();
-					map.get("Moneda").toString();
-					
-					Element cbcaddextra = doc.createElement("cbcadd:extra");
-					cbcaddextra.appendChild(doc.createCDATASection("Crédito a 45 días"));
-					cacaddExtraParameters.appendChild(cbcaddextra);
-					
-					Attr name = doc.createAttribute("name");
-					name.setValue("Forma de Pago");
-					cbcaddextra.setAttributeNode(name);
-								
-					Element cbcaddextra1 = doc.createElement("cbcadd:extra");
-					cbcaddextra1.appendChild(doc.createCDATASection(map.get("Moneda").toString()+" "+map.get("Total").toString()));
-					cacaddExtraParameters.appendChild(cbcaddextra1);
-					
-					Attr name1 = doc.createAttribute("name");
-					name1.setValue("Monto Neto Pendiente de Pago");
-					cbcaddextra1.setAttributeNode(name1);
-					
-					Element cbcaddextra2 = doc.createElement("cbcadd:extra");
-					cbcaddextra2.appendChild(doc.createCDATASection(map.get("Moneda").toString()+" "+map.get("Total").toString()+" - "+valnuevafec));
-					cacaddExtraParameters.appendChild(cbcaddextra2);
-				
-					Attr name2 = doc.createAttribute("name");
-					name2.setValue("Cuota 001");
-					cbcaddextra2.setAttributeNode(name2);
-					
-				} else {
-					
-					Element cbcaddextra = doc.createElement("cbcadd:extra");
-					cbcaddextra.appendChild(doc.createCDATASection("Contado"));
-					cacaddExtraParameters.appendChild(cbcaddextra);
-					
-					Attr name = doc.createAttribute("name");
-					name.setValue("Forma de Pago");
-					cbcaddextra.setAttributeNode(name);
-					
-					Element cbcaddextra1 = doc.createElement("cbcadd:extra");
-					cbcaddextra1.appendChild(doc.createCDATASection(map.get("Moneda").toString()+" "+map.get("Total").toString()));
-					cacaddExtraParameters.appendChild(cbcaddextra1);
-					
-					Attr name1 = doc.createAttribute("name");
-					name1.setValue("Monto Neto Pendiente de Pago");
-					cbcaddextra1.setAttributeNode(name1);
-					
-				}
-				
-				Element cbcaddextra3 = doc.createElement("cbcadd:extra");
-				cbcaddextra3.appendChild(doc.createCDATASection("______________________________"));
-				cacaddExtraParameters.appendChild(cbcaddextra3);
-			
-				Attr name3 = doc.createAttribute("name");
-				name3.setValue("______________________________");
-				cbcaddextra3.setAttributeNode(name3);
-				
-				
-
-				if(map.get("CodigoTotalVenta").toString().equals("1003")) {
-					
-					DecimalFormat formato1 = new DecimalFormat("#.00");
-					String totaladetra=String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.10")));
-					
-					Element cbcaddextra4 = doc.createElement("cbcadd:extra");
-					cbcaddextra4.appendChild(doc.createCDATASection(
-							
-					"Operación sujeta al Sistema de Pago de Obligaciones Tributarias."
-					+"Bien o Servicio sujeto a Detracción:" 
-					+"026 - Otros servicios empresariales "
-					+"Depositar a la cuenta del Banco de la Nación" 
-					+"Nro. 00005066646."
-					+"Medio de Pago: 001 - Depósito en cuenta"
-					+"Monto en Soles: " + totaladetra
-					//+"Tipo de Cambio: 3.50000"
-					+"Porcentaje: 10.00%")
-					);
-					cacaddExtraParameters.appendChild(cbcaddextra4);
-					
-					Attr name4 = doc.createAttribute("name");
-					name4.setValue("Detracciones");
-					cbcaddextra4.setAttributeNode(name4);
-											
-				} else {
-					
-					    DecimalFormat formato1 = new DecimalFormat("#.00");
-						String totaladetra=String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.04")));						
-						Element cbcaddextra4 = doc.createElement("cbcadd:extra");
-						cbcaddextra4.appendChild(doc.createCDATASection(								
-						"Operación sujeta al Sistema de Pago de Obligaciones Tributarias."
-						+"Bien o Servicio sujeto a Detracción:" 
-						+"027 - Otros servicios empresariales "
-						+"Depositar a la cuenta del Banco de la Nación" 
-						+"Nro. 00005066646."
-						+"Medio de Pago: 001 - Depósito en cuenta"
-						+"Monto en Soles: " + totaladetra
-						//+"Tipo de Cambio: 3.50000"
-						+"Porcentaje: 4.00%")
-						);
-						cacaddExtraParameters.appendChild(cbcaddextra4);
-						
-						Attr name4 = doc.createAttribute("name");
-						name4.setValue("Detracciones");
-						cbcaddextra4.setAttributeNode(name4);	
-						
-				}					
-				
-				Element cbcaddextra5 = doc.createElement("cbcadd:extra");
-				cbcaddextra5.appendChild(doc.createCDATASection("______________________________"));
-				cacaddExtraParameters.appendChild(cbcaddextra5);
-			
-				Attr name5 = doc.createAttribute("name");
-				name5.setValue("______________________________");
-				cbcaddextra5.setAttributeNode(name5);
-								
-				Element cbcaddextra6 = doc.createElement("cbcadd:extra");
-				cbcaddextra6.appendChild(doc.createCDATASection("00005066646"));
-				cacaddExtraParameters.appendChild(cbcaddextra6);
-			
-				Attr name6 = doc.createAttribute("name");
-				name6.setValue("BCP MN:");
-				cbcaddextra6.setAttributeNode(name6);
-			}		*/
-			//FIN ULTIMO CAMBIO DETRACCIONES JCHC
-			
-			// Extensions XML			
+			// Extensions XML
 
 			Element ublExtension = doc.createElement("ext:UBLExtension");
 			ublExtensions.appendChild(ublExtension);
 
 			Element extExtensionContent = doc.createElement("ext:ExtensionContent");
 			ublExtension.appendChild(extExtensionContent);
-			
+
 			Element sacAdditionalInformation = doc.createElement("sac:AdditionalInformation");
 			extExtensionContent.appendChild(sacAdditionalInformation);
-						
-						// ****************************** VERIFICAR CON LA SUNAT SI SON
+
+			// ****************************** VERIFICAR CON LA SUNAT SI SON
 			// MANDATORIOS ESTOS CAMPOS DE TOTALES
 			// *******************************************************************
 
 			// TOTAL DE VENTA OPERACIONES GRAVADAS (MANDATORIO)
 			Element sacAdditionalMonetaryTotalGravadas = doc.createElement("sac:AdditionalMonetaryTotal");
 			sacAdditionalInformation.appendChild(sacAdditionalMonetaryTotalGravadas);
-			
-			
 
 			Element cbcIDGravadas = doc.createElement("cbc:ID");
 			cbcIDGravadas.appendChild(doc.createTextNode(map.get("CodigoTotalVenta").toString())); // CODIGO
@@ -3044,20 +2986,16 @@ public class GeneraDocumentoFe {
 																									// 1001
 			sacAdditionalMonetaryTotalGravadas.appendChild(cbcIDGravadas);
 
-			
-			
-			
-			
-			
 			Element cbcPayableAmountGravadas = doc.createElement("cbc:PayableAmount");
 			cbcPayableAmountGravadas.appendChild(doc.createTextNode(String.valueOf(map.get("TotalSinIGV")))); // "0.00"
-			//cbcPayableAmountGravadas.appendChild(doc.createTextNode(String.valueOf(map.get("Total")))); // "0.00"
-																												// ///
-																												// VERIFICAR
-																												// ES
-																												// TOTAL
-																												// SIN
-																												// IGV
+			// cbcPayableAmountGravadas.appendChild(doc.createTextNode(String.valueOf(map.get("Total"))));
+			// // "0.00"
+			// ///
+			// VERIFICAR
+			// ES
+			// TOTAL
+			// SIN
+			// IGV
 			sacAdditionalMonetaryTotalGravadas.appendChild(cbcPayableAmountGravadas);
 
 			Attr attrGravadas = doc.createAttribute("currencyID");
@@ -3065,75 +3003,84 @@ public class GeneraDocumentoFe {
 			cbcPayableAmountGravadas.setAttributeNode(attrGravadas);
 
 			// TOTAL DE VENTA MONTO POR VENTA (EN LETRAS)
-				Element sacAdditionalProperty = doc.createElement("sac:AdditionalProperty");
-				sacAdditionalInformation.appendChild(sacAdditionalProperty);
-	
-				Element cbcIDProperty = doc.createElement("cbc:ID");
-				cbcIDProperty.appendChild(doc.createTextNode(Utils.CODIGO_MONTO_LETRAS));
-				sacAdditionalProperty.appendChild(cbcIDProperty);
-	
-				Element cbcValue = doc.createElement("cbc:Value");
-				cbcValue.appendChild(doc.createTextNode(map.get("MontoLetras").toString().trim()));// "CUATROCIENTOS
-																									// VEINTITRES 
-																									// MIL 
-																									// DOSCIENTOS
-																									// VEINTICINCO 
-																									// Y 
-																									// 00/100"
-				sacAdditionalProperty.appendChild(cbcValue);
-				
-				//AGREGADO POR JCHC
-				
-				
-				
-			
-				/*Element cbcOrderReference = doc.createElement("cac:OrderReference");			
-				Element cbcIDor = doc.createElement("cbc:ID");
-				cbcIDor.appendChild(doc.createTextNode(map.get("NroOrdenRef").toString().trim()));
-				cbcOrderReference.appendChild(cbcIDor); 
-				rootElementInvoice.appendChild(cbcOrderReference);*/
-			
-				// ORDEN DE REFERENCIA
-			 
-					Element cacAdditionalInformation = doc.createElement("cac:OrderReference");
-					sacAdditionalInformation.appendChild(cacAdditionalInformation);
-					if(map.get("NroOrdenRef").toString()!=null || !map.get("NroOrdenRef").toString().equals("")){
-						String ordreferencia=map.get("NroOrdenRef").toString().trim();				
-						if(ordreferencia.length()<=4) { ordreferencia="0"; } 
-								
-						Element cbc_ID = doc.createElement("cbc:ID");
-						cbc_ID.appendChild(doc.createTextNode(ordreferencia)); // NRO ORDEN REFERENCIA AGREGADO JCHC 
-						cacAdditionalInformation.appendChild(cbc_ID);
-	
-						/*Element cbcTypeCode = doc.createElement("cbc:DocumentTypeCode listAgencyName='PE:SUNAT' listName='SUNAT:ORDEN REFERENCE' listURI='urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo12'");
-						cbcTypeCode.appendChild(doc.createTextNode(Utils.NROORDENREFERENCIA)); //TIPO DE REFERENCIA																							
-						cacAdditionalInformation.appendChild(cbcTypeCode);*/	
-					}
-					
-					/* Esto adicionamos 
-					if(map.get("TipoDocumentoD").toString().equals("Factura")) {
-						Element sacAdditionalMonetaryTotal = doc.createElement("sac:AdditionalMonetaryTotal");
-						sacAdditionalInformation.appendChild(sacAdditionalMonetaryTotal);
-						
-						Element sacAdditionalID = doc.createElement("cbc:ID");
-						sacAdditionalID.appendChild(doc.createTextNode("2003")); // NRO ORDEN REFERENCIA AGREGADO JCHC 
-						sacAdditionalMonetaryTotal.appendChild(sacAdditionalID);
-						
-						DecimalFormat formato1 = new DecimalFormat("#.00");
-						String totaladetra=String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.10")));
-						
-						Element sacAdditionalPayableAmount = doc.createElement("cbc:PayableAmount");
-						sacAdditionalPayableAmount.appendChild(doc.createTextNode(totaladetra)); // NRO ORDEN REFERENCIA AGREGADO JCHC 
-						sacAdditionalMonetaryTotal.appendChild(sacAdditionalPayableAmount);
-						
-						Element sacAdditionalPayablePercent = doc.createElement("cbc:Percent");
-						sacAdditionalPayablePercent.appendChild(doc.createTextNode("10")); // NRO ORDEN REFERENCIA AGREGADO JCHC 
-						sacAdditionalMonetaryTotal.appendChild(sacAdditionalPayablePercent);
-					}
-					 hasta aqui */
-				
-				//hASTA AQUI LLEGA JCHC
-			
+			Element sacAdditionalProperty = doc.createElement("sac:AdditionalProperty");
+			sacAdditionalInformation.appendChild(sacAdditionalProperty);
+
+			Element cbcIDProperty = doc.createElement("cbc:ID");
+			cbcIDProperty.appendChild(doc.createTextNode(Utils.CODIGO_MONTO_LETRAS));
+			sacAdditionalProperty.appendChild(cbcIDProperty);
+
+			Element cbcValue = doc.createElement("cbc:Value");
+			cbcValue.appendChild(doc.createTextNode(map.get("MontoLetras").toString().trim()));// "CUATROCIENTOS
+																								// VEINTITRES
+																								// MIL
+																								// DOSCIENTOS
+																								// VEINTICINCO
+																								// Y
+																								// 00/100"
+			sacAdditionalProperty.appendChild(cbcValue);
+
+			// AGREGADO POR JCHC
+
+			/*
+			 * Element cbcOrderReference = doc.createElement("cac:OrderReference"); Element
+			 * cbcIDor = doc.createElement("cbc:ID");
+			 * cbcIDor.appendChild(doc.createTextNode(map.get("NroOrdenRef").toString().trim
+			 * ())); cbcOrderReference.appendChild(cbcIDor);
+			 * rootElementInvoice.appendChild(cbcOrderReference);
+			 */
+
+			// ORDEN DE REFERENCIA
+
+			Element cacAdditionalInformation = doc.createElement("cac:OrderReference");
+			sacAdditionalInformation.appendChild(cacAdditionalInformation);
+			if (map.get("NroOrdenRef").toString() != null || !map.get("NroOrdenRef").toString().equals("")) {
+				String ordreferencia = map.get("NroOrdenRef").toString().trim();
+				if (ordreferencia.length() <= 4) {
+					ordreferencia = "0";
+				}
+
+				Element cbc_ID = doc.createElement("cbc:ID");
+				cbc_ID.appendChild(doc.createTextNode(ordreferencia)); // NRO ORDEN REFERENCIA AGREGADO JCHC
+				cacAdditionalInformation.appendChild(cbc_ID);
+
+				/*
+				 * Element cbcTypeCode = doc.
+				 * createElement("cbc:DocumentTypeCode listAgencyName='PE:SUNAT' listName='SUNAT:ORDEN REFERENCE' listURI='urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo12'"
+				 * ); cbcTypeCode.appendChild(doc.createTextNode(Utils.NROORDENREFERENCIA));
+				 * //TIPO DE REFERENCIA cacAdditionalInformation.appendChild(cbcTypeCode);
+				 */
+			}
+
+			/*
+			 * Esto adicionamos if(map.get("TipoDocumentoD").toString().equals("Factura")) {
+			 * Element sacAdditionalMonetaryTotal =
+			 * doc.createElement("sac:AdditionalMonetaryTotal");
+			 * sacAdditionalInformation.appendChild(sacAdditionalMonetaryTotal);
+			 * 
+			 * Element sacAdditionalID = doc.createElement("cbc:ID");
+			 * sacAdditionalID.appendChild(doc.createTextNode("2003")); // NRO ORDEN
+			 * REFERENCIA AGREGADO JCHC
+			 * sacAdditionalMonetaryTotal.appendChild(sacAdditionalID);
+			 * 
+			 * DecimalFormat formato1 = new DecimalFormat("#.00"); String
+			 * totaladetra=String.valueOf(formato1.format(Float.parseFloat(map.get("Total").
+			 * toString()) * Float.parseFloat("0.10")));
+			 * 
+			 * Element sacAdditionalPayableAmount = doc.createElement("cbc:PayableAmount");
+			 * sacAdditionalPayableAmount.appendChild(doc.createTextNode(totaladetra)); //
+			 * NRO ORDEN REFERENCIA AGREGADO JCHC
+			 * sacAdditionalMonetaryTotal.appendChild(sacAdditionalPayableAmount);
+			 * 
+			 * Element sacAdditionalPayablePercent = doc.createElement("cbc:Percent");
+			 * sacAdditionalPayablePercent.appendChild(doc.createTextNode("10")); // NRO
+			 * ORDEN REFERENCIA AGREGADO JCHC
+			 * sacAdditionalMonetaryTotal.appendChild(sacAdditionalPayablePercent); } hasta
+			 * aqui
+			 */
+
+			// hASTA AQUI LLEGA JCHC
+
 			// EXTENSION PARA LA FIRMA DIGITAL
 
 			Element ublExtensionSignature = doc.createElement("ext:UBLExtension");
@@ -3158,8 +3105,26 @@ public class GeneraDocumentoFe {
 
 			// TIPO DE OPERACION
 			Element cbcProfileID = doc.createElement("cbc:ProfileID");
-			cbcProfileID.appendChild(doc.createTextNode("0101")); // VENTA
-																	// INTERNA
+			// cbcProfileID.appendChild(doc.createTextNode("0101")); // VENTA
+			// INTERNA
+			// rootElementInvoice.appendChild(cbcProfileID);
+
+			boolean isdetraccion = false;
+			if (map.get("CodigoTotalVenta").toString().equals("1003") && Float.parseFloat(map.get("Total").toString()) >= 700) {// 1003 = pasajes y mayor igual a 700
+				isdetraccion = true;
+			} else if (map.get("CodigoTotalVenta").toString().equals("1001") && !map.get("Bus_Carga").toString().equals("VA") && map.get("Serie").toString().equals("390")
+					&& Float.parseFloat(map.get("Total").toString()) >= 700) {
+				isdetraccion = true;
+			} else if (map.get("CodigoTotalVenta").toString().equals("1001") && Float.parseFloat(map.get("Total").toString()) >= 400) {// Encomienda
+				isdetraccion = true;
+			}
+
+			if (map.get("TipoDocumento").toString().equals("01") && isdetraccion) {
+				cbcProfileID.appendChild(doc.createTextNode("1001")); // VENTA sujeta a detraccion
+			} else {
+				cbcProfileID.appendChild(doc.createTextNode("0101")); // VENTA interna
+			}
+
 			rootElementInvoice.appendChild(cbcProfileID);
 
 			// ********ATRIBUTOS
@@ -3208,38 +3173,45 @@ public class GeneraDocumentoFe {
 																											// 01
 																											// //Boleta:03
 			rootElementInvoice.appendChild(cbcInvoiceTypeCode);
-			
 
 			Attr listID = doc.createAttribute("listID");
-			listID.setValue("0101"); // venta interna
+
+			if (map.get("TipoDocumento").toString().equals("01") && isdetraccion) {
+				listID.setValue("1001"); // VENTA sujeta a detraccion
+			} else {
+				listID.setValue("0101"); // venta interna
+			}
+
 			cbcInvoiceTypeCode.setAttributeNode(listID);
 
+			// Catálogo No. 52: Código de leyendas
+
 			Element cbcNote = doc.createElement("cbc:Note");
-			cbcNote.appendChild(doc.createCDATASection(map.get("MontoLetras").toString().trim())); // Monto
-																									// en
-																									// Letras
-			
+			cbcNote.appendChild(doc.createCDATASection(map.get("MontoLetras").toString().trim())); // Monto en Letras
+
 			Attr languageLocaleID = doc.createAttribute("languageLocaleID");
 			languageLocaleID.setValue("1000"); // venta interna
-			cbcNote.setAttributeNode(languageLocaleID);			
+			cbcNote.setAttributeNode(languageLocaleID);
 			rootElementInvoice.appendChild(cbcNote);
-			if(map.get("TipoDocumento").toString().trim().equals("01")) {
-				
+			log.info(map.toString() + "");
+
+			log.info("condición TipoDocumento " + (map.get("TipoDocumento").toString().trim().equals("01") && isdetraccion));
+			if (map.get("TipoDocumento").toString().trim().equals("01") && isdetraccion) {
+
 				Element cbcNote1 = doc.createElement("cbc:Note");
-				cbcNote1.appendChild(doc.createCDATASection("Operación sujeta a detracción")); // detracciones				
-				
+				cbcNote1.appendChild(doc.createCDATASection("Operación sujeta a detracción")); // detracciones
+
 				Attr languageLocaleID1 = doc.createAttribute("languageLocaleID");
 				languageLocaleID1.setValue("2006"); // Detracciones
 				cbcNote1.setAttributeNode(languageLocaleID1);
-				
 				rootElementInvoice.appendChild(cbcNote1);
 			}
-			
+
 			// CODIGO DE MONEDA (CATALOGO NÂ°. 2)
 			Element cbcDocumentCurrencyCode = doc.createElement("cbc:DocumentCurrencyCode");
 			cbcDocumentCurrencyCode.appendChild(doc.createTextNode(map.get("Moneda").toString()));
 			rootElementInvoice.appendChild(cbcDocumentCurrencyCode);
-			
+
 			// CAC SIGNATURE
 			Element cacSignature = doc.createElement("cac:Signature");
 			rootElementInvoice.appendChild(cacSignature);
@@ -3327,7 +3299,7 @@ public class GeneraDocumentoFe {
 
 			Element cacRegistrationAddressEmisor = doc.createElement("cac:RegistrationAddress");
 			cacPartyLegalEntity.appendChild(cacRegistrationAddressEmisor);
-			//empresa.getUbigeo()
+			// empresa.getUbigeo()
 			Element cbcAddressTypeCode = doc.createElement("cbc:AddressTypeCode");
 			cbcAddressTypeCode.appendChild(doc.createTextNode("0000"));
 			cacRegistrationAddressEmisor.appendChild(cbcAddressTypeCode);
@@ -3340,17 +3312,16 @@ public class GeneraDocumentoFe {
 			 * Element cbcCustomerAssignedAccountIDReceptor =
 			 * doc.createElement("cbc:CustomerAssignedAccountID");
 			 * cbcCustomerAssignedAccountIDReceptor.appendChild(doc.
-			 * createTextNode(map.get("TipoDocumento").toString().trim().equals(
-			 * "01")? map.get("Ruc").toString() :map.get("DNI").toString()));
-			 * //"20341198217" cacAccountingCustomerParty.appendChild(
+			 * createTextNode(map.get("TipoDocumento").toString().trim().equals( "01")?
+			 * map.get("Ruc").toString() :map.get("DNI").toString())); //"20341198217"
+			 * cacAccountingCustomerParty.appendChild(
 			 * cbcCustomerAssignedAccountIDReceptor);
 			 * 
 			 * Element cbcAdditionalAccountIDReceptor =
 			 * doc.createElement("cbc:AdditionalAccountID");
 			 * cbcAdditionalAccountIDReceptor.appendChild(doc.createTextNode(map
 			 * .get("TipoDocumentoReceptor").toString())); //"6"
-			 * cacAccountingCustomerParty.appendChild(
-			 * cbcAdditionalAccountIDReceptor);
+			 * cacAccountingCustomerParty.appendChild( cbcAdditionalAccountIDReceptor);
 			 */
 
 			Element cacPartyReceptor = doc.createElement("cac:Party");
@@ -3360,8 +3331,7 @@ public class GeneraDocumentoFe {
 			cacPartyReceptor.appendChild(cacPartyIdentificationReceptor);
 
 			Element cbcIDReceptor = doc.createElement("cbc:ID");
-			cbcIDReceptor.appendChild(doc.createTextNode(map.get("TipoDocumento").toString().trim().equals("01")
-					? map.get("Ruc").toString() : map.get("DNI").toString()));
+			cbcIDReceptor.appendChild(doc.createTextNode(map.get("TipoDocumento").toString().trim().equals("01") ? map.get("Ruc").toString() : map.get("DNI").toString()));
 			cacPartyIdentificationReceptor.appendChild(cbcIDReceptor);
 			// *************** atributos que dicen que nuestra identificación es
 			// con DNI o ruc
@@ -3385,290 +3355,301 @@ public class GeneraDocumentoFe {
 			Element cacPartyLegalEntityReceptor = doc.createElement("cac:PartyLegalEntity");
 			cacPartyReceptor.appendChild(cacPartyLegalEntityReceptor);
 
-			String datoName = map.get("TipoDocumento").toString().trim().equals("01") ? map.get("Razon").toString()
-					: map.get("Nombre").toString();
+			String datoName = map.get("TipoDocumento").toString().trim().equals("01") ? map.get("Razon").toString() : map.get("Nombre").toString();
 			Element cbcRegistrationNameReceptor = doc.createElement("cbc:RegistrationName");
-			cbcRegistrationNameReceptor
-					.appendChild(doc.createCDATASection(datoName.trim().equals("-") ? "---" : datoName));// "VISANET
-																											// -
-																											// CIA
-																											// PERUANA
-																											// DE
-																											// MEDIOS
-																											// DE
-																											// PAGO
-																											// SAC"
+			cbcRegistrationNameReceptor.appendChild(doc.createCDATASection(datoName.trim().equals("-") ? "---" : datoName));// "VISANET
+																															// -
+																															// CIA
+																															// PERUANA
+																															// DE
+																															// MEDIOS
+																															// DE
+																															// PAGO
+																															// SAC"
 			cacPartyLegalEntityReceptor.appendChild(cbcRegistrationNameReceptor);
 
-			//*********************************************************************************************
-			//Nuevos Campos para el 2021
+			// *********************************************************************************************
+			// Nuevos Campos para el 2021
+
+			// agregado por JCHC , aqui hacemos el proceso de calcular la fecha de
+			// vencimiento de la factrura
 			
-			//agregado por JCHC , aqui hacemos el proceso de calcular la fecha de vencimiento de la factrura				
-			if(map.get("TipoDocumentoD").toString().equals("Factura")) {
-				
-				log.info("Inicio  Detraccion");
-				
-				Element cacPaymentMeans = doc.createElement("cac:PaymentMeans");
-				rootElementInvoice.appendChild(cacPaymentMeans);
-				
-				Element cacPaymentMeans1 = doc.createElement("cbc:ID");
-				cacPaymentMeans1.appendChild(doc.createTextNode("Detraccion"));
-				cacPaymentMeans.appendChild(cacPaymentMeans1);
-				
-				Element cacPaymentMeansCode = doc.createElement("cbc:PaymentMeansCode");
-				cacPaymentMeansCode.appendChild(doc.createTextNode("001"));
-				cacPaymentMeans.appendChild(cacPaymentMeansCode);
-				
-				Attr attrlistAgencyName = doc.createAttribute("listAgencyName");
-				attrlistAgencyName.setValue("PE:SUNAT");
-				cacPaymentMeansCode.setAttributeNode(attrlistAgencyName);
-				
-				Attr attrlistName = doc.createAttribute("listName");
-				attrlistName.setValue("Medio de pago"); 
-				cacPaymentMeansCode.setAttributeNode(attrlistName);					
-				
-				Attr attrlistURI = doc.createAttribute("listURI");
-				attrlistURI.setValue("urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo59");
-				cacPaymentMeansCode.setAttributeNode(attrlistURI);					
-				
-				Element cacPayeeFinancialAccount = doc.createElement("cac:PayeeFinancialAccount");						
-				cacPaymentMeans.appendChild(cacPayeeFinancialAccount);
-				
-				Element cacPaymentTermsIDC_1 = doc.createElement("cbc:ID");
-				cacPaymentTermsIDC_1.appendChild(doc.createTextNode("00005066646"));
-				cacPayeeFinancialAccount.appendChild(cacPaymentTermsIDC_1);
-				
-				Element cacPaymentTermsDetraccion = doc.createElement("cac:PaymentTerms");
-				rootElementInvoice.appendChild(cacPaymentTermsDetraccion);				
-				
-				/*Element cacPaymentMeansIDD1 = doc.createElement("cbc:ID");
-				cacPaymentMeansIDD1.appendChild(doc.createTextNode("Detraccion")); //026
-				cacPaymentTermsDetraccion.appendChild(cacPaymentMeansIDD1);*/
-				
-				log.info(" CodigoTotalVenta : " + map.get("CodigoTotalVenta").toString());
-				
-				//map.get("CodigoTotalVenta").toString()
-				//1003 pasajes
-				//1001 encomiendas	
-				
-				if(map.get("CodigoTotalVenta").toString().equals("1003")) {	
-					//cbc:PaymentMeansID
-					//Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
-					if(Float.parseFloat(map.get("Total").toString())>=700) {
-					Element cacPaymentMeansID = doc.createElement("cbc:ID");					
-					cacPaymentMeansID.appendChild(doc.createTextNode("026")); //026
-					cacPaymentTermsDetraccion.appendChild(cacPaymentMeansID);
-												
-					Attr attrTaxAmountPayment = doc.createAttribute("schemeName");
-					attrTaxAmountPayment.setValue("SUNAT:Codigo de detraccion");
-					cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment);
-					
-					Attr attrTaxAmountPayment1 = doc.createAttribute("schemeAgencyName");
-					attrTaxAmountPayment.setValue("PE:SUNAT");
-					cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment1);
-					
-					Attr attrTaxAmountPayment2 = doc.createAttribute("schemeURI");
-					attrTaxAmountPayment.setValue("urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo54");
-					cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment2);
-					
-					Element cacPaymentPorcentaje = doc.createElement("cbc:PaymentPercent");
-					cacPaymentPorcentaje.appendChild(doc.createTextNode("10.00"));
-					cacPaymentTermsDetraccion.appendChild(cacPaymentPorcentaje);
-					
-					DecimalFormat formato1 = new DecimalFormat("#.00");					
-					String totaladetra=String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.10")));
-					
-					log.info(totaladetra);
-											
-					Element cacPaymentAmountDet = doc.createElement("cbc:Amount");
-					cacPaymentAmountDet.appendChild( doc.createTextNode(totaladetra));
-					cacPaymentTermsDetraccion.appendChild(cacPaymentAmountDet);
-					
-					Attr attrPaymentAmountDet = doc.createAttribute("currencyID");
-					attrPaymentAmountDet.setValue(map.get("Moneda").toString());
-					cacPaymentAmountDet.setAttributeNode(attrPaymentAmountDet);
-					}
-					
-				} else {
-					
-					if(map.get("Serie").toString().equals("390")) {	
-						//cbc:PaymentMeansID
-						//Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
-						if(!map.get("Bus_Carga").toString().equals("VA")) {
-							Element cacPaymentMeansID = doc.createElement("cbc:ID");					
-							cacPaymentMeansID.appendChild(doc.createTextNode("026")); //026
+			log.info("Condición inicio detracción : "+map.get("TipoDocumento").toString().equals("01"));
+			if (map.get("TipoDocumento").toString().equals("01")) { 
+
+				log.info("Inicio Detraccion");
+
+				if (isdetraccion) {
+
+					Element cacPaymentMeans = doc.createElement("cac:PaymentMeans");
+					rootElementInvoice.appendChild(cacPaymentMeans);
+
+					Element cacPaymentMeans1 = doc.createElement("cbc:ID");
+					cacPaymentMeans1.appendChild(doc.createTextNode("Detraccion"));
+					cacPaymentMeans.appendChild(cacPaymentMeans1);
+
+					Element cacPaymentMeansCode = doc.createElement("cbc:PaymentMeansCode");
+					cacPaymentMeansCode.appendChild(doc.createTextNode("001"));
+					cacPaymentMeans.appendChild(cacPaymentMeansCode);
+
+					Attr attrlistAgencyName = doc.createAttribute("listAgencyName");
+					attrlistAgencyName.setValue("PE:SUNAT");
+					cacPaymentMeansCode.setAttributeNode(attrlistAgencyName);
+
+					Attr attrlistName = doc.createAttribute("listName");
+					attrlistName.setValue("Medio de pago");
+					cacPaymentMeansCode.setAttributeNode(attrlistName);
+
+					Attr attrlistURI = doc.createAttribute("listURI");
+					attrlistURI.setValue("urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo59");
+					cacPaymentMeansCode.setAttributeNode(attrlistURI);
+
+					Element cacPayeeFinancialAccount = doc.createElement("cac:PayeeFinancialAccount");
+					cacPaymentMeans.appendChild(cacPayeeFinancialAccount);
+
+					Element cacPaymentTermsIDC_1 = doc.createElement("cbc:ID");
+					cacPaymentTermsIDC_1.appendChild(doc.createTextNode("00005066646"));
+					cacPayeeFinancialAccount.appendChild(cacPaymentTermsIDC_1);
+
+					Element cacPaymentTermsDetraccion = doc.createElement("cac:PaymentTerms");
+					rootElementInvoice.appendChild(cacPaymentTermsDetraccion);
+
+					/*
+					 * Element cacPaymentMeansIDD1 = doc.createElement("cbc:ID");
+					 * cacPaymentMeansIDD1.appendChild(doc.createTextNode("Detraccion")); //026
+					 * cacPaymentTermsDetraccion.appendChild(cacPaymentMeansIDD1);
+					 */
+
+					log.info(" CodigoTotalVenta : " + map.get("CodigoTotalVenta").toString());
+
+					// map.get("CodigoTotalVenta").toString()
+					// 1003 pasajes
+					// 1001 encomiendas
+
+					if (map.get("CodigoTotalVenta").toString().equals("1003")) {
+						// cbc:PaymentMeansID
+						// Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
+						if (Float.parseFloat(map.get("Total").toString()) >= 700) {
+							Element cacPaymentMeansID = doc.createElement("cbc:ID");
+							cacPaymentMeansID.appendChild(doc.createTextNode("026")); // 026
 							cacPaymentTermsDetraccion.appendChild(cacPaymentMeansID);
-														
+
 							Attr attrTaxAmountPayment = doc.createAttribute("schemeName");
 							attrTaxAmountPayment.setValue("SUNAT:Codigo de detraccion");
 							cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment);
-							
+
 							Attr attrTaxAmountPayment1 = doc.createAttribute("schemeAgencyName");
 							attrTaxAmountPayment.setValue("PE:SUNAT");
 							cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment1);
-							
+
 							Attr attrTaxAmountPayment2 = doc.createAttribute("schemeURI");
 							attrTaxAmountPayment.setValue("urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo54");
 							cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment2);
-							
+
 							Element cacPaymentPorcentaje = doc.createElement("cbc:PaymentPercent");
 							cacPaymentPorcentaje.appendChild(doc.createTextNode("10.00"));
 							cacPaymentTermsDetraccion.appendChild(cacPaymentPorcentaje);
-							
+
 							DecimalFormat formato1 = new DecimalFormat("#.00");
-							String totaladetra=String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.10")));
-							
+							String totaladetra = String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.10")));
+
 							log.info(totaladetra);
-													
+
 							Element cacPaymentAmountDet = doc.createElement("cbc:Amount");
-							cacPaymentAmountDet.appendChild( doc.createTextNode(totaladetra));
+							cacPaymentAmountDet.appendChild(doc.createTextNode(totaladetra));
 							cacPaymentTermsDetraccion.appendChild(cacPaymentAmountDet);
-							
+
 							Attr attrPaymentAmountDet = doc.createAttribute("currencyID");
 							attrPaymentAmountDet.setValue(map.get("Moneda").toString());
 							cacPaymentAmountDet.setAttributeNode(attrPaymentAmountDet);
 						}
-						
+
 					} else {
-						if(Float.parseFloat(map.get("Total").toString())>=700) {
-							//Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
-							Element cacPaymentMeansID = doc.createElement("cbc:ID");
-							cacPaymentMeansID.appendChild(doc.createTextNode("027")); //026
-							cacPaymentTermsDetraccion.appendChild(cacPaymentMeansID);
-							
-							Attr attrTaxAmountPayment = doc.createAttribute("schemeName");
-							attrTaxAmountPayment.setValue("SUNAT:Codigo de detraccion");
-							cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment);
-							
-							Attr attrTaxAmountPayment1 = doc.createAttribute("schemeAgencyName");
-							attrTaxAmountPayment.setValue("PE:SUNAT");
-							cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment1);
-							
-							Attr attrTaxAmountPayment2 = doc.createAttribute("schemeURI");
-							attrTaxAmountPayment.setValue("urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo54");
-							cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment2);
-							
-							Element cacPaymentPorcentaje = doc.createElement("cbc:PaymentPercent");
-							cacPaymentPorcentaje.appendChild(doc.createTextNode("4.00"));
-							cacPaymentTermsDetraccion.appendChild(cacPaymentPorcentaje);
-							
-							DecimalFormat formato1 = new DecimalFormat("#.00");
-							String totaladetra=String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.04")));
-							log.info(totaladetra);
-							
-							Element cacPaymentAmountDet = doc.createElement("cbc:Amount");
-							cacPaymentAmountDet.appendChild( doc.createTextNode(totaladetra));
-							cacPaymentTermsDetraccion.appendChild(cacPaymentAmountDet);
-							
-							Attr attrPaymentAmountDet = doc.createAttribute("currencyID");
-							attrPaymentAmountDet.setValue(map.get("Moneda").toString());
-							cacPaymentAmountDet.setAttributeNode(attrPaymentAmountDet);	
-						}							
+
+						if (map.get("Serie").toString().equals("390")) {
+							// cbc:PaymentMeansID
+							// Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
+							if (!map.get("Bus_Carga").toString().equals("VA") && Float.parseFloat(map.get("Total").toString()) >= 700) {
+								Element cacPaymentMeansID = doc.createElement("cbc:ID");
+								cacPaymentMeansID.appendChild(doc.createTextNode("026")); // 026
+								cacPaymentTermsDetraccion.appendChild(cacPaymentMeansID);
+
+								Attr attrTaxAmountPayment = doc.createAttribute("schemeName");
+								attrTaxAmountPayment.setValue("SUNAT:Codigo de detraccion");
+								cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment);
+
+								Attr attrTaxAmountPayment1 = doc.createAttribute("schemeAgencyName");
+								attrTaxAmountPayment.setValue("PE:SUNAT");
+								cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment1);
+
+								Attr attrTaxAmountPayment2 = doc.createAttribute("schemeURI");
+								attrTaxAmountPayment.setValue("urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo54");
+								cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment2);
+
+								Element cacPaymentPorcentaje = doc.createElement("cbc:PaymentPercent");
+								cacPaymentPorcentaje.appendChild(doc.createTextNode("10.00"));
+								cacPaymentTermsDetraccion.appendChild(cacPaymentPorcentaje);
+
+								DecimalFormat formato1 = new DecimalFormat("#.00");
+								String totaladetra = String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.10")));
+
+								log.info(totaladetra);
+
+								Element cacPaymentAmountDet = doc.createElement("cbc:Amount");
+								cacPaymentAmountDet.appendChild(doc.createTextNode(totaladetra));
+								cacPaymentTermsDetraccion.appendChild(cacPaymentAmountDet);
+
+								Attr attrPaymentAmountDet = doc.createAttribute("currencyID");
+								attrPaymentAmountDet.setValue(map.get("Moneda").toString());
+								cacPaymentAmountDet.setAttributeNode(attrPaymentAmountDet);
+							}
+
+						} else {
+							if (Float.parseFloat(map.get("Total").toString()) >= 400) {
+								// Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
+								Element cacPaymentMeansID = doc.createElement("cbc:ID");
+								cacPaymentMeansID.appendChild(doc.createTextNode("027")); // 027 Encomiendas
+								cacPaymentTermsDetraccion.appendChild(cacPaymentMeansID);
+
+								Attr attrTaxAmountPayment = doc.createAttribute("schemeName");
+								attrTaxAmountPayment.setValue("SUNAT:Codigo de detraccion");
+								cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment);
+
+								Attr attrTaxAmountPayment1 = doc.createAttribute("schemeAgencyName");
+								attrTaxAmountPayment.setValue("PE:SUNAT");
+								cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment1);
+
+								Attr attrTaxAmountPayment2 = doc.createAttribute("schemeURI");
+								attrTaxAmountPayment.setValue("urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo54");
+								cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment2);
+
+								Element cacPaymentPorcentaje = doc.createElement("cbc:PaymentPercent");
+								cacPaymentPorcentaje.appendChild(doc.createTextNode("4.00"));
+								cacPaymentTermsDetraccion.appendChild(cacPaymentPorcentaje);
+
+								DecimalFormat formato1 = new DecimalFormat("#.00");
+								String totaladetra = String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.04")));
+								log.info(totaladetra);
+
+								Element cacPaymentAmountDet = doc.createElement("cbc:Amount");
+								cacPaymentAmountDet.appendChild(doc.createTextNode(totaladetra));
+								cacPaymentTermsDetraccion.appendChild(cacPaymentAmountDet);
+
+								Attr attrPaymentAmountDet = doc.createAttribute("currencyID");
+								attrPaymentAmountDet.setValue(map.get("Moneda").toString());
+								cacPaymentAmountDet.setAttributeNode(attrPaymentAmountDet);
+							}
+						}
+
 					}
-					
-				}												
+
+				}
+		
 				log.info("Llego al final Detraccion");
-							
+
 				Date fechaDate;
-				Date nvalfec;				
-				try {				
-					
+				Date nvalfec;
+				try {
+
 					fechaDate = new SimpleDateFormat("yyyy-MM-dd").parse(map.get("FechaEmision").toString());
-					nvalfec=sumarRestarDiasFecha(fechaDate,60);
-					DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-					String valnuevafec=dateformat.format(nvalfec);
-					
+					// nvalfec=sumarRestarDiasFecha(fechaDate,60);
+					// DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+					// String valnuevafec=dateformat.format(nvalfec);
+
 					Element cacPaymentTerms = doc.createElement("cac:PaymentTerms");
 					rootElementInvoice.appendChild(cacPaymentTerms);
 
 					Element cacPaymentTermsID = doc.createElement("cbc:ID");
 					cacPaymentTermsID.appendChild(doc.createTextNode("FormaPago"));
 					cacPaymentTerms.appendChild(cacPaymentTermsID);
-					
-						if (map.get("Tipo").toString().equals("V") || map.get("Tipo").toString().equals("T") || map.get("Tipo").toString().equals("EF") || map.get("Tipo").toString().equals("PP") || map.get("Tipo").toString().equals("TJ")) {
-							
-							Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
-							cacPaymentMeansID.appendChild(doc.createTextNode("Contado"));
-							cacPaymentTerms.appendChild(cacPaymentMeansID);							
-							
-						} 
-						else if (map.get("Tipo").toString().equals("C") || map.get("Tipo").toString().equals("CR")) {
-							
-							Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
-							cacPaymentMeansID.appendChild(doc.createTextNode("Credito"));
-							cacPaymentTerms.appendChild(cacPaymentMeansID);
-							
-							String ladetra="";
-							if(map.get("CodigoTotalVenta").toString().equals("1003")) {	
-								
-								DecimalFormat formato1 = new DecimalFormat("#.00");
-								ladetra=String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) - (Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.10"))));								
-								
-							} else {
-								if(map.get("Serie").toString().equals("390")) {
-									if(!map.get("Bus_Carga").toString().equals("VA")) {
-										DecimalFormat formato1 = new DecimalFormat("#.00");
-										ladetra=String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) - (Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.10"))));
-									}
-									else {
-										DecimalFormat formato1 = new DecimalFormat("#.00");
-										ladetra=String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString())));
-									}
-								} else {
+
+					if (map.get("Tipo").toString().equals("V") || map.get("Tipo").toString().equals("T") || map.get("Tipo").toString().equals("EF") || map.get("Tipo").toString().equals("PP")
+							|| map.get("Tipo").toString().equals("TJ")) {
+
+						Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
+						cacPaymentMeansID.appendChild(doc.createTextNode("Contado"));
+						cacPaymentTerms.appendChild(cacPaymentMeansID);
+
+					} else if (map.get("Tipo").toString().equals("C") || map.get("Tipo").toString().equals("CR")) {
+
+						Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
+						cacPaymentMeansID.appendChild(doc.createTextNode("Credito"));
+						cacPaymentTerms.appendChild(cacPaymentMeansID);
+
+						String ladetra = "";
+						if (map.get("CodigoTotalVenta").toString().equals("1003")) { // pasaje
+
+							DecimalFormat formato1 = new DecimalFormat("#.00");
+							ladetra = String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) - (Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.10"))));
+
+						} else { // encomienda
+							if (map.get("Serie").toString().equals("390")) { // serie para "TD" "CA" "BU" "VA"
+								if (!map.get("Bus_Carga").toString().equals("VA") && Float.parseFloat(map.get("Total").toString()) >= 700) { // si no es VA
 									DecimalFormat formato1 = new DecimalFormat("#.00");
-									ladetra=String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) - (Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.04"))));
+									ladetra = String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) - (Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.10"))));
+								} else { // SI ES VA
+									DecimalFormat formato1 = new DecimalFormat("#.00");
+									ladetra = String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString())));
 								}
+							} else {
+								DecimalFormat formato1 = new DecimalFormat("#.00");
+								ladetra = String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) - (Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.04"))));
 							}
-							
-							log.info("Calculo Neto a Pagar"+ladetra);
-							
-							Element cacPaymentTermsAmount = doc.createElement("cbc:Amount");
-							//cacPaymentTermsAmount.appendChild(doc.createTextNode(map.get("Total").toString()));
-							cacPaymentTermsAmount.appendChild(doc.createTextNode(ladetra));								
-							cacPaymentTerms.appendChild(cacPaymentTermsAmount);
-							
-							/*Element cacPaymentTermsAmount = doc.createElement("cbc:Amount");
-							cacPaymentTermsAmount.appendChild(doc.createTextNode(map.get("Total").toString()));
-							cacPaymentTerms.appendChild(cacPaymentTermsAmount);*/
-							
-							Attr attrTaxAmountPayment_ = doc.createAttribute("currencyID");
-							attrTaxAmountPayment_.setValue(map.get("Moneda").toString());
-							cacPaymentTermsAmount.setAttributeNode(attrTaxAmountPayment_);
-							
-							Element cacPaymentTermscredito = doc.createElement("cac:PaymentTerms");
-							rootElementInvoice.appendChild(cacPaymentTermscredito);
-							
-							Element cacPaymentTermsID_1 = doc.createElement("cbc:ID");
-							cacPaymentTermsID_1.appendChild(doc.createTextNode("FormaPago"));
-							cacPaymentTermscredito.appendChild(cacPaymentTermsID_1);
-							
-							Element cacPaymentMeansID1 = doc.createElement("cbc:PaymentMeansID");
-							cacPaymentMeansID1.appendChild(doc.createTextNode("Cuota001"));
-							cacPaymentTermscredito.appendChild(cacPaymentMeansID1);
-							
-							/*Element cacPaymentTermsAmount = doc.createElement("cbc:Amount");
-							cacPaymentTermsID.appendChild(doc.createTextNode(map.get("TotalSinIGV").toString()));
-							cacPaymentTerms.appendChild(cacPaymentTermsAmount);*/
-							
-							Element cacPaymentTermsAmount1 = doc.createElement("cbc:Amount");
-							//cacPaymentTermsAmount1.appendChild(doc.createTextNode(map.get("Total").toString()));
-							cacPaymentTermsAmount1.appendChild(doc.createTextNode(ladetra));
-							cacPaymentTermscredito.appendChild(cacPaymentTermsAmount1);
-							
-							Attr attrTaxAmountPayment = doc.createAttribute("currencyID");
-							attrTaxAmountPayment.setValue(map.get("Moneda").toString());
-							cacPaymentTermsAmount1.setAttributeNode(attrTaxAmountPayment);
-							
-							Element cbcPaymentDueDate = doc.createElement("cbc:PaymentDueDate");
-							cbcPaymentDueDate.appendChild(doc.createTextNode(valnuevafec));
-							cacPaymentTermscredito.appendChild(cbcPaymentDueDate);							
 						}
-						
+
+						log.info("Calculo Neto a Pagar" + ladetra);
+
+						Element cacPaymentTermsAmount = doc.createElement("cbc:Amount");
+						// cacPaymentTermsAmount.appendChild(doc.createTextNode(map.get("Total").toString()));
+						cacPaymentTermsAmount.appendChild(doc.createTextNode(ladetra));
+						cacPaymentTerms.appendChild(cacPaymentTermsAmount);
+
+						/*
+						 * Element cacPaymentTermsAmount = doc.createElement("cbc:Amount");
+						 * cacPaymentTermsAmount.appendChild(doc.createTextNode(map.get("Total").
+						 * toString())); cacPaymentTerms.appendChild(cacPaymentTermsAmount);
+						 */
+
+						Attr attrTaxAmountPayment_ = doc.createAttribute("currencyID");
+						attrTaxAmountPayment_.setValue(map.get("Moneda").toString());
+						cacPaymentTermsAmount.setAttributeNode(attrTaxAmountPayment_);
+
+						Element cacPaymentTermscredito = doc.createElement("cac:PaymentTerms");
+						rootElementInvoice.appendChild(cacPaymentTermscredito);
+
+						Element cacPaymentTermsID_1 = doc.createElement("cbc:ID");
+						cacPaymentTermsID_1.appendChild(doc.createTextNode("FormaPago"));
+						cacPaymentTermscredito.appendChild(cacPaymentTermsID_1);
+
+						Element cacPaymentMeansID1 = doc.createElement("cbc:PaymentMeansID");
+						cacPaymentMeansID1.appendChild(doc.createTextNode("Cuota001"));
+						cacPaymentTermscredito.appendChild(cacPaymentMeansID1);
+
+						/*
+						 * Element cacPaymentTermsAmount = doc.createElement("cbc:Amount");
+						 * cacPaymentTermsID.appendChild(doc.createTextNode(map.get("TotalSinIGV").
+						 * toString())); cacPaymentTerms.appendChild(cacPaymentTermsAmount);
+						 */
+
+						Element cacPaymentTermsAmount1 = doc.createElement("cbc:Amount");
+						// cacPaymentTermsAmount1.appendChild(doc.createTextNode(map.get("Total").toString()));
+						cacPaymentTermsAmount1.appendChild(doc.createTextNode(ladetra));
+						cacPaymentTermscredito.appendChild(cacPaymentTermsAmount1);
+
+						Attr attrTaxAmountPayment = doc.createAttribute("currencyID");
+						attrTaxAmountPayment.setValue(map.get("Moneda").toString());
+						cacPaymentTermsAmount1.setAttributeNode(attrTaxAmountPayment);
+
+						Element cbcPaymentDueDate = doc.createElement("cbc:PaymentDueDate");
+						cbcPaymentDueDate.appendChild(doc.createTextNode(map.get("FechaVencimiento").toString()));
+						cacPaymentTermscredito.appendChild(cbcPaymentDueDate);
+					}
+
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 			}
 			// *******************************************************************************************
 			// INFORMACION DE SUMATORIA IVG GLOBAL
@@ -3790,30 +3771,33 @@ public class GeneraDocumentoFe {
 
 			Element cacLegalMonetaryTotal = doc.createElement("cac:LegalMonetaryTotal");
 			rootElementInvoice.appendChild(cacLegalMonetaryTotal);
-			
-			// este cambio aun no es aceptado por la OSE, debe ser usado desde el 01/09/2021			
+
+			// este cambio aun no es aceptado por la OSE, debe ser usado desde el 01/09/2021
 			Element cbcLineExtensionAmount1 = doc.createElement("cbc:LineExtensionAmount");
 			cbcLineExtensionAmount1.appendChild(doc.createTextNode(String.valueOf(map.get("TotalSinIGV")))); // "150.00"
 			cacLegalMonetaryTotal.appendChild(cbcLineExtensionAmount1);
-			
+
 			Attr attrMonetaryTotal2 = doc.createAttribute("currencyID");
 			attrMonetaryTotal2.setValue(map.get("Moneda").toString());
 			cbcLineExtensionAmount1.setAttributeNode(attrMonetaryTotal2);
-			
+
 			// este cambio aun no es aceptado por la OSE, debe ser usado desde el 01/09/2021
 			Element cbcTaxInclusiveAmount = doc.createElement("cbc:TaxInclusiveAmount");
-			cbcTaxInclusiveAmount.appendChild(doc.createTextNode(String.valueOf(map.get("Total")))); // "150.00" 
+			cbcTaxInclusiveAmount.appendChild(doc.createTextNode(String.valueOf(map.get("Total")))); // "150.00"
 			cacLegalMonetaryTotal.appendChild(cbcTaxInclusiveAmount);
-			
+
 			Attr attrMonetaryTotal1 = doc.createAttribute("currencyID");
 			attrMonetaryTotal1.setValue(map.get("Moneda").toString());
 			cbcTaxInclusiveAmount.setAttributeNode(attrMonetaryTotal1);
 
 			//
-			
-			//DecimalFormat formato1 = new DecimalFormat("#.00");
-			//String totaladetra=String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) - (Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.10"))));
-			
+
+			// DecimalFormat formato1 = new DecimalFormat("#.00");
+			// String
+			// totaladetra=String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString())
+			// - (Float.parseFloat(map.get("Total").toString()) *
+			// Float.parseFloat("0.10"))));
+
 			Element cbcPayableAmount = doc.createElement("cbc:PayableAmount");
 			cbcPayableAmount.appendChild(doc.createTextNode(String.valueOf(map.get("Total").toString()))); // "150.00"
 			cacLegalMonetaryTotal.appendChild(cbcPayableAmount);
@@ -3821,8 +3805,7 @@ public class GeneraDocumentoFe {
 			Attr attrMonetaryTotal = doc.createAttribute("currencyID");
 			attrMonetaryTotal.setValue(map.get("Moneda").toString());
 			cbcPayableAmount.setAttributeNode(attrMonetaryTotal);
-			
-			
+
 			// *************************************************************
 			// INFORMACIï¿½N DEL ARTICULO
 			Element cacInvoiceLine = doc.createElement("cac:InvoiceLine");
@@ -3883,28 +3866,28 @@ public class GeneraDocumentoFe {
 
 			//// REGUNTAR QUE CODIGO VA IR !!!!!! 2017-11-26
 			Element cbcPriceTypeCode = doc.createElement("cbc:PriceTypeCode");
-			//cbcPriceTypeCode.appendChild(doc.createTextNode("01"));// CATALOGO
+			// cbcPriceTypeCode.appendChild(doc.createTextNode("01"));// CATALOGO
 			cbcPriceTypeCode.appendChild(doc.createTextNode(String.valueOf(map.get("TipoPrecio"))));
-																					// Nï¿½ 16
-																					// (01-
-																					// Precio
-																					// unitario
-																					// (incluye
-																					// el IGV))
-																					// (02 -
-																					// Valor
-																					// referencial
-																					// unitario
-																					// en
-																					// operaciones
-																					// no
-																					// onerosas)
+			// Nï¿½ 16
+			// (01-
+			// Precio
+			// unitario
+			// (incluye
+			// el IGV))
+			// (02 -
+			// Valor
+			// referencial
+			// unitario
+			// en
+			// operaciones
+			// no
+			// onerosas)
 			cacAlternativeConditionPrice.appendChild(cbcPriceTypeCode);
-			
+
 			Attr attrPriceTypeCode = doc.createAttribute("listAgencyName");
 			attrPriceTypeCode.setValue("PE:SUNAT");
 			cbcPriceTypeCode.setAttributeNode(attrPriceTypeCode);
-			
+
 			Attr attrPriceTypeCode1 = doc.createAttribute("listURI");
 			attrPriceTypeCode1.setValue("urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16");
 			cbcPriceTypeCode.setAttributeNode(attrPriceTypeCode1);
@@ -3996,7 +3979,7 @@ public class GeneraDocumentoFe {
 			cbcTaxExemptionReasonCode.setAttributeNode(listAgencyNameImpuesto);
 
 			Attr listNameImpuesto = doc.createAttribute("listName");
-			//listNameImpuesto.setValue("SUNAT:Codigo de Tipo de Afectación del IGV");			
+			// listNameImpuesto.setValue("SUNAT:Codigo de Tipo de Afectación del IGV");
 			listNameImpuesto.setValue("Afectacion del IGV");
 			cbcTaxExemptionReasonCode.setAttributeNode(listNameImpuesto);
 
@@ -4053,35 +4036,28 @@ public class GeneraDocumentoFe {
 			Element cbcDescription = doc.createElement("cbc:Description");
 
 			if (map.get("Servicio").toString().trim().equals("B")) {
-				cbcDescription.appendChild(doc.createCDATASection("SERVICIO DE TRANSPORTE EN LA RUTA: "
-						+ map.get("DestinoD") /* venta.getDestinoD() */));
+				cbcDescription.appendChild(doc.createCDATASection("SERVICIO DE TRANSPORTE EN LA RUTA: " + map.get("DestinoD") /* venta.getDestinoD() */));
 				cacItem.appendChild(cbcDescription);
 			} else {
 
 				String Descripcion = "";
-				if (!map.get("Cantidad1").toString().trim().equals("")
-						&& !map.get("Descripcion1").toString().trim().equals("")) {
+				if (!map.get("Cantidad1").toString().trim().equals("") && !map.get("Descripcion1").toString().trim().equals("")) {
 
-					Descripcion = map.get("Cantidad1").toString().trim() + " "
-							+ map.get("Descripcion1").toString().trim();
+					Descripcion = map.get("Cantidad1").toString().trim() + " " + map.get("Descripcion1").toString().trim();
 				}
-				if (!map.get("Cantidad2").toString().trim().equals("")
-						&& !map.get("Descripcion2").toString().trim().equals("")) {
+				if (!map.get("Cantidad2").toString().trim().equals("") && !map.get("Descripcion2").toString().trim().equals("")) {
 
-					Descripcion = Descripcion + "/" + map.get("Cantidad2").toString().trim() + " "
-							+ map.get("Descripcion2").toString().trim();
+					Descripcion = Descripcion + "/" + map.get("Cantidad2").toString().trim() + " " + map.get("Descripcion2").toString().trim();
 				}
-				if (!map.get("Cantidad3").toString().trim().equals("")
-						&& !map.get("Descripcion3").toString().trim().equals("")) {
+				if (!map.get("Cantidad3").toString().trim().equals("") && !map.get("Descripcion3").toString().trim().equals("")) {
 
-					Descripcion = Descripcion + "/" + map.get("Cantidad3").toString().trim() + " "
-							+ map.get("Descripcion3").toString().trim();
+					Descripcion = Descripcion + "/" + map.get("Cantidad3").toString().trim() + " " + map.get("Descripcion3").toString().trim();
 				}
 
-				if(Integer.parseInt(map.get("Exceso").toString())==1){
-				cbcDescription.appendChild(doc.createCDATASection("BOLETO DE EXCESO: " + Descripcion));
-				}else{
-				cbcDescription.appendChild(doc.createCDATASection("SERVICIO DE ENVIO DE ENCOMIENDA: " + Descripcion));
+				if (Integer.parseInt(map.get("Exceso").toString()) == 1) {
+					cbcDescription.appendChild(doc.createCDATASection("BOLETO DE EXCESO: " + Descripcion));
+				} else {
+					cbcDescription.appendChild(doc.createCDATASection("SERVICIO DE ENVIO DE ENCOMIENDA: " + Descripcion));
 				}
 				cacItem.appendChild(cbcDescription);
 			}
@@ -4089,7 +4065,7 @@ public class GeneraDocumentoFe {
 			// VALOR UNITARIO POR ITEM
 			Element cacPrice = doc.createElement("cac:Price");
 			cacInvoiceLine.appendChild(cacPrice);
-			//PrecioItem map.get("PrecioItem")
+			// PrecioItem map.get("PrecioItem")
 			Element cbcPriceAmountItem = doc.createElement("cbc:PriceAmount");
 			cbcPriceAmountItem.appendChild(doc.createTextNode(String.valueOf(map.get("PrecioItem"))));
 			cacPrice.appendChild(cbcPriceAmountItem);
@@ -4108,18 +4084,15 @@ public class GeneraDocumentoFe {
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File(empresa.getRutaEnvioSunat() + empresa.getRuc() + "-"
-					+ map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico") + ".xml"));
+			StreamResult result = new StreamResult(new File(empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico") + ".xml"));
 			// StreamResult result = new StreamResult(new
 			// File(empresa.getRutaEnvioSunat()+empresa.getRuc()+"-"+map.get("TipoDocumento")+"-"+map.get("DocumentoElectronicoXml")+".xml"));
 
 			transformer.transform(source, result);
 
-			String RutaXML = empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-"
-					+ map.get("DocumentoElectronico");
+			String RutaXML = empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico");
 
-			String NombreFile = empresa.getRuc() + "-" + map.get("TipoDocumento") + "-"
-					+ map.get("DocumentoElectronico");
+			String NombreFile = empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico");
 			// String NombreFile =
 			// empresa.getRuc()+"-"+map.get("TipoDocumento")+"-"+map.get("DocumentoElectronicoXml");
 			// String RutaZip =
@@ -4139,31 +4112,32 @@ public class GeneraDocumentoFe {
 
 			System.out.println("LINEA 1");
 			//
-			
-			//KeyStore ks1 = KeyStore.getInstance("PFX");
-			//ks1.load);
+
+			// KeyStore ks1 = KeyStore.getInstance("PFX");
+			// ks1.load);
 			// Cargamos el almacen de claves
 			KeyStore ks = KeyStore.getInstance(Utils.KEYSTORE_TYPE);
-			//agregado por JCHC
-			//String KeysPass="bizlinks@2022$";
-			//String KeystorePass ="%bizlinks@2022$%";
-			
+			// agregado por JCHC
+			// String KeysPass="bizlinks@2022$";
+			// String KeystorePass ="%bizlinks@2022$%";
+
 			ks.load(new FileInputStream(empresa.getKeystoreFile()), empresa.getKeystorePassword().toCharArray());
-			
-			//agregado por JCHC - lo reemplace por la linea de arriba
-			//ks.load(new FileInputStream(empresa.getKeystoreFile()), KeysPass.toCharArray());
-			
+
+			// agregado por JCHC - lo reemplace por la linea de arriba
+			// ks.load(new FileInputStream(empresa.getKeystoreFile()),
+			// KeysPass.toCharArray());
 
 			System.out.println("LINEA 2");
 			// Obtenemos la clave privada, pues la necesitaremos para encriptar.
-			
-			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(),
-					empresa.getKeystorePassword().toCharArray());
-			
-			//agregado por JCHC lo reemplace por la linea de arriba
-			/*PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(),
-					KeystorePass.toCharArray());*/
-			
+
+			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(), empresa.getKeystorePassword().toCharArray());
+
+			// agregado por JCHC lo reemplace por la linea de arriba
+			/*
+			 * PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(),
+			 * KeystorePass.toCharArray());
+			 */
+
 			File signatureFile = new File(RutaXML + ".xml");
 			// @SuppressWarnings("deprecation")
 			String baseURI = signatureFile.toString(); // BaseURI para las URL
@@ -4199,17 +4173,16 @@ public class GeneraDocumentoFe {
 			os.close();
 
 			/*
-			 * NodeList nodeListhash =
-			 * doc1.getElementsByTagName("ds:DigestValue"); Node nodohash =
-			 * nodeListhash.item(0);
+			 * NodeList nodeListhash = doc1.getElementsByTagName("ds:DigestValue"); Node
+			 * nodohash = nodeListhash.item(0);
 			 * 
 			 * if (nodohash instanceof Element){ respuesta.put("codehash",
-			 * nodohash.getTextContent().trim()); System.out.println(
-			 * "CODIGO HASH --> "+ nodohash.getTextContent().trim()); }
+			 * nodohash.getTextContent().trim()); System.out.println( "CODIGO HASH --> "+
+			 * nodohash.getTextContent().trim()); }
 			 */
-			
-			//comentado por JCHC aqui se cre el ZIP -- Debe estar decomentado
-			
+
+			// comentado por JCHC aqui se cre el ZIP -- Debe estar decomentado
+
 			crearZip(RutaXML, signatureFile, NombreFile/* ,RutaZip */);
 
 		} catch (Exception e) {
@@ -4219,55 +4192,50 @@ public class GeneraDocumentoFe {
 		// return respuesta;
 
 	}
+
 	public static B_EncomiendasDao dao = new B_EncomiendasIDao();
-	 
-	//Bus_Carga
+
+	// Bus_Carga
 	public static void GeneraDocumentoFacturaXMLPruebaUBL21ViajeEspecial(Map<String, Object> map, V_Varios_FacturacionBean empresa) {
-		
+
 		List<B_Encomiendas_Detalles> items = dao.SQL_Obtiene_DetalleEncomienda(Integer.parseInt(map.get("Nro").toString()));
-		//items.remove(0);
-		//int accion  =0;
-			/*switch (map.get("CodigoAfectacionIGV").toString()) {
-			case "10":
-				CODIGO_TIPO_TRIBUTO = "1000";
-				NOMBRE_TRIBUTO = "IGV";
-				CODIGO_INTERNACIONAL_TRIBUTO = "VAT";
-				PORCENTAJE = "18.00"; */
-				/*accion=Integer.parseInt(map.get("Exceso").toString());
-				if (accion ==1) {
-					NOMBRE_TRIBUTO = "EXO";
-					CODIGO_INTERNACIONAL_TRIBUTO = "VAT";
-					PORCENTAJE = "0.00";
-					map.put("CodigoAfectacionIGV",20);		
-					} */
-				//break;
-			//case "20":
-		
-		if(Boolean.parseBoolean(map.get("IGV_Activo").toString()))
-		{
-			B_Encomiendas_Detalles _item=items.get(0);
-			items.get(0).setSubTotal(_item.getSubTotal()-Double.parseDouble(map.get("IGV").toString()));			
-			map.put("CodigoAfectacionIGV",10);
+		// items.remove(0);
+		// int accion =0;
+		/*
+		 * switch (map.get("CodigoAfectacionIGV").toString()) { case "10":
+		 * CODIGO_TIPO_TRIBUTO = "1000"; NOMBRE_TRIBUTO = "IGV";
+		 * CODIGO_INTERNACIONAL_TRIBUTO = "VAT"; PORCENTAJE = "18.00";
+		 */
+		/*
+		 * accion=Integer.parseInt(map.get("Exceso").toString()); if (accion ==1) {
+		 * NOMBRE_TRIBUTO = "EXO"; CODIGO_INTERNACIONAL_TRIBUTO = "VAT"; PORCENTAJE =
+		 * "0.00"; map.put("CodigoAfectacionIGV",20); }
+		 */
+		// break;
+		// case "20":
+
+		if (Boolean.parseBoolean(map.get("IGV_Activo").toString())) {
+			B_Encomiendas_Detalles _item = items.get(0);
+			items.get(0).setSubTotal(_item.getSubTotal() - Double.parseDouble(map.get("IGV").toString()));
+			map.put("CodigoAfectacionIGV", 10);
 			CODIGO_TIPO_TRIBUTO = "1000";
 			NOMBRE_TRIBUTO = "IGV";
 			CODIGO_INTERNACIONAL_TRIBUTO = "VAT";
-			PORCENTAJE = "18.00"; 
-			
-			
-		}else{
+			PORCENTAJE = "18.00";
+
+		} else {
 			map.put("IGV", 0.00);
-				map.put("CodigoAfectacionIGV",20);
-				CODIGO_TIPO_TRIBUTO = "9997";
-				NOMBRE_TRIBUTO = "EXO";
-				CODIGO_INTERNACIONAL_TRIBUTO = "VAT";
-				PORCENTAJE = "0.00";	
-				
-				
+			map.put("CodigoAfectacionIGV", 20);
+			CODIGO_TIPO_TRIBUTO = "9997";
+			NOMBRE_TRIBUTO = "EXO";
+			CODIGO_INTERNACIONAL_TRIBUTO = "VAT";
+			PORCENTAJE = "0.00";
+
 		}
-		
-			/*	break;
-			}
-		*/
+
+		/*
+		 * break; }
+		 */
 		try {
 
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -4387,8 +4355,7 @@ public class GeneraDocumentoFe {
 																								// Y
 																								// 00/100"
 			sacAdditionalProperty.appendChild(cbcValue);
-			
-			
+
 			// EXTENSION PARA LA FIRMA DIGITAL
 
 			Element ublExtensionSignature = doc.createElement("ext:UBLExtension");
@@ -4473,21 +4440,22 @@ public class GeneraDocumentoFe {
 																									// en
 																									// Letras
 			rootElementInvoice.appendChild(cbcNote);
-			
+
 			// ORDEN DE REFERENCIA DE LA ENCOMIENDA (EN LETRAS) AGREGADO POR JCHC
-						/*
-						Element sacAdditionalProperty1 = doc.createElement("sac:AdditionalProperty");
-						sacAdditionalInformation.appendChild(sacAdditionalProperty1);
-
-						Element cbcIDProperty1 = doc.createElement("cbc:ID");
-						cbcIDProperty1.appendChild(doc.createTextNode(Utils.NROORDENREFERENCIA1));
-						sacAdditionalProperty.appendChild(cbcIDProperty1);
-
-						Element cbcValue1 = doc.createElement("cbc:Value");
-						cbcValue.appendChild(doc.createTextNode(map.get("NroOrdenRef").toString().trim())); // "ORDEN DE REFERENCIA SOLO ENCOMIENDAS 
-						sacAdditionalProperty.appendChild(cbcValue1);
-						*/			
-						//TERMINA AQUI LO AGREGADO POR JCHC		
+			/*
+			 * Element sacAdditionalProperty1 = doc.createElement("sac:AdditionalProperty");
+			 * sacAdditionalInformation.appendChild(sacAdditionalProperty1);
+			 * 
+			 * Element cbcIDProperty1 = doc.createElement("cbc:ID");
+			 * cbcIDProperty1.appendChild(doc.createTextNode(Utils.NROORDENREFERENCIA1));
+			 * sacAdditionalProperty.appendChild(cbcIDProperty1);
+			 * 
+			 * Element cbcValue1 = doc.createElement("cbc:Value");
+			 * cbcValue.appendChild(doc.createTextNode(map.get("NroOrdenRef").toString().
+			 * trim())); // "ORDEN DE REFERENCIA SOLO ENCOMIENDAS
+			 * sacAdditionalProperty.appendChild(cbcValue1);
+			 */
+			// TERMINA AQUI LO AGREGADO POR JCHC
 
 			// CODIGO DE MONEDA (CATALOGO NÂ°. 2)
 			Element cbcDocumentCurrencyCode = doc.createElement("cbc:DocumentCurrencyCode");
@@ -4583,7 +4551,7 @@ public class GeneraDocumentoFe {
 			cacPartyLegalEntity.appendChild(cacRegistrationAddressEmisor);
 
 			Element cbcAddressTypeCode = doc.createElement("cbc:AddressTypeCode");
-			//empresa.getUbigeo()
+			// empresa.getUbigeo()
 			cbcAddressTypeCode.appendChild(doc.createTextNode("0000"));
 			cacRegistrationAddressEmisor.appendChild(cbcAddressTypeCode);
 
@@ -4595,50 +4563,48 @@ public class GeneraDocumentoFe {
 			 * Element cbcCustomerAssignedAccountIDReceptor =
 			 * doc.createElement("cbc:CustomerAssignedAccountID");
 			 * cbcCustomerAssignedAccountIDReceptor.appendChild(doc.
-			 * createTextNode(map.get("TipoDocumento").toString().trim().equals(
-			 * "01")? map.get("Ruc").toString() :map.get("DNI").toString()));
-			 * //"20341198217" cacAccountingCustomerParty.appendChild(
+			 * createTextNode(map.get("TipoDocumento").toString().trim().equals( "01")?
+			 * map.get("Ruc").toString() :map.get("DNI").toString())); //"20341198217"
+			 * cacAccountingCustomerParty.appendChild(
 			 * cbcCustomerAssignedAccountIDReceptor);
 			 * 
 			 * Element cbcAdditionalAccountIDReceptor =
 			 * doc.createElement("cbc:AdditionalAccountID");
 			 * cbcAdditionalAccountIDReceptor.appendChild(doc.createTextNode(map
 			 * .get("TipoDocumentoReceptor").toString())); //"6"
-			 * cacAccountingCustomerParty.appendChild(
-			 * cbcAdditionalAccountIDReceptor);
+			 * cacAccountingCustomerParty.appendChild( cbcAdditionalAccountIDReceptor);
 			 */
-			
-			
-			//AGREGADO POR JCHC
-			
+
+			// AGREGADO POR JCHC
+
 			// NUMERO ORDEN DE REFERENCIA
-				/*
-				 <cac:AdditionalDocumentReference>
-					<cbc:ID>024099</cbc:ID>
-					<cbc:DocumentTypeCode>99</cbc:DocumentTypeCode>
-				</cac:AdditionalDocumentReference>
-			*/
 			/*
-			Element cacAdditionalInformation = doc.createElement("cac:AdditionalDocumentReference");
-			extExtensionContent.appendChild(cacAdditionalInformation);
-			
-			Element cacAdditionalDocumentReference = doc.createElement("cac:AdditionalDocumentReference");
-			cacAdditionalInformation.appendChild(cacAdditionalDocumentReference);
+			 * <cac:AdditionalDocumentReference> <cbc:ID>024099</cbc:ID>
+			 * <cbc:DocumentTypeCode>99</cbc:DocumentTypeCode>
+			 * </cac:AdditionalDocumentReference>
+			 */
+			/*
+			 * Element cacAdditionalInformation =
+			 * doc.createElement("cac:AdditionalDocumentReference");
+			 * extExtensionContent.appendChild(cacAdditionalInformation);
+			 * 
+			 * Element cacAdditionalDocumentReference =
+			 * doc.createElement("cac:AdditionalDocumentReference");
+			 * cacAdditionalInformation.appendChild(cacAdditionalDocumentReference);
+			 * 
+			 * Element cbc_ID = doc.createElement("cbc:ID");
+			 * cbc_ID.appendChild(doc.createTextNode(map.get("NroOrdenRef").toString().trim(
+			 * ))); // NRO ORDEN REFERENCIA AGREGADO JCHC // Tipo y número de otro documento
+			 * y código relacionado con la operación que se factura // Tipo de documento -
+			 * Catálogo No. 12 cacAdditionalDocumentReference.appendChild(cbc_ID);
+			 * 
+			 * Element cbcTypeCode = doc.createElement("cbc:DocumentTypeCode");
+			 * cbcTypeCode.appendChild(doc.createTextNode(Utils.NROORDENREFERENCIA)); //TIPO
+			 * DE REFERENCIA cacAdditionalDocumentReference.appendChild(cbcTypeCode);
+			 */
 
-			Element cbc_ID = doc.createElement("cbc:ID");
-			cbc_ID.appendChild(doc.createTextNode(map.get("NroOrdenRef").toString().trim())); // NRO ORDEN REFERENCIA AGREGADO JCHC 
-																									 // Tipo y número de otro documento y código relacionado con la operación que se factura
-																									 // Tipo de documento - Catálogo No. 12
-			cacAdditionalDocumentReference.appendChild(cbc_ID);
+			// hASTA AQUI LLEGA JCHC
 
-			Element cbcTypeCode = doc.createElement("cbc:DocumentTypeCode");
-			cbcTypeCode.appendChild(doc.createTextNode(Utils.NROORDENREFERENCIA)); //TIPO DE REFERENCIA																							
-			cacAdditionalDocumentReference.appendChild(cbcTypeCode);
-			*/
-			
-			//hASTA AQUI LLEGA JCHC
-			
-			
 			Element cacPartyReceptor = doc.createElement("cac:Party");
 			cacAccountingCustomerParty.appendChild(cacPartyReceptor);
 
@@ -4646,8 +4612,7 @@ public class GeneraDocumentoFe {
 			cacPartyReceptor.appendChild(cacPartyIdentificationReceptor);
 
 			Element cbcIDReceptor = doc.createElement("cbc:ID");
-			cbcIDReceptor.appendChild(doc.createTextNode(map.get("TipoDocumento").toString().trim().equals("01")
-					? map.get("Ruc").toString() : map.get("DNI").toString()));
+			cbcIDReceptor.appendChild(doc.createTextNode(map.get("TipoDocumento").toString().trim().equals("01") ? map.get("Ruc").toString() : map.get("DNI").toString()));
 			cacPartyIdentificationReceptor.appendChild(cbcIDReceptor);
 			// *************** atributos que dicen que nuestra identificación es
 			// con DNI o ruc
@@ -4671,21 +4636,19 @@ public class GeneraDocumentoFe {
 			Element cacPartyLegalEntityReceptor = doc.createElement("cac:PartyLegalEntity");
 			cacPartyReceptor.appendChild(cacPartyLegalEntityReceptor);
 
-			String datoName = map.get("TipoDocumento").toString().trim().equals("01") ? map.get("Razon").toString()
-					: map.get("Nombre").toString();
+			String datoName = map.get("TipoDocumento").toString().trim().equals("01") ? map.get("Razon").toString() : map.get("Nombre").toString();
 			Element cbcRegistrationNameReceptor = doc.createElement("cbc:RegistrationName");
-			cbcRegistrationNameReceptor
-					.appendChild(doc.createCDATASection(datoName.trim().equals("-") ? "---" : datoName));// "VISANET
-																											// -
-																											// CIA
-																											// PERUANA
-																											// DE
-																											// MEDIOS
-																											// DE
-																											// PAGO
-																											// SAC"
+			cbcRegistrationNameReceptor.appendChild(doc.createCDATASection(datoName.trim().equals("-") ? "---" : datoName));// "VISANET
+																															// -
+																															// CIA
+																															// PERUANA
+																															// DE
+																															// MEDIOS
+																															// DE
+																															// PAGO
+																															// SAC"
 			cacPartyLegalEntityReceptor.appendChild(cbcRegistrationNameReceptor);
-			
+
 			// *******************************************************************************************
 			// INFORMACION DE SUMATORIA IVG GLOBAL
 
@@ -4697,28 +4660,27 @@ public class GeneraDocumentoFe {
 
 			Element cbcTaxAmountGlobal = doc.createElement("cbc:TaxAmount");
 			cbcTaxAmountGlobal.appendChild(doc.createTextNode(String.valueOf(map.get("IGV"))));
-			//cbcTaxAmountGlobal.appendChild(doc.createTextNode(String.valueOf("0.00")));
-			
+			// cbcTaxAmountGlobal.appendChild(doc.createTextNode(String.valueOf("0.00")));
+
 			cacTaxTotalGlobal.appendChild(cbcTaxAmountGlobal);
 
 			Attr attrTaxAmountGlobal = doc.createAttribute("currencyID");
 			attrTaxAmountGlobal.setValue(map.get("Moneda").toString());
 			cbcTaxAmountGlobal.setAttributeNode(attrTaxAmountGlobal);
 
-			 //for(B_Encomiendas_Detalles item : items)
-			 
-			 
+			// for(B_Encomiendas_Detalles item : items)
+
 			Element cacTaxSubtotalGlobal = doc.createElement("cac:TaxSubtotal");
 			cacTaxTotalGlobal.appendChild(cacTaxSubtotalGlobal);
 
 			Element cbcTaxableAmount = doc.createElement("cbc:TaxableAmount");
 			cbcTaxableAmount.appendChild(doc.createTextNode(String.valueOf(map.get("Total"))));
-			
+
 			cacTaxSubtotalGlobal.appendChild(cbcTaxableAmount);
 
-				Attr currencyIDAmount = doc.createAttribute("currencyID");
-				currencyIDAmount.setValue(map.get("Moneda").toString());
-				cbcTaxableAmount.setAttributeNode(currencyIDAmount);
+			Attr currencyIDAmount = doc.createAttribute("currencyID");
+			currencyIDAmount.setValue(map.get("Moneda").toString());
+			cbcTaxableAmount.setAttributeNode(currencyIDAmount);
 
 			Element cbcTaxAmountSubtotalGblobal = doc.createElement("cbc:TaxAmount");
 			cbcTaxAmountSubtotalGblobal.appendChild(doc.createTextNode(String.valueOf(map.get("IGV")))); // "100"
@@ -4733,7 +4695,7 @@ public class GeneraDocumentoFe {
 
 			Element cbcTaxExemptionReasonCodeGlobal = doc.createElement("cbc:TaxExemptionReasonCode");
 			cbcTaxExemptionReasonCodeGlobal.appendChild(doc.createTextNode(map.get("CodigoAfectacionIGV").toString()));
-			
+
 			cacTaxtCategoryGlobal.appendChild(cbcTaxExemptionReasonCodeGlobal);
 
 			Attr listAgencyNameGlobal = doc.createAttribute("listAgencyName");
@@ -4752,8 +4714,8 @@ public class GeneraDocumentoFe {
 			cacTaxtCategoryGlobal.appendChild(cacTaxSchemeGlobal);
 
 			Element cacTaxSchemeIDGlobal = doc.createElement("cbc:ID");
-			cacTaxSchemeIDGlobal.appendChild(doc.createTextNode(CODIGO_TIPO_TRIBUTO)); 
-			
+			cacTaxSchemeIDGlobal.appendChild(doc.createTextNode(CODIGO_TIPO_TRIBUTO));
+
 			cacTaxSchemeGlobal.appendChild(cacTaxSchemeIDGlobal);
 
 			Element cbcTaxSchemeNameGlobal = doc.createElement("cbc:Name");
@@ -4766,9 +4728,6 @@ public class GeneraDocumentoFe {
 
 			cacTaxSchemeGlobal.appendChild(cbcTaxTypeCodeGlobal);
 
-			
-			
-			
 			// *************************************************************
 			// IMPORTE TOTAL DE LA VENTA SESION EN USO O DEL SERVICIO PRESTADO
 
@@ -4783,237 +4742,235 @@ public class GeneraDocumentoFe {
 			attrMonetaryTotal.setValue(map.get("Moneda").toString());
 			cbcPayableAmount.setAttributeNode(attrMonetaryTotal);
 
-			B_Encomiendas_Detalles item =items.get(0);
-			for(int i=0;i<items.size();i++)
-			{
-				int contador = i+1;
-			// *************************************************************
-			// INFORMACIï¿½N DEL ARTICULO
-			Element cacInvoiceLine = doc.createElement("cac:InvoiceLine");
-			rootElementInvoice.appendChild(cacInvoiceLine);
+			B_Encomiendas_Detalles item = items.get(0);
+			for (int i = 0; i < items.size(); i++) {
+				int contador = i + 1;
+				// *************************************************************
+				// INFORMACIï¿½N DEL ARTICULO
+				Element cacInvoiceLine = doc.createElement("cac:InvoiceLine");
+				rootElementInvoice.appendChild(cacInvoiceLine);
 
-			Element cbcIDInvoiceLine = doc.createElement("cbc:ID");
-			//cbcIDInvoiceLine.appendChild(doc.createTextNode("1"));// SIMPRE VA SER 1 (YA QUE ES UN SOLO ITEM)
-			cbcIDInvoiceLine.appendChild(doc.createTextNode(contador+""));
-			cacInvoiceLine.appendChild(cbcIDInvoiceLine);
+				Element cbcIDInvoiceLine = doc.createElement("cbc:ID");
+				// cbcIDInvoiceLine.appendChild(doc.createTextNode("1"));// SIMPRE VA SER 1 (YA
+				// QUE ES UN SOLO ITEM)
+				cbcIDInvoiceLine.appendChild(doc.createTextNode(contador + ""));
+				cacInvoiceLine.appendChild(cbcIDInvoiceLine);
 
-			// CANTIDA DE ARTICULOS
-			Element cbcInvoicedQuantity = doc.createElement("cbc:InvoicedQuantity");
-			cbcInvoicedQuantity.appendChild(doc.createTextNode(item.getCantidad()+""));
-			cacInvoiceLine.appendChild(cbcInvoicedQuantity);
+				// CANTIDA DE ARTICULOS
+				Element cbcInvoicedQuantity = doc.createElement("cbc:InvoicedQuantity");
+				cbcInvoicedQuantity.appendChild(doc.createTextNode(item.getCantidad() + ""));
+				cacInvoiceLine.appendChild(cbcInvoicedQuantity);
 
-			Attr attrInvoicedQuantity = doc.createAttribute("unitCode");
-			attrInvoicedQuantity.setValue(empresa.getCodigoUnidadMedida()); // CODIGO
-																			// DE
-																			// UNIDAD
-																			// DE
-																			// MEDIDA
-			cbcInvoicedQuantity.setAttributeNode(attrInvoicedQuantity);
+				Attr attrInvoicedQuantity = doc.createAttribute("unitCode");
+				attrInvoicedQuantity.setValue(empresa.getCodigoUnidadMedida()); // CODIGO
+																				// DE
+																				// UNIDAD
+																				// DE
+																				// MEDIDA
+				cbcInvoicedQuantity.setAttributeNode(attrInvoicedQuantity);
 
-			// VALOR DE VENTA DEL ITEM
-			Element cbcLineExtensionAmount = doc.createElement("cbc:LineExtensionAmount");
-			//cbcLineExtensionAmount.appendChild(doc.createTextNode(String.valueOf(map.get("TotalSinIGV"))));//cambio
-			cbcLineExtensionAmount.appendChild(doc.createTextNode(item.getPU()+""));//cambio
-			cacInvoiceLine.appendChild(cbcLineExtensionAmount);
+				// VALOR DE VENTA DEL ITEM
+				Element cbcLineExtensionAmount = doc.createElement("cbc:LineExtensionAmount");
+				// cbcLineExtensionAmount.appendChild(doc.createTextNode(String.valueOf(map.get("TotalSinIGV"))));//cambio
+				cbcLineExtensionAmount.appendChild(doc.createTextNode(item.getPU() + ""));// cambio
+				cacInvoiceLine.appendChild(cbcLineExtensionAmount);
 
-			Attr attrLineExtensionAmount = doc.createAttribute("currencyID");
-			attrLineExtensionAmount.setValue(map.get("Moneda").toString());
-			cbcLineExtensionAmount.setAttributeNode(attrLineExtensionAmount);
+				Attr attrLineExtensionAmount = doc.createAttribute("currencyID");
+				attrLineExtensionAmount.setValue(map.get("Moneda").toString());
+				cbcLineExtensionAmount.setAttributeNode(attrLineExtensionAmount);
 
-			// PRECIO UNITARIO O VALOR REFERENCIAL UNITARIO EN OPERACIONES NO
-			// ONEROSAS
-			Element cacPricingReference = doc.createElement("cac:PricingReference");
-			cacInvoiceLine.appendChild(cacPricingReference);
+				// PRECIO UNITARIO O VALOR REFERENCIAL UNITARIO EN OPERACIONES NO
+				// ONEROSAS
+				Element cacPricingReference = doc.createElement("cac:PricingReference");
+				cacInvoiceLine.appendChild(cacPricingReference);
 
-			Element cacAlternativeConditionPrice = doc.createElement("cac:AlternativeConditionPrice");
-			cacPricingReference.appendChild(cacAlternativeConditionPrice);
+				Element cacAlternativeConditionPrice = doc.createElement("cac:AlternativeConditionPrice");
+				cacPricingReference.appendChild(cacAlternativeConditionPrice);
 
-			Element cbcPriceAmount = doc.createElement("cbc:PriceAmount");
-			cbcPriceAmount.appendChild(doc.createTextNode(item.getPU()+""/*String.valueOf(map.get("TotalSinIGV"))*/));
-			cacAlternativeConditionPrice.appendChild(cbcPriceAmount);
+				Element cbcPriceAmount = doc.createElement("cbc:PriceAmount");
+				cbcPriceAmount.appendChild(doc.createTextNode(item.getPU() + ""/* String.valueOf(map.get("TotalSinIGV")) */));
+				cacAlternativeConditionPrice.appendChild(cbcPriceAmount);
 
-			Attr attrPriceAmount = doc.createAttribute("currencyID");
-			attrPriceAmount.setValue(map.get("Moneda").toString());
-			cbcPriceAmount.setAttributeNode(attrPriceAmount);
+				Attr attrPriceAmount = doc.createAttribute("currencyID");
+				attrPriceAmount.setValue(map.get("Moneda").toString());
+				cbcPriceAmount.setAttributeNode(attrPriceAmount);
 
-			//// REGUNTAR QUE CODIGO VA IR !!!!!! 2017-11-26
-			Element cbcPriceTypeCode = doc.createElement("cbc:PriceTypeCode");
-			cbcPriceTypeCode.appendChild(doc.createTextNode("01"));// CATALOGO
-																	// Nï¿½ 16
-																	// (01-
-																	// Precio
-																	// unitario
-																	// (incluye
-																	// el IGV))
-																	// (02 -
-																	// Valor
-																	// referencial
-																	// unitario
-																	// en
-																	// operaciones
-																	// no
-																	// onerosas)
-			cacAlternativeConditionPrice.appendChild(cbcPriceTypeCode);
+				//// REGUNTAR QUE CODIGO VA IR !!!!!! 2017-11-26
+				Element cbcPriceTypeCode = doc.createElement("cbc:PriceTypeCode");
+				cbcPriceTypeCode.appendChild(doc.createTextNode("01"));// CATALOGO
+																		// Nï¿½ 16
+																		// (01-
+																		// Precio
+																		// unitario
+																		// (incluye
+																		// el IGV))
+																		// (02 -
+																		// Valor
+																		// referencial
+																		// unitario
+																		// en
+																		// operaciones
+																		// no
+																		// onerosas)
+				cacAlternativeConditionPrice.appendChild(cbcPriceTypeCode);
 
-			// AFECTACION AL IGV POR ITEM
-			Element cacTaxTotal = doc.createElement("cac:TaxTotal");
-			cacInvoiceLine.appendChild(cacTaxTotal);
+				// AFECTACION AL IGV POR ITEM
+				Element cacTaxTotal = doc.createElement("cac:TaxTotal");
+				cacInvoiceLine.appendChild(cacTaxTotal);
 
-			Element cbcTaxAmount = doc.createElement("cbc:TaxAmount");
-			cbcTaxAmount.appendChild(doc.createTextNode(String.valueOf(map.get("IGV"))));
-			//cbcTaxAmount.appendChild(doc.createTextNode("0.00"));
-			cacTaxTotal.appendChild(cbcTaxAmount);
+				Element cbcTaxAmount = doc.createElement("cbc:TaxAmount");
+				cbcTaxAmount.appendChild(doc.createTextNode(String.valueOf(map.get("IGV"))));
+				// cbcTaxAmount.appendChild(doc.createTextNode("0.00"));
+				cacTaxTotal.appendChild(cbcTaxAmount);
 
-			Attr attrTaxAmount = doc.createAttribute("currencyID");
-			attrTaxAmount.setValue(map.get("Moneda").toString());
-			cbcTaxAmount.setAttributeNode(attrTaxAmount);
+				Attr attrTaxAmount = doc.createAttribute("currencyID");
+				attrTaxAmount.setValue(map.get("Moneda").toString());
+				cbcTaxAmount.setAttributeNode(attrTaxAmount);
 
-			Element cacTaxSubtotal = doc.createElement("cac:TaxSubtotal");
-			cacTaxTotal.appendChild(cacTaxSubtotal);
+				Element cacTaxSubtotal = doc.createElement("cac:TaxSubtotal");
+				cacTaxTotal.appendChild(cacTaxSubtotal);
 
-			Element cbcTaxableAmountHijo = doc.createElement("cbc:TaxableAmount");
-			//cbcTaxableAmountHijo.appendChild(doc.createTextNode(String.valueOf(map.get("TotalSinIGV"))));
-			cbcTaxableAmountHijo.appendChild(doc.createTextNode(String.valueOf(item.getSubTotal())));
-			
-			cacTaxSubtotal.appendChild(cbcTaxableAmountHijo);
+				Element cbcTaxableAmountHijo = doc.createElement("cbc:TaxableAmount");
+				// cbcTaxableAmountHijo.appendChild(doc.createTextNode(String.valueOf(map.get("TotalSinIGV"))));
+				cbcTaxableAmountHijo.appendChild(doc.createTextNode(String.valueOf(item.getSubTotal())));
 
-			Attr currencyIDAmountHijo = doc.createAttribute("currencyID");
-			currencyIDAmountHijo.setValue(map.get("Moneda").toString());
-			cbcTaxableAmountHijo.setAttributeNode(currencyIDAmountHijo);
+				cacTaxSubtotal.appendChild(cbcTaxableAmountHijo);
 
-			Element cbcTaxAmountSubtotal = doc.createElement("cbc:TaxAmount");
-			cbcTaxAmountSubtotal.appendChild(doc.createTextNode(String.valueOf(map.get("IGV")))); // "100"
-			//cbcTaxAmountSubtotal.appendChild(doc.createTextNode(String.valueOf("0.00"))); // "100"
-			cacTaxSubtotal.appendChild(cbcTaxAmountSubtotal);
+				Attr currencyIDAmountHijo = doc.createAttribute("currencyID");
+				currencyIDAmountHijo.setValue(map.get("Moneda").toString());
+				cbcTaxableAmountHijo.setAttributeNode(currencyIDAmountHijo);
 
-			Attr attrTaxAmountSubtotal = doc.createAttribute("currencyID");
-			attrTaxAmountSubtotal.setValue(map.get("Moneda").toString());
-			cbcTaxAmountSubtotal.setAttributeNode(attrTaxAmountSubtotal);
+				Element cbcTaxAmountSubtotal = doc.createElement("cbc:TaxAmount");
+				cbcTaxAmountSubtotal.appendChild(doc.createTextNode(String.valueOf(map.get("IGV")))); // "100"
+				// cbcTaxAmountSubtotal.appendChild(doc.createTextNode(String.valueOf("0.00")));
+				// // "100"
+				cacTaxSubtotal.appendChild(cbcTaxAmountSubtotal);
 
-			Element cacTaxtCategory = doc.createElement("cac:TaxCategory");
-			cacTaxSubtotal.appendChild(cacTaxtCategory);
+				Attr attrTaxAmountSubtotal = doc.createAttribute("currencyID");
+				attrTaxAmountSubtotal.setValue(map.get("Moneda").toString());
+				cbcTaxAmountSubtotal.setAttributeNode(attrTaxAmountSubtotal);
 
-			// ***AÑADIDO
+				Element cacTaxtCategory = doc.createElement("cac:TaxCategory");
+				cacTaxSubtotal.appendChild(cacTaxtCategory);
 
-			Element cbcIDCategory = doc.createElement("cbc:ID");
-			cbcIDCategory.appendChild(doc.createTextNode("S"));
-			cacTaxtCategory.appendChild(cbcIDCategory);
+				// ***AÑADIDO
 
-			Attr schemeIDImpuesto = doc.createAttribute("schemeID");
-			schemeIDImpuesto.setValue("UN/ECE 5305");
-			cbcIDCategory.setAttributeNode(schemeIDImpuesto);
+				Element cbcIDCategory = doc.createElement("cbc:ID");
+				cbcIDCategory.appendChild(doc.createTextNode("S"));
+				cacTaxtCategory.appendChild(cbcIDCategory);
 
-			Attr schemeNameImpuesto = doc.createAttribute("schemeName");
-			schemeNameImpuesto.setValue("Tax Category Identifier");
-			cbcIDCategory.setAttributeNode(schemeNameImpuesto);
+				Attr schemeIDImpuesto = doc.createAttribute("schemeID");
+				schemeIDImpuesto.setValue("UN/ECE 5305");
+				cbcIDCategory.setAttributeNode(schemeIDImpuesto);
 
-			Attr schemeAgencyNameImpuesto = doc.createAttribute("schemeAgencyName");
-			schemeAgencyNameImpuesto.setValue("United Nations Economic Commission for Europe");
-			cbcIDCategory.setAttributeNode(schemeAgencyNameImpuesto);
+				Attr schemeNameImpuesto = doc.createAttribute("schemeName");
+				schemeNameImpuesto.setValue("Tax Category Identifier");
+				cbcIDCategory.setAttributeNode(schemeNameImpuesto);
 
-			Element cbcPercent = doc.createElement("cbc:Percent");
-			cbcPercent.appendChild(doc.createTextNode(PORCENTAJE)); // porcentaje
-																	// de IGV
-			cacTaxtCategory.appendChild(cbcPercent);
-			// ****
+				Attr schemeAgencyNameImpuesto = doc.createAttribute("schemeAgencyName");
+				schemeAgencyNameImpuesto.setValue("United Nations Economic Commission for Europe");
+				cbcIDCategory.setAttributeNode(schemeAgencyNameImpuesto);
 
-			Element cbcTaxExemptionReasonCode = doc.createElement("cbc:TaxExemptionReasonCode");
-			cbcTaxExemptionReasonCode.appendChild(doc.createTextNode(map.get("CodigoAfectacionIGV").toString()));
-			
-			cacTaxtCategory.appendChild(cbcTaxExemptionReasonCode);
+				Element cbcPercent = doc.createElement("cbc:Percent");
+				cbcPercent.appendChild(doc.createTextNode(PORCENTAJE)); // porcentaje
+																		// de IGV
+				cacTaxtCategory.appendChild(cbcPercent);
+				// ****
 
-			Attr listAgencyNameImpuesto = doc.createAttribute("listAgencyName");
-			listAgencyNameImpuesto.setValue("PE:SUNAT");
-			cbcTaxExemptionReasonCode.setAttributeNode(listAgencyNameImpuesto);
+				Element cbcTaxExemptionReasonCode = doc.createElement("cbc:TaxExemptionReasonCode");
+				cbcTaxExemptionReasonCode.appendChild(doc.createTextNode(map.get("CodigoAfectacionIGV").toString()));
 
-			Attr listNameImpuesto = doc.createAttribute("listName");
-			listNameImpuesto.setValue("Afectacion del IGV");
-			cbcTaxExemptionReasonCode.setAttributeNode(listNameImpuesto);
+				cacTaxtCategory.appendChild(cbcTaxExemptionReasonCode);
 
-			Attr listURIImpuesto = doc.createAttribute("listURI");
-			listURIImpuesto.setValue("urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07");
-			cbcTaxExemptionReasonCode.setAttributeNode(listURIImpuesto);
+				Attr listAgencyNameImpuesto = doc.createAttribute("listAgencyName");
+				listAgencyNameImpuesto.setValue("PE:SUNAT");
+				cbcTaxExemptionReasonCode.setAttributeNode(listAgencyNameImpuesto);
 
-			// schemeID="UN/ECE 5305" schemeName="Tax Category Identifier"
-			// schemeAgencyName="United Nations Economic Commission for Europe"
+				Attr listNameImpuesto = doc.createAttribute("listName");
+				listNameImpuesto.setValue("Afectacion del IGV");
+				cbcTaxExemptionReasonCode.setAttributeNode(listNameImpuesto);
 
-			Element cacTaxScheme = doc.createElement("cac:TaxScheme");
-			cacTaxtCategory.appendChild(cacTaxScheme);
+				Attr listURIImpuesto = doc.createAttribute("listURI");
+				listURIImpuesto.setValue("urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07");
+				cbcTaxExemptionReasonCode.setAttributeNode(listURIImpuesto);
 
-			Element cacTaxSchemeID = doc.createElement("cbc:ID");
-			cacTaxSchemeID.appendChild(doc.createTextNode(CODIGO_TIPO_TRIBUTO));
-			
-			
-			cacTaxScheme.appendChild(cacTaxSchemeID);
-			Element cbcTaxSchemeName = doc.createElement("cbc:Name");
-			cbcTaxSchemeName.appendChild(doc.createTextNode(NOMBRE_TRIBUTO));// map.get("Servicio").equals("B")?Utils.NOMBRE_TRIBUTO_PASAJES:Utils.NOMBRE_TRIBUTO_ENCOMIENDA));//
-																				// VERIFICAR
-																				// CATALOGO
-																				// Nï¿½
-																				// 5
-																				// (CODIGO
-																				// 1000)
-			cacTaxScheme.appendChild(cbcTaxSchemeName);
+				// schemeID="UN/ECE 5305" schemeName="Tax Category Identifier"
+				// schemeAgencyName="United Nations Economic Commission for Europe"
 
-			Element cbcTaxTypeCode = doc.createElement("cbc:TaxTypeCode");
-			cbcTaxTypeCode.appendChild(doc.createTextNode(CODIGO_INTERNACIONAL_TRIBUTO));// VERIFICAR
-																							// CATALOGO
-																							// Nï¿½
-																							// 5
-																							// (CODIGO
-																							// 1000)
-			cacTaxScheme.appendChild(cbcTaxTypeCode);
+				Element cacTaxScheme = doc.createElement("cac:TaxScheme");
+				cacTaxtCategory.appendChild(cacTaxScheme);
 
-			// DESCRIPCION DEL ITEM
-			Element cacItem = doc.createElement("cac:Item");
-			cacInvoiceLine.appendChild(cacItem);
+				Element cacTaxSchemeID = doc.createElement("cbc:ID");
+				cacTaxSchemeID.appendChild(doc.createTextNode(CODIGO_TIPO_TRIBUTO));
 
-			Element cbcDescription = doc.createElement("cbc:Description");
+				cacTaxScheme.appendChild(cacTaxSchemeID);
+				Element cbcTaxSchemeName = doc.createElement("cbc:Name");
+				cbcTaxSchemeName.appendChild(doc.createTextNode(NOMBRE_TRIBUTO));// map.get("Servicio").equals("B")?Utils.NOMBRE_TRIBUTO_PASAJES:Utils.NOMBRE_TRIBUTO_ENCOMIENDA));//
+																					// VERIFICAR
+																					// CATALOGO
+																					// Nï¿½
+																					// 5
+																					// (CODIGO
+																					// 1000)
+				cacTaxScheme.appendChild(cbcTaxSchemeName);
 
-			/*if (map.get("Servicio").toString().trim().equals("B")) {
-				cbcDescription.appendChild(doc.createCDATASection("SERVICIO DE TRANSPORTE EN LA RUTA: "+ map.get("DestinoD") ));
+				Element cbcTaxTypeCode = doc.createElement("cbc:TaxTypeCode");
+				cbcTaxTypeCode.appendChild(doc.createTextNode(CODIGO_INTERNACIONAL_TRIBUTO));// VERIFICAR
+																								// CATALOGO
+																								// Nï¿½
+																								// 5
+																								// (CODIGO
+																								// 1000)
+				cacTaxScheme.appendChild(cbcTaxTypeCode);
+
+				// DESCRIPCION DEL ITEM
+				Element cacItem = doc.createElement("cac:Item");
+				cacInvoiceLine.appendChild(cacItem);
+
+				Element cbcDescription = doc.createElement("cbc:Description");
+
+				/*
+				 * if (map.get("Servicio").toString().trim().equals("B")) {
+				 * cbcDescription.appendChild(doc.
+				 * createCDATASection("SERVICIO DE TRANSPORTE EN LA RUTA: "+ map.get("DestinoD")
+				 * )); cacItem.appendChild(cbcDescription); } else {
+				 * 
+				 * String Descripcion = ""; if
+				 * (!map.get("Cantidad1").toString().trim().equals("") &&
+				 * !map.get("Descripcion1").toString().trim().equals("")) {
+				 * 
+				 * Descripcion = map.get("Cantidad1").toString().trim() + " " +
+				 * map.get("Descripcion1").toString().trim(); } if
+				 * (!map.get("Cantidad2").toString().trim().equals("") &&
+				 * !map.get("Descripcion2").toString().trim().equals("")) {
+				 * 
+				 * Descripcion = Descripcion + "/" + map.get("Cantidad2").toString().trim() +
+				 * " " + map.get("Descripcion2").toString().trim(); } if
+				 * (!map.get("Cantidad3").toString().trim().equals("") &&
+				 * !map.get("Descripcion3").toString().trim().equals("")) {
+				 * 
+				 * Descripcion = Descripcion + "/" + map.get("Cantidad3").toString().trim() +
+				 * " " + map.get("Descripcion3").toString().trim(); }
+				 * 
+				 * if(Integer.parseInt(map.get("Exceso").toString())==1){
+				 * cbcDescription.appendChild(doc.createCDATASection("BOLETO DE EXCESO: " +
+				 * Descripcion)); }else{ cbcDescription.appendChild(doc.
+				 * createCDATASection("SERVICIO DE ENVIO DE ENCOMIENDA: " + Descripcion)); }
+				 * cacItem.appendChild(cbcDescription); }
+				 * cbcDescription.appendChild(doc.createCDATASection("BOLETO DE EXCESO: " +
+				 * Descripcion));
+				 */
+				cbcDescription.appendChild(doc.createCDATASection("" + item.getDescripcion()));
 				cacItem.appendChild(cbcDescription);
-			} else {
 
-				String Descripcion = "";
-				if (!map.get("Cantidad1").toString().trim().equals("")
-						&& !map.get("Descripcion1").toString().trim().equals("")) {
+				// VALOR UNITARIO POR ITEM
+				Element cacPrice = doc.createElement("cac:Price");
+				cacInvoiceLine.appendChild(cacPrice);
 
-					Descripcion = map.get("Cantidad1").toString().trim() + " "
-							+ map.get("Descripcion1").toString().trim();
-				}
-				if (!map.get("Cantidad2").toString().trim().equals("")
-						&& !map.get("Descripcion2").toString().trim().equals("")) {
-
-					Descripcion = Descripcion + "/" + map.get("Cantidad2").toString().trim() + " "
-							+ map.get("Descripcion2").toString().trim();
-				}
-				if (!map.get("Cantidad3").toString().trim().equals("")
-						&& !map.get("Descripcion3").toString().trim().equals("")) {
-
-					Descripcion = Descripcion + "/" + map.get("Cantidad3").toString().trim() + " "
-							+ map.get("Descripcion3").toString().trim();
-				}
-
-				if(Integer.parseInt(map.get("Exceso").toString())==1){
-				cbcDescription.appendChild(doc.createCDATASection("BOLETO DE EXCESO: " + Descripcion));
-				}else{
-				cbcDescription.appendChild(doc.createCDATASection("SERVICIO DE ENVIO DE ENCOMIENDA: " + Descripcion));
-				}
-				cacItem.appendChild(cbcDescription);
-			}
-		cbcDescription.appendChild(doc.createCDATASection("BOLETO DE EXCESO: " + Descripcion));*/
-			cbcDescription.appendChild(doc.createCDATASection("" + item.getDescripcion()));
-			cacItem.appendChild(cbcDescription);
-			
-			// VALOR UNITARIO POR ITEM
-			Element cacPrice = doc.createElement("cac:Price");
-			cacInvoiceLine.appendChild(cacPrice);
-
-			Element cbcPriceAmountItem = doc.createElement("cbc:PriceAmount");
-			//cbcPriceAmountItem.appendChild(doc.createTextNode(String.valueOf(map.get("TotalSinIGV"))));
-			cbcPriceAmountItem.appendChild(doc.createTextNode(item.getSubTotal()+""));
-			cacPrice.appendChild(cbcPriceAmountItem);
+				Element cbcPriceAmountItem = doc.createElement("cbc:PriceAmount");
+				// cbcPriceAmountItem.appendChild(doc.createTextNode(String.valueOf(map.get("TotalSinIGV"))));
+				cbcPriceAmountItem.appendChild(doc.createTextNode(item.getSubTotal() + ""));
+				cacPrice.appendChild(cbcPriceAmountItem);
 
 				Attr attrPriceAmountItem = doc.createAttribute("currencyID");
 				attrPriceAmountItem.setValue(map.get("Moneda").toString());
@@ -5029,19 +4986,16 @@ public class GeneraDocumentoFe {
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File(empresa.getRutaEnvioSunat() + empresa.getRuc() + "-"
-					+ map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico") + ".xml"));
+			StreamResult result = new StreamResult(new File(empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico") + ".xml"));
 			// StreamResult result = new StreamResult(new
 			// File(empresa.getRutaEnvioSunat()+empresa.getRuc()+"-"+map.get("TipoDocumento")+"-"+map.get("DocumentoElectronicoXml")+".xml"));
 
 			transformer.transform(source, result);
 
-			String RutaXML = empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-"
-					+ map.get("DocumentoElectronico");
+			String RutaXML = empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico");
 
-			String NombreFile = empresa.getRuc() + "-" + map.get("TipoDocumento") + "-"
-					+ map.get("DocumentoElectronico");
-			
+			String NombreFile = empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico");
+
 			// String NombreFile =
 			// empresa.getRuc()+"-"+map.get("TipoDocumento")+"-"+map.get("DocumentoElectronicoXml");
 			// String RutaZip =
@@ -5061,17 +5015,16 @@ public class GeneraDocumentoFe {
 
 			System.out.println("LINEA 1");
 			//
-			
-			//KeyStore ks1 = KeyStore.getInstance("PFX");
-			//ks1.load);
+
+			// KeyStore ks1 = KeyStore.getInstance("PFX");
+			// ks1.load);
 			// Cargamos el almacen de claves
 			KeyStore ks = KeyStore.getInstance(Utils.KEYSTORE_TYPE);
 			ks.load(new FileInputStream(empresa.getKeystoreFile()), empresa.getKeystorePassword().toCharArray());
 
 			System.out.println("LINEA 2");
 			// Obtenemos la clave privada, pues la necesitaremos para encriptar.
-			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(),
-					empresa.getKeystorePassword().toCharArray());
+			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(), empresa.getKeystorePassword().toCharArray());
 			File signatureFile = new File(RutaXML + ".xml");
 			// @SuppressWarnings("deprecation")
 			String baseURI = signatureFile.toString(); // BaseURI para las URL
@@ -5107,13 +5060,12 @@ public class GeneraDocumentoFe {
 			os.close();
 
 			/*
-			 * NodeList nodeListhash =
-			 * doc1.getElementsByTagName("ds:DigestValue"); Node nodohash =
-			 * nodeListhash.item(0);
+			 * NodeList nodeListhash = doc1.getElementsByTagName("ds:DigestValue"); Node
+			 * nodohash = nodeListhash.item(0);
 			 * 
 			 * if (nodohash instanceof Element){ respuesta.put("codehash",
-			 * nodohash.getTextContent().trim()); System.out.println(
-			 * "CODIGO HASH --> "+ nodohash.getTextContent().trim()); }
+			 * nodohash.getTextContent().trim()); System.out.println( "CODIGO HASH --> "+
+			 * nodohash.getTextContent().trim()); }
 			 */
 
 			crearZip(RutaXML, signatureFile, NombreFile/* ,RutaZip */);
@@ -5125,8 +5077,8 @@ public class GeneraDocumentoFe {
 		// return respuesta;
 
 	}
-	public static void/* Map<String, Object> */ GeneraDocumentoNotaCreditoXMLUBL21(Map<String, Object> map,
-			V_Varios_FacturacionBean empresa) {
+
+	public static void/* Map<String, Object> */ GeneraDocumentoNotaCreditoXMLUBL21(Map<String, Object> map, V_Varios_FacturacionBean empresa) {
 
 		// Map<String, Object> respuesta = new HashMap<>();
 
@@ -5215,12 +5167,10 @@ public class GeneraDocumentoFe {
 			// xmlns:sac='urn:sunat.names.specification.ubl_2_0.2_0.peru:schema:xsd:SunatAggregateComponents-1'
 			// />
 			/*
-			 * Element cacaddExtraParameters =
-			 * doc.createElement("cacadd:ExtraParameters");
+			 * Element cacaddExtraParameters = doc.createElement("cacadd:ExtraParameters");
 			 * extExtensionContent.appendChild(cacaddExtraParameters);
 			 * 
-			 * Attr xmlnssac = doc.createAttribute("xmlns:sac");
-			 * xmlnssac.setValue(
+			 * Attr xmlnssac = doc.createAttribute("xmlns:sac"); xmlnssac.setValue(
 			 * "urn:sunat.names.specification.ubl_2_0.2_0.peru:schema:xsd:SunatAggregateComponents-1"
 			 * ); cacaddExtraParameters.setAttributeNode(xmlnssac);
 			 */
@@ -5487,11 +5437,11 @@ public class GeneraDocumentoFe {
 			Element cacRegistrationAddress_Supplier = doc.createElement("cac:RegistrationAddress");
 			cacPartyLegalEntity_Supplier.appendChild(cacRegistrationAddress_Supplier);
 
-			//0008 Expreso Arriola
-			//empresa.getUbigeo()
-			
+			// 0008 Expreso Arriola
+			// empresa.getUbigeo()
+
 			Element cbcAddressTypeCode_Supplier = doc.createElement("cbc:AddressTypeCode");
-			//empresa.getUbigeo()
+			// empresa.getUbigeo()
 			cbcAddressTypeCode_Supplier.appendChild(doc.createTextNode("0000"));
 			cacRegistrationAddress_Supplier.appendChild(cbcAddressTypeCode_Supplier);
 
@@ -5517,8 +5467,7 @@ public class GeneraDocumentoFe {
 
 			Element cbcID_Customer = doc.createElement("cbc:ID");// boleta o
 																	// factura
-			cbcID_Customer.appendChild(doc.createTextNode(map.get("TipoDocumentoAplicar").toString() == "03"
-					? map.get("DNI").toString() : map.get("Ruc").toString()));
+			cbcID_Customer.appendChild(doc.createTextNode(map.get("TipoDocumentoAplicar").toString() == "03" ? map.get("DNI").toString() : map.get("Ruc").toString()));
 			cacPartyIdentification_Customer.appendChild(cbcID_Customer);
 
 			schemeID = doc.createAttribute("schemeID");
@@ -5541,89 +5490,78 @@ public class GeneraDocumentoFe {
 			cacParty_Customer.appendChild(cacPartyLegalEntity_Customer);
 
 			Element cbcRegistrationName_Customer = doc.createElement("cbc:RegistrationName");
-			cbcRegistrationName_Customer
-					.appendChild(doc.createCDATASection(map.get("TipoDocumentoAplicar").toString() == "03"
-							? map.get("DNI").toString().equals("-") ? "---" : map.get("DNI").toString()
-							: map.get("Razon").equals("-") ? "---" : map.get("Razon").toString()));
+			cbcRegistrationName_Customer.appendChild(doc.createCDATASection(
+					map.get("TipoDocumentoAplicar").toString() == "03" ? map.get("DNI").toString().equals("-") ? "---" : map.get("DNI").toString() : map.get("Razon").equals("-") ? "---" : map.get("Razon").toString()));
 
 			cacPartyLegalEntity_Customer.appendChild(cbcRegistrationName_Customer);
-			
-			
-			
-			//*******************************************************************************************
+
+			// *******************************************************************************************
 			// CAMBIOS PARA ABRIL 2021
 			log.info(map.get("TipoDocumentoAplicar").toString());
-			//if(map.get("TipoDocumentoAplicar").toString().equals("01")) {
-				Date fechaDate;
-				Date nvalfec;				
-				try {				
-					
-					fechaDate = new SimpleDateFormat("yyyy-MM-dd").parse(map.get("FechaEmision").toString());
-					nvalfec=sumarRestarDiasFecha(fechaDate,60);
-					DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-					String valnuevafec=dateformat.format(nvalfec);
-					
-							Element cacPaymentTerms = doc.createElement("cac:PaymentTerms");
-							rootElementCreditNote.appendChild(cacPaymentTerms);
+			// if(map.get("TipoDocumentoAplicar").toString().equals("01")) {
+			Date fechaDate;
+			Date nvalfec;
+			try {
 
-							Element cacPaymentTermsID = doc.createElement("cbc:ID");
-							cacPaymentTermsID.appendChild(doc.createTextNode("FormaPago"));
-							cacPaymentTerms.appendChild(cacPaymentTermsID);
-							
-								Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
-								cacPaymentMeansID.appendChild(doc.createTextNode("Credito"));
-								cacPaymentTerms.appendChild(cacPaymentMeansID);
-								
-								Element cacPaymentTermsAmount = doc.createElement("cbc:Amount");
-								cacPaymentTermsAmount.appendChild(doc.createTextNode(map.get("Total").toString()));
-								cacPaymentTerms.appendChild(cacPaymentTermsAmount);
-								
-								Attr attrTaxAmountPayment_ = doc.createAttribute("currencyID");
-								attrTaxAmountPayment_.setValue(map.get("Moneda").toString());
-								cacPaymentTermsAmount.setAttributeNode(attrTaxAmountPayment_);
-							
-							Element cacPaymentTermscredito = doc.createElement("cac:PaymentTerms");
-							rootElementCreditNote.appendChild(cacPaymentTermscredito);
-							
-							Element cacPaymentTermsID_1 = doc.createElement("cbc:ID");
-							cacPaymentTermsID_1.appendChild(doc.createTextNode("FormaPago"));
-							cacPaymentTermscredito.appendChild(cacPaymentTermsID_1);
-							
-							Element cacPaymentMeansID1 = doc.createElement("cbc:PaymentMeansID");
-							cacPaymentMeansID1.appendChild(doc.createTextNode("Cuota001"));
-							cacPaymentTermscredito.appendChild(cacPaymentMeansID1);
-							
-							/*Element cacPaymentTermsAmount = doc.createElement("cbc:Amount");
-							cacPaymentTermsID.appendChild(doc.createTextNode(map.get("TotalSinIGV").toString()));
-							cacPaymentTerms.appendChild(cacPaymentTermsAmount);*/
-							
-							Element cacPaymentTermsAmount1 = doc.createElement("cbc:Amount");
-							cacPaymentTermsAmount1.appendChild(doc.createTextNode(map.get("Total").toString()));
-							cacPaymentTermscredito.appendChild(cacPaymentTermsAmount1);
-							
-							Attr attrTaxAmountPayment = doc.createAttribute("currencyID");
-							attrTaxAmountPayment.setValue(map.get("Moneda").toString());
-							cacPaymentTermsAmount1.setAttributeNode(attrTaxAmountPayment);
-							
-							Element cbcPaymentDueDate = doc.createElement("cbc:PaymentDueDate");
-							cbcPaymentDueDate.appendChild(doc.createTextNode(valnuevafec));
-							cacPaymentTermscredito.appendChild(cbcPaymentDueDate);
-							
-						
-						
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-			//}
-			
-			
-			
-			
-			
-			
-			
+				fechaDate = new SimpleDateFormat("yyyy-MM-dd").parse(map.get("FechaEmision").toString());
+				nvalfec = sumarRestarDiasFecha(fechaDate, 60);
+				DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+				String valnuevafec = dateformat.format(nvalfec);
+
+				Element cacPaymentTerms = doc.createElement("cac:PaymentTerms");
+				rootElementCreditNote.appendChild(cacPaymentTerms);
+
+				Element cacPaymentTermsID = doc.createElement("cbc:ID");
+				cacPaymentTermsID.appendChild(doc.createTextNode("FormaPago"));
+				cacPaymentTerms.appendChild(cacPaymentTermsID);
+
+				Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
+				cacPaymentMeansID.appendChild(doc.createTextNode("Credito"));
+				cacPaymentTerms.appendChild(cacPaymentMeansID);
+
+				Element cacPaymentTermsAmount = doc.createElement("cbc:Amount");
+				cacPaymentTermsAmount.appendChild(doc.createTextNode(map.get("Total").toString()));
+				cacPaymentTerms.appendChild(cacPaymentTermsAmount);
+
+				Attr attrTaxAmountPayment_ = doc.createAttribute("currencyID");
+				attrTaxAmountPayment_.setValue(map.get("Moneda").toString());
+				cacPaymentTermsAmount.setAttributeNode(attrTaxAmountPayment_);
+
+				Element cacPaymentTermscredito = doc.createElement("cac:PaymentTerms");
+				rootElementCreditNote.appendChild(cacPaymentTermscredito);
+
+				Element cacPaymentTermsID_1 = doc.createElement("cbc:ID");
+				cacPaymentTermsID_1.appendChild(doc.createTextNode("FormaPago"));
+				cacPaymentTermscredito.appendChild(cacPaymentTermsID_1);
+
+				Element cacPaymentMeansID1 = doc.createElement("cbc:PaymentMeansID");
+				cacPaymentMeansID1.appendChild(doc.createTextNode("Cuota001"));
+				cacPaymentTermscredito.appendChild(cacPaymentMeansID1);
+
+				/*
+				 * Element cacPaymentTermsAmount = doc.createElement("cbc:Amount");
+				 * cacPaymentTermsID.appendChild(doc.createTextNode(map.get("TotalSinIGV").
+				 * toString())); cacPaymentTerms.appendChild(cacPaymentTermsAmount);
+				 */
+
+				Element cacPaymentTermsAmount1 = doc.createElement("cbc:Amount");
+				cacPaymentTermsAmount1.appendChild(doc.createTextNode(map.get("Total").toString()));
+				cacPaymentTermscredito.appendChild(cacPaymentTermsAmount1);
+
+				Attr attrTaxAmountPayment = doc.createAttribute("currencyID");
+				attrTaxAmountPayment.setValue(map.get("Moneda").toString());
+				cacPaymentTermsAmount1.setAttributeNode(attrTaxAmountPayment);
+
+				Element cbcPaymentDueDate = doc.createElement("cbc:PaymentDueDate");
+				cbcPaymentDueDate.appendChild(doc.createTextNode(valnuevafec));
+				cacPaymentTermscredito.appendChild(cbcPaymentDueDate);
+
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			// }
 
 			// *******************************************************************************************
 			// INFORMACION DE SUMATORIA IVG GLOBAL
@@ -5724,8 +5662,7 @@ public class GeneraDocumentoFe {
 			 * Element cbcRegistrationNameReceptor =
 			 * doc.createElement("cbc:RegistrationName");
 			 * cbcRegistrationNameReceptor.appendChild(doc.createCDATASection(
-			 * map.get("Razon").toString()));
-			 * cacPartyLegalEntityReceptor.appendChild(
+			 * map.get("Razon").toString())); cacPartyLegalEntityReceptor.appendChild(
 			 * cbcRegistrationNameReceptor);
 			 */
 
@@ -5861,21 +5798,20 @@ public class GeneraDocumentoFe {
 			cacTaxtCategoryGlobalCredit.appendChild(cacTaxtPercent);
 
 			Element cbcTaxExemptionReasonCodeGlobalCredit = doc.createElement("cbc:TaxExemptionReasonCode");
-			cbcTaxExemptionReasonCodeGlobalCredit
-					.appendChild(doc.createTextNode(map.get("CodigoAfectacionIGV").toString()));// VERIFICAR
-																								// CATALOGO
-																								// Nï¿½
-																								// 7
-																								// (
-																								// CODIGO
-																								// 20
-																								// PARA
-																								// PASAJES
-																								// -
-																								// CODIGO
-																								// 10
-																								// PARA
-																								// ENCOMIENDAS)
+			cbcTaxExemptionReasonCodeGlobalCredit.appendChild(doc.createTextNode(map.get("CodigoAfectacionIGV").toString()));// VERIFICAR
+																																// CATALOGO
+																																// Nï¿½
+																																// 7
+																																// (
+																																// CODIGO
+																																// 20
+																																// PARA
+																																// PASAJES
+																																// -
+																																// CODIGO
+																																// 10
+																																// PARA
+																																// ENCOMIENDAS)
 			cacTaxtCategoryGlobalCredit.appendChild(cbcTaxExemptionReasonCodeGlobalCredit);
 
 			Element cacTaxSchemeGlobalCredit = doc.createElement("cac:TaxScheme");
@@ -5916,36 +5852,28 @@ public class GeneraDocumentoFe {
 			// cacitem.appendChild(cbcDescriptionLast);
 
 			if (map.get("ServicioAplicar").toString().trim().equals("B")) {
-				cbcDescriptionLast.appendChild(doc.createCDATASection("SERVICIO DE TRANSPORTE EN LA RUTA: "
-						+ map.get("DestinoDA") /* venta.getDestinoD() */));
+				cbcDescriptionLast.appendChild(doc.createCDATASection("SERVICIO DE TRANSPORTE EN LA RUTA: " + map.get("DestinoDA") /* venta.getDestinoD() */));
 				cacitem.appendChild(cbcDescriptionLast);
 				System.out.println("ENTRO A CONDICION");
 			} else {
 
 				String Descripcion = "";
-				if (!map.get("Cantidad1A").toString().trim().equals("")
-						&& !map.get("Descripcion1A").toString().trim().equals("")) {
+				if (!map.get("Cantidad1A").toString().trim().equals("") && !map.get("Descripcion1A").toString().trim().equals("")) {
 
-					Descripcion += "/" + map.get("Cantidad1A").toString().trim() + " "
-							+ map.get("Descripcion1A").toString().trim();
+					Descripcion += "/" + map.get("Cantidad1A").toString().trim() + " " + map.get("Descripcion1A").toString().trim();
 				}
-				if (!map.get("Cantidad2A").toString().trim().equals("")
-						|| !map.get("Descripcion2A").toString().trim().equals("")) {
+				if (!map.get("Cantidad2A").toString().trim().equals("") || !map.get("Descripcion2A").toString().trim().equals("")) {
 
-					Descripcion += "/" + map.get("Cantidad2A").toString().trim() + " "
-							+ map.get("Descripcion2A").toString().trim();
+					Descripcion += "/" + map.get("Cantidad2A").toString().trim() + " " + map.get("Descripcion2A").toString().trim();
 				}
-				if (!map.get("Cantidad3A").toString().trim().equals("")
-						|| !map.get("Descripcion3A").toString().trim().equals("")) {
+				if (!map.get("Cantidad3A").toString().trim().equals("") || !map.get("Descripcion3A").toString().trim().equals("")) {
 
-					Descripcion += "/" + map.get("Cantidad3A").toString().trim() + " "
-							+ map.get("Descripcion3A").toString().trim();
+					Descripcion += "/" + map.get("Cantidad3A").toString().trim() + " " + map.get("Descripcion3A").toString().trim();
 				}
 				System.out.println("ENTRO A CONDICION 2");
 				System.out.println("ENTRO A CONDICION 2 " + map.get("Descripcion2A").toString().trim());
 
-				cbcDescriptionLast
-						.appendChild(doc.createCDATASection("SERVICIO DE ENVIO DE ENCOMIENDA: " + Descripcion));
+				cbcDescriptionLast.appendChild(doc.createCDATASection("SERVICIO DE ENVIO DE ENCOMIENDA: " + Descripcion));
 				cacitem.appendChild(cbcDescriptionLast);
 			}
 			cacCreditNoteLine.appendChild(cacitem);
@@ -5961,8 +5889,8 @@ public class GeneraDocumentoFe {
 			 * 
 			 * 
 			 * <cbc:Description>P001 DESCRIPCIÓN DEL PRODUCTO</cbc:Description>
-			 * <cac:CommodityClassification> <cbc:ItemClassificationCode
-			 * listID="UNSPSC" listAgencyName="GS1 US" listName=
+			 * <cac:CommodityClassification> <cbc:ItemClassificationCode listID="UNSPSC"
+			 * listAgencyName="GS1 US" listName=
 			 * "Item Classification">10000000</cbc:ItemClassificationCode>
 			 * </cac:CommodityClassification>
 			 */
@@ -5989,19 +5917,16 @@ public class GeneraDocumentoFe {
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File(empresa.getRutaEnvioSunat() + empresa.getRuc() + "-"
-					+ map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico") + ".xml"));
+			StreamResult result = new StreamResult(new File(empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico") + ".xml"));
 			// StreamResult result = new StreamResult(new
 			// File(empresa.getRutaEnvioSunat()+empresa.getRuc()+"-"+map.get("TipoDocumento")+"-"+map.get("DocumentoElectronicoXml")+".xml"));
 
 			transformer.transform(source, result);
 
-			String RutaXML = empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-"
-					+ map.get("DocumentoElectronico");
+			String RutaXML = empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico");
 			// String RutaXML =
 			// empresa.getRutaEnvioSunat()+empresa.getRuc()+"-"+map.get("TipoDocumento")+"-"+map.get("DocumentoElectronicoXml");
-			String NombreFile = empresa.getRuc() + "-" + map.get("TipoDocumento") + "-"
-					+ map.get("DocumentoElectronico");
+			String NombreFile = empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico");
 			// String NombreFile =
 			// empresa.getRuc()+"-"+map.get("TipoDocumento")+"-"+map.get("DocumentoElectronicoXml");
 			// String RutaZip =
@@ -6026,8 +5951,7 @@ public class GeneraDocumentoFe {
 
 			System.out.println("LINEA 2");
 			// Obtenemos la clave privada, pues la necesitaremos para encriptar.
-			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(),
-					empresa.getKeystorePassword().toCharArray());
+			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(), empresa.getKeystorePassword().toCharArray());
 			File signatureFile = new File(RutaXML + ".xml");
 			// @SuppressWarnings("deprecation")
 			String baseURI = signatureFile.toString(); // BaseURI para las URL
@@ -6063,9 +5987,8 @@ public class GeneraDocumentoFe {
 			os.close();
 
 			/*
-			 * NodeList nodeListhash =
-			 * doc1.getElementsByTagName("ds:DigestValue"); Node nodohash =
-			 * nodeListhash.item(0);
+			 * NodeList nodeListhash = doc1.getElementsByTagName("ds:DigestValue"); Node
+			 * nodohash = nodeListhash.item(0);
 			 * 
 			 * if (nodohash instanceof Element){ respuesta.put("codehash",
 			 * nodohash.getTextContent().trim()); }
@@ -6081,8 +6004,7 @@ public class GeneraDocumentoFe {
 
 	}
 
-	public static void/* Map<String, Object> */ GeneraDocumentoNotaDebitoXMLUBL21(Map<String, Object> map,
-			V_Varios_FacturacionBean empresa) {
+	public static void/* Map<String, Object> */ GeneraDocumentoNotaDebitoXMLUBL21(Map<String, Object> map, V_Varios_FacturacionBean empresa) {
 
 		switch (map.get("CodigoAfectacionIGV").toString()) {
 		case "10":
@@ -6337,8 +6259,7 @@ public class GeneraDocumentoFe {
 			// *************************************************************
 
 			/*
-			 * // DATOS DEL EMISOR DEL DOCUMENTO Element
-			 * cacAccountingSupplierParty =
+			 * // DATOS DEL EMISOR DEL DOCUMENTO Element cacAccountingSupplierParty =
 			 * doc.createElement("cac:AccountingSupplierParty");
 			 * rootElementDebitNote.appendChild(cacAccountingSupplierParty);
 			 * 
@@ -6350,8 +6271,7 @@ public class GeneraDocumentoFe {
 			 * cbcCustomerAssignedAccountID);
 			 * 
 			 * // TIPO DE DOCUMENTO DE IDENTIFICACION -- EMISOR Element
-			 * cbcAdditionalAccountID =
-			 * doc.createElement("cbc:AdditionalAccountID");
+			 * cbcAdditionalAccountID = doc.createElement("cbc:AdditionalAccountID");
 			 * cbcAdditionalAccountID.appendChild(doc.createTextNode("6"));
 			 * cacAccountingSupplierParty.appendChild(cbcAdditionalAccountID);
 			 * 
@@ -6371,20 +6291,18 @@ public class GeneraDocumentoFe {
 			 * cacParty.appendChild(cacPostalAddress);
 			 * 
 			 * Element cbcPostalAddressID = doc.createElement("cbc:ID");
-			 * cbcPostalAddressID.appendChild(doc.createTextNode(empresa.
-			 * getUbigeo())); cacPostalAddress.appendChild(cbcPostalAddressID);
+			 * cbcPostalAddressID.appendChild(doc.createTextNode(empresa. getUbigeo()));
+			 * cacPostalAddress.appendChild(cbcPostalAddressID);
 			 * 
 			 * // DIRECCION POSTAL Element cbcStreetName =
 			 * doc.createElement("cbc:StreetName");
-			 * cbcStreetName.appendChild(doc.createTextNode(empresa.getDireccion
-			 * ())); cacPostalAddress.appendChild(cbcStreetName);
+			 * cbcStreetName.appendChild(doc.createTextNode(empresa.getDireccion ()));
+			 * cacPostalAddress.appendChild(cbcStreetName);
 			 * 
-			 * // CODIGO DE PAIS Element cbcCountry =
-			 * doc.createElement("cac:Country");
+			 * // CODIGO DE PAIS Element cbcCountry = doc.createElement("cac:Country");
 			 * cacPostalAddress.appendChild(cbcCountry);
 			 * 
-			 * Element cbcIdentificationCode =
-			 * doc.createElement("cbc:IdentificationCode");
+			 * Element cbcIdentificationCode = doc.createElement("cbc:IdentificationCode");
 			 * cbcIdentificationCode.appendChild(doc.createTextNode(empresa.
 			 * getCodigoPais())); cbcCountry.appendChild(cbcIdentificationCode);
 			 * 
@@ -6395,8 +6313,7 @@ public class GeneraDocumentoFe {
 			 * 
 			 * // DATOS DEL EMISOR (DESCRIPCION) Element cbcRegistrationName =
 			 * doc.createElement("cbc:RegistrationName");
-			 * cbcRegistrationName.appendChild(doc.createCDATASection(empresa.
-			 * getRazon()));
+			 * cbcRegistrationName.appendChild(doc.createCDATASection(empresa. getRazon()));
 			 * cacPartyLegalEntity.appendChild(cbcRegistrationName);
 			 */
 
@@ -6450,7 +6367,7 @@ public class GeneraDocumentoFe {
 
 			Element cacRegistrationAddress_Supplier = doc.createElement("cac:RegistrationAddress");
 			cacPartyLegalEntity_Supplier.appendChild(cacRegistrationAddress_Supplier);
-			//empresa.getUbigeo()	
+			// empresa.getUbigeo()
 			Element cbcAddressTypeCode_Supplier = doc.createElement("cbc:AddressTypeCode");
 			cbcAddressTypeCode_Supplier.appendChild(doc.createTextNode("0000"));
 			cacRegistrationAddress_Supplier.appendChild(cbcAddressTypeCode_Supplier);
@@ -6470,10 +6387,10 @@ public class GeneraDocumentoFe {
 			 * doc.createElement("cac:AccountingCustomerParty");
 			 * rootElementDebitNote.appendChild(cacAccountingCustomerParty);
 			 * 
-			 * // NUMERO DE DOCUMENTO DEL ADQUIRIENTE (CUANDO ES A UNA FACTURA
-			 * SE LE ASIGNA EL RUC DEL ADQUIRIENTE, SI ES UNA BOLETA SE LE
-			 * COLOCA UN GUION "-") Element cbcCustomerAssignedAccountIDReceptor
-			 * = doc.createElement("cbc:CustomerAssignedAccountID");
+			 * // NUMERO DE DOCUMENTO DEL ADQUIRIENTE (CUANDO ES A UNA FACTURA SE LE ASIGNA
+			 * EL RUC DEL ADQUIRIENTE, SI ES UNA BOLETA SE LE COLOCA UN GUION "-") Element
+			 * cbcCustomerAssignedAccountIDReceptor =
+			 * doc.createElement("cbc:CustomerAssignedAccountID");
 			 * cbcCustomerAssignedAccountIDReceptor.appendChild(doc.
 			 * createTextNode(map.get("Ruc").toString()));
 			 * cacAccountingCustomerParty.appendChild(
@@ -6483,8 +6400,7 @@ public class GeneraDocumentoFe {
 			 * doc.createElement("cbc:AdditionalAccountID");
 			 * cbcAdditionalAccountIDReceptor.appendChild(doc.createTextNode(map
 			 * .get("TipoDocumentoReceptor").toString()));
-			 * cacAccountingCustomerParty.appendChild(
-			 * cbcAdditionalAccountIDReceptor);
+			 * cacAccountingCustomerParty.appendChild( cbcAdditionalAccountIDReceptor);
 			 * 
 			 * Element cacPartyReceptor = doc.createElement("cac:Party");
 			 * cacAccountingCustomerParty.appendChild(cacPartyReceptor);
@@ -6496,8 +6412,7 @@ public class GeneraDocumentoFe {
 			 * Element cbcRegistrationNameReceptor =
 			 * doc.createElement("cbc:RegistrationName");
 			 * cbcRegistrationNameReceptor.appendChild(doc.createCDATASection(
-			 * map.get("Razon").toString()));
-			 * cacPartyLegalEntityReceptor.appendChild(
+			 * map.get("Razon").toString())); cacPartyLegalEntityReceptor.appendChild(
 			 * cbcRegistrationNameReceptor);
 			 * 
 			 */
@@ -6513,8 +6428,7 @@ public class GeneraDocumentoFe {
 
 			Element cbcID_Customer = doc.createElement("cbc:ID");// boleta o
 																	// factura
-			cbcID_Customer.appendChild(doc.createTextNode(map.get("TipoDocumentoAplicar").toString() == "03"
-					? map.get("DNI").toString() : map.get("Ruc").toString()));
+			cbcID_Customer.appendChild(doc.createTextNode(map.get("TipoDocumentoAplicar").toString() == "03" ? map.get("DNI").toString() : map.get("Ruc").toString()));
 			cacPartyIdentification_Customer.appendChild(cbcID_Customer);
 
 			schemeID = doc.createAttribute("schemeID");
@@ -6537,10 +6451,8 @@ public class GeneraDocumentoFe {
 			cacParty_Customer.appendChild(cacPartyLegalEntity_Customer);
 
 			Element cbcRegistrationName_Customer = doc.createElement("cbc:RegistrationName");
-			cbcRegistrationName_Customer
-					.appendChild(doc.createCDATASection(map.get("TipoDocumentoAplicar").toString() == "03"
-							? map.get("DNI").toString().equals("-") ? "---" : map.get("DNI").toString()
-							: map.get("Razon").equals("-") ? "---" : map.get("Razon").toString()));
+			cbcRegistrationName_Customer.appendChild(doc.createCDATASection(
+					map.get("TipoDocumentoAplicar").toString() == "03" ? map.get("DNI").toString().equals("-") ? "---" : map.get("DNI").toString() : map.get("Razon").equals("-") ? "---" : map.get("Razon").toString()));
 
 			cacPartyLegalEntity_Customer.appendChild(cbcRegistrationName_Customer);
 
@@ -6559,33 +6471,27 @@ public class GeneraDocumentoFe {
 			 * attrTaxAmountGlobal.setValue(map.get("Moneda").toString());
 			 * cbcTaxAmountGlobal.setAttributeNode(attrTaxAmountGlobal);
 			 * 
-			 * Element cacTaxSubtotalGlobal =
-			 * doc.createElement("cac:TaxSubtotal");
+			 * Element cacTaxSubtotalGlobal = doc.createElement("cac:TaxSubtotal");
 			 * cacTaxTotalGlobal.appendChild(cacTaxSubtotalGlobal);
 			 * 
-			 * Element cbcTaxAmountSubtotalGblobal =
-			 * doc.createElement("cbc:TaxAmount");
+			 * Element cbcTaxAmountSubtotalGblobal = doc.createElement("cbc:TaxAmount");
 			 * cbcTaxAmountSubtotalGblobal.appendChild(doc.createTextNode(String
 			 * .valueOf(map.get("IGV")))); // "100"
 			 * cacTaxSubtotalGlobal.appendChild(cbcTaxAmountSubtotalGblobal);
 			 * 
-			 * Attr attrTaxAmountSubtotalGlobal =
-			 * doc.createAttribute("currencyID");
-			 * attrTaxAmountSubtotalGlobal.setValue(map.get("Moneda").toString()
-			 * ); cbcTaxAmountSubtotalGblobal.setAttributeNode(
-			 * attrTaxAmountSubtotalGlobal);
+			 * Attr attrTaxAmountSubtotalGlobal = doc.createAttribute("currencyID");
+			 * attrTaxAmountSubtotalGlobal.setValue(map.get("Moneda").toString() );
+			 * cbcTaxAmountSubtotalGblobal.setAttributeNode( attrTaxAmountSubtotalGlobal);
 			 * 
-			 * Element cacTaxtCategoryGlobal =
-			 * doc.createElement("cac:TaxCategory");
+			 * Element cacTaxtCategoryGlobal = doc.createElement("cac:TaxCategory");
 			 * cacTaxSubtotalGlobal.appendChild(cacTaxtCategoryGlobal);
 			 * 
 			 * Element cbcTaxExemptionReasonCodeGlobal =
 			 * doc.createElement("cbc:TaxExemptionReasonCode");
 			 * cbcTaxExemptionReasonCodeGlobal.appendChild(doc.createTextNode(
-			 * map.get("CodigoAfectacionIGV").toString()));// VERIFICAR CATALOGO
-			 * No 7 ( CODIGO 20 PARA PASAJES - CODIGO 10 PARA ENCOMIENDAS)
-			 * cacTaxtCategoryGlobal.appendChild(cbcTaxExemptionReasonCodeGlobal
-			 * );
+			 * map.get("CodigoAfectacionIGV").toString()));// VERIFICAR CATALOGO No 7 (
+			 * CODIGO 20 PARA PASAJES - CODIGO 10 PARA ENCOMIENDAS)
+			 * cacTaxtCategoryGlobal.appendChild(cbcTaxExemptionReasonCodeGlobal );
 			 * 
 			 * Element cacTaxSchemeGlobal = doc.createElement("cac:TaxScheme");
 			 * cacTaxtCategoryGlobal.appendChild(cacTaxSchemeGlobal);
@@ -6600,11 +6506,10 @@ public class GeneraDocumentoFe {
 			 * NOMBRE_TRIBUTO));// VERIFICAR CATALOGO No 5 (CODIGO 1000)
 			 * cacTaxSchemeGlobal.appendChild(cbcTaxSchemeNameGlobal);
 			 * 
-			 * Element cbcTaxTypeCodeGlobal =
-			 * doc.createElement("cbc:TaxTypeCode");
+			 * Element cbcTaxTypeCodeGlobal = doc.createElement("cbc:TaxTypeCode");
 			 * //cbcTaxTypeCodeGlobal.appendChild(doc.createTextNode(Utils.
-			 * CODIGO_INTERNACIONAL_TRIBUTO));// VERIFICAR CATALOGO No 5 (CODIGO
-			 * 1000) cacTaxSchemeGlobal.appendChild(cbcTaxTypeCodeGlobal);
+			 * CODIGO_INTERNACIONAL_TRIBUTO));// VERIFICAR CATALOGO No 5 (CODIGO 1000)
+			 * cacTaxSchemeGlobal.appendChild(cbcTaxTypeCodeGlobal);
 			 * 
 			 */
 
@@ -6709,8 +6614,7 @@ public class GeneraDocumentoFe {
 
 			// **************************************************************
 			/*
-			 * Element cacCreditNoteLine =
-			 * doc.createElement("cac:DebitNoteLine");
+			 * Element cacCreditNoteLine = doc.createElement("cac:DebitNoteLine");
 			 * rootElementDebitNote.appendChild(cacCreditNoteLine);
 			 * 
 			 * // CALOR DEL ITEM SIEMPRE VA SER 1 Element cbcCreditNoteLineID =
@@ -6836,21 +6740,20 @@ public class GeneraDocumentoFe {
 			cacTaxtCategoryGlobalCredit.appendChild(cacTaxtPercent);
 
 			Element cbcTaxExemptionReasonCodeGlobalCredit = doc.createElement("cbc:TaxExemptionReasonCode");
-			cbcTaxExemptionReasonCodeGlobalCredit
-					.appendChild(doc.createTextNode(map.get("CodigoAfectacionIGV").toString()));// VERIFICAR
-																								// CATALOGO
-																								// Nï¿½
-																								// 7
-																								// (
-																								// CODIGO
-																								// 20
-																								// PARA
-																								// PASAJES
-																								// -
-																								// CODIGO
-																								// 10
-																								// PARA
-																								// ENCOMIENDAS)
+			cbcTaxExemptionReasonCodeGlobalCredit.appendChild(doc.createTextNode(map.get("CodigoAfectacionIGV").toString()));// VERIFICAR
+																																// CATALOGO
+																																// Nï¿½
+																																// 7
+																																// (
+																																// CODIGO
+																																// 20
+																																// PARA
+																																// PASAJES
+																																// -
+																																// CODIGO
+																																// 10
+																																// PARA
+																																// ENCOMIENDAS)
 			cacTaxtCategoryGlobalCredit.appendChild(cbcTaxExemptionReasonCodeGlobalCredit);
 
 			Element cacTaxSchemeGlobalCredit = doc.createElement("cac:TaxScheme");
@@ -6891,30 +6794,23 @@ public class GeneraDocumentoFe {
 			// cacitem.appendChild(cbcDescriptionLast);
 
 			if (map.get("ServicioAplicar").toString().trim().equals("B")) {
-				cbcDescriptionLast.appendChild(doc.createCDATASection("SERVICIO DE TRANSPORTE EN LA RUTA: "
-						+ map.get("DestinoDA") /* venta.getDestinoD() */));
+				cbcDescriptionLast.appendChild(doc.createCDATASection("SERVICIO DE TRANSPORTE EN LA RUTA: " + map.get("DestinoDA") /* venta.getDestinoD() */));
 				cacitem.appendChild(cbcDescriptionLast);
 				System.out.println("ENTRO A CONDICION");
 			} else {
 
 				String Descripcion = "";
-				if (!map.get("Cantidad1A").toString().trim().equals("")
-						&& !map.get("Descripcion1A").toString().trim().equals("")) {
+				if (!map.get("Cantidad1A").toString().trim().equals("") && !map.get("Descripcion1A").toString().trim().equals("")) {
 
-					Descripcion += "/" + map.get("Cantidad1A").toString().trim() + " "
-							+ map.get("Descripcion1A").toString().trim();
+					Descripcion += "/" + map.get("Cantidad1A").toString().trim() + " " + map.get("Descripcion1A").toString().trim();
 				}
-				if (!map.get("Cantidad2A").toString().trim().equals("")
-						|| !map.get("Descripcion2A").toString().trim().equals("")) {
+				if (!map.get("Cantidad2A").toString().trim().equals("") || !map.get("Descripcion2A").toString().trim().equals("")) {
 
-					Descripcion += "/" + map.get("Cantidad2A").toString().trim() + " "
-							+ map.get("Descripcion2A").toString().trim();
+					Descripcion += "/" + map.get("Cantidad2A").toString().trim() + " " + map.get("Descripcion2A").toString().trim();
 				}
-				if (!map.get("Cantidad3A").toString().trim().equals("")
-						|| !map.get("Descripcion3A").toString().trim().equals("")) {
+				if (!map.get("Cantidad3A").toString().trim().equals("") || !map.get("Descripcion3A").toString().trim().equals("")) {
 
-					Descripcion += "/" + map.get("Cantidad3A").toString().trim() + " "
-							+ map.get("Descripcion3A").toString().trim();
+					Descripcion += "/" + map.get("Cantidad3A").toString().trim() + " " + map.get("Descripcion3A").toString().trim();
 				}
 				System.out.println("ENTRO A CONDICION 2");
 				System.out.println("ENTRO A CONDICION 2 " + map.get("Descripcion2A").toString().trim());
@@ -6951,15 +6847,12 @@ public class GeneraDocumentoFe {
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File(empresa.getRutaEnvioSunat() + empresa.getRuc() + "-"
-					+ map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico") + ".xml"));
+			StreamResult result = new StreamResult(new File(empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico") + ".xml"));
 
 			transformer.transform(source, result);
 
-			String RutaXML = empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-"
-					+ map.get("DocumentoElectronico");
-			String NombreFile = empresa.getRuc() + "-" + map.get("TipoDocumento") + "-"
-					+ map.get("DocumentoElectronico");
+			String RutaXML = empresa.getRutaEnvioSunat() + empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico");
+			String NombreFile = empresa.getRuc() + "-" + map.get("TipoDocumento") + "-" + map.get("DocumentoElectronico");
 
 			Init.init();
 
@@ -6980,8 +6873,7 @@ public class GeneraDocumentoFe {
 
 			System.out.println("LINEA 2");
 			// Obtenemos la clave privada, pues la necesitaremos para encriptar.
-			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(),
-					empresa.getKeystorePassword().toCharArray());
+			PrivateKey privateKey = (PrivateKey) ks.getKey(empresa.getPrivateKeyAlias(), empresa.getKeystorePassword().toCharArray());
 			File signatureFile = new File(RutaXML + ".xml");
 			// @SuppressWarnings("deprecation")
 			String baseURI = signatureFile.toString(); // BaseURI para las URL
@@ -7017,9 +6909,8 @@ public class GeneraDocumentoFe {
 			os.close();
 
 			/*
-			 * NodeList nodeListhash =
-			 * doc1.getElementsByTagName("ds:DigestValue"); Node nodohash =
-			 * nodeListhash.item(0);
+			 * NodeList nodeListhash = doc1.getElementsByTagName("ds:DigestValue"); Node
+			 * nodohash = nodeListhash.item(0);
 			 * 
 			 * if (nodohash instanceof Element){ respuesta.put("codehash",
 			 * nodohash.getTextContent().trim()); }
@@ -7033,6 +6924,6 @@ public class GeneraDocumentoFe {
 
 		// return respuesta;
 
-	} 
-	
+	}
+
 }

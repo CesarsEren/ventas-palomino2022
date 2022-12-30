@@ -131,7 +131,8 @@ public class EliminaVentasNoConfirmadas
     
     @Scheduled(fixedRate = 300000L)
     public void verificaVentasPendiente() {
-        if (Utils.isDesarrollo()) {
+    	log.info("[INICIO]======= verificaVentasPendiente =======");
+        if (Utils.isProduccion()) {
             List<B_VentaBean> listaPendientes = new ArrayList<B_VentaBean>();
             List<B_VentaBean> listaPendientesEmbarcar = new ArrayList<B_VentaBean>();
             try {
@@ -229,6 +230,7 @@ public class EliminaVentasNoConfirmadas
                 EliminaVentasNoConfirmadas.log.info((Object)Utils.printStackTraceToString(e));
             }
         }
+        log.info("[FIN]======= verificaVentasPendiente =======");
     }
     
     public void EnviarCorreoPrueba(final int dato) {
@@ -255,6 +257,7 @@ public class EliminaVentasNoConfirmadas
     
     @Scheduled(cron = "0 0 10 * * *")
     public void EnviarInformeContabilidad() {
+    	log.info("[INICIO] ======= ENVIAR REPORTE A CONTABILIDAD TODO LOS DÍAS A LAS 10 AM =======");
         final Map<String, String> parametros = new HashMap<String, String>();
         
         parametros.put("to", "desarrolladorweb@grupopalomino.com.pe");
@@ -318,13 +321,14 @@ public class EliminaVentasNoConfirmadas
         catch (IOException e) {
             e.printStackTrace();
         }
+    	log.info("[FIN]======= ENVIAR REPORTE A CONTABILIDAD TODO LOS DÍAS A LAS 10 AM =======");
     }
     
 
     @Scheduled(cron = "0 0 23 * * *")
     public void EnviarDocumentosOse() {
-    		
-        if (Utils.isDesarrollo()) {
+    	log.info("[INICIO]======= ENVIO AUTOMÁTICO DE DOCUMENTOS ELECTRÓNICOS A LAS 11:00 PM =======");
+        if (Utils.isProduccion()) {
         	EliminaVentasNoConfirmadas.log.info((Object)("********* INICIANDO ENVIO AUTOMATICO SUNAT*********** : "));
             final Map<String, Object> mapaEnvio = new HashMap<String, Object>();
             final List<Map<String, Object>> lstResultado = new ArrayList<Map<String, Object>>();
@@ -494,6 +498,7 @@ public class EliminaVentasNoConfirmadas
                 }
             }
         }
+        log.info("[FIN]======= ENVIO AUTOMÁTICO DE DOCUMENTOS ELECTRÓNICOS A LAS 11:00 PM=======");
     }
     
     public static byte[] toBytes(final DataHandler handler) throws IOException {
@@ -504,12 +509,14 @@ public class EliminaVentasNoConfirmadas
     
     @Scheduled(cron = "0 0 22 * * *")
     public void GenerarCodigoPDF417() {
-        if (Utils.isDesarrollo()) {
+    	log.info("[INICIO]======= REPORTE A CONTABILIDAD DOCUMETNOS SIN PDF417 =======");
+        if (Utils.isProduccion()) {
             final List<String> numeros = (List<String>)this.reportecontabilidadservice.GetDocumentosSinPDF417();
             for (final String temp : numeros) {
                 Utils.consumirservicio(temp, "B");
             }
         }
+        log.info("[FIN]======= REPORTE A CONTABILIDAD DOCUMETNOS SIN PDF417 =======");
     }
     
     public Date sumarRestarDiasFecha(final Date fecha, final int dias) {
@@ -574,7 +581,8 @@ public class EliminaVentasNoConfirmadas
     
     @Scheduled(fixedRate = 300000L)
     public void ReconfirmarCIPs() throws Exception { 
-    	if(Utils.isDesarrollo()) {
+    	log.info("[INICIO]======= RECONFIRMANDO CIPS  ¿===> 593? =======");
+    	if(Utils.isProduccion()) {
         final List<String> cips = (List<String>)this.boletajecipservice.getEticketsPorConfirmar();
         for (final String cip : cips) { 
             final Map<String, Object> res = this.consultapagoefectivoVentaTelefonica(cip);
@@ -587,6 +595,7 @@ public class EliminaVentasNoConfirmadas
             }
         }
     	}
+    	log.info("[FIN]======= RECONFIRMANDO CIPS  ¿===> 593? =======");
     }
     
     public void activomanualCodigoCIP(final String CodigoCIP, final String Correo) throws Exception {
@@ -839,7 +848,8 @@ public class EliminaVentasNoConfirmadas
     
     @Scheduled(fixedRate = 300000L)
     public void eliminaVentasNoConfirmadas() throws Exception {
-    	if(Utils.isDesarrollo()) {
+    	log.info("[INICIO]======= ELIMINANDO VENTAS NO CONFIRMADAS =======");
+    	if(Utils.isProduccion()) {
             List<B_VentaBean> ventasPagoEfectivo = new ArrayList<B_VentaBean>();
             try {
                 ventasPagoEfectivo = (List<B_VentaBean>)this.venta.SelectListVentasPendientesPagoEfectivo();
@@ -900,29 +910,37 @@ public class EliminaVentasNoConfirmadas
                 EliminaVentasNoConfirmadas.log.info((Object)Utils.printStackTraceToString(e));
             }
         }
+    	log.info("[FIN]======= ELIMINANDO VENTAS NO CONFIRMADAS =======");
     }
     
     @Scheduled(fixedRate = 300000L)
     public void UpdateVentasNoConfirmadas() throws Exception {
-        if (Utils.isDesarrollo()) {
+    	log.info("[INICIO]======= UPDATE VENTAS NO CONFIRMADAS =======");
+        if (Utils.isProduccion()) {
             this.venta.updateVentaNoConfirmada("E");            
         }
+        log.info("[FIN]======= UPDATE VENTAS NO CONFIRMADAS =======");
     }
     
     @Scheduled(fixedRate = 1800000L)
     public void borrarVentasNoConfirmadas() throws Exception {
-        if (Utils.isDesarrollo()) {            
+    	log.info("[INICIO]======= ELIMINANDO VENTAS CON ESTADO WEB [E] =======");
+        if (Utils.isProduccion()) {            
             this.venta.deleteVentaNoConfirmada("E");
             EliminaVentasNoConfirmadas.log.info((Object)"****************** ELIMINANDO VENTAS QUE EST\u00c1N CON ESTADOWEB E ******************");
         }
+
+    	log.info("[FIN]======= ELIMINANDO VENTAS CON ESTADO WEB [E] =======");
     }
     
     @Scheduled(cron = "0 27 0 * * ?")
     public void EliminaDocumentos() throws Exception {
-        if (Utils.isDesarrollo()) {
+    	log.info("[INICIO]======= ELIMINANDO ARCHIVOS TEMPORALES  =======");
+        if (Utils.isProduccion()) {
             final File directorioEnvio = new File("/var/www/ventas/facturacion/enviotemporal/");
             EliminaVentasNoConfirmadas.log.info((Object)"INGRESANDO AL PROCESO DE ARCHIVOS .... ");
             FileUtils.cleanDirectory(directorioEnvio);
         }
+        log.info("[FIN]======= ELIMINANDO ARCHIVOS TEMPORALES  =======");
     }
 }

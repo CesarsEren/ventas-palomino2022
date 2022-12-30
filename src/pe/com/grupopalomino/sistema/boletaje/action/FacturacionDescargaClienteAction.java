@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.StringReader;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -294,8 +295,15 @@ public class FacturacionDescargaClienteAction extends ActionSupport implements S
 						if(facturacionEmpresa.getEmpresa().trim().equals("002")){
 							
 							
-							InputStream rutaLogoPalomino = request.getServletContext().getResourceAsStream("_lib/img"+File.separator+"palomino.jpg");
-							
+							InputStream rutaLogoPalomino = null;// request.getServletContext().getResourceAsStream("_lib/img"+File.separator+"palomino.jpg");
+
+							rutaLogoPalomino = new URL("https://ventas.grupopalomino.com.pe:8443/ventas/_lib/img/palomino.jpg").openStream();
+
+							if (rutaLogoPalomino == null) {
+								rutaLogoPalomino = new URL("http://localhost:8080/ventas/_lib/img/palomino.jpg").openStream();
+
+							}
+
 							Image logoPalomino = Image.getInstance(IOUtils.toByteArray(rutaLogoPalomino));
 							logoPalomino.scalePercent(12f);
 							logoPalomino.setAbsolutePosition(35f, 810f);
@@ -305,8 +313,14 @@ public class FacturacionDescargaClienteAction extends ActionSupport implements S
 							
 						}else if (facturacionEmpresa.getEmpresa().trim().equals("004")){
 							
-							InputStream rutaLogoWari = request.getServletContext().getResourceAsStream("_lib/img"+File.separator+"wari.jpg");
-							
+							InputStream rutaLogoWari = null;// request.getServletContext().getResourceAsStream("_lib/img"+File.separator+"palomino.jpg");
+
+							rutaLogoWari = new URL("https://ventas.grupopalomino.com.pe:8443/ventas/_lib/img/wari.jpg").openStream();
+
+							if (rutaLogoWari == null) {
+								rutaLogoWari = new URL("http://localhost:8080/ventas/_lib/img/wari.jpg").openStream();
+
+							}
 							Image logoWari = Image.getInstance(IOUtils.toByteArray(rutaLogoWari));
 							logoWari.scalePercent(15f);
 							logoWari.setAbsolutePosition(55f, 810f);
@@ -317,8 +331,10 @@ public class FacturacionDescargaClienteAction extends ActionSupport implements S
 						else if (facturacionEmpresa.getEmpresa().trim().equals("003")){
 							
 							
-							InputStream rutaLogoCargo = request.getServletContext().getResourceAsStream("_lib/img"+File.separator+"cargo.jpg");
-							
+							InputStream rutaLogoCargo = null;// request.getServletContext().getResourceAsStream("_lib/img"+File.separator+"palomino.jpg");
+
+							rutaLogoCargo = new URL("https://ventas.grupopalomino.com.pe:8443/ventas/_lib/img/cargo.jpg").openStream();
+
 							Image logoCargo = Image.getInstance(IOUtils.toByteArray(rutaLogoCargo));
 							logoCargo.scalePercent(16f);
 							logoCargo.setAbsolutePosition(60f, 800f);
