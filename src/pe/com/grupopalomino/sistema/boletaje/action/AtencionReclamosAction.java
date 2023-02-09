@@ -350,7 +350,7 @@ public class AtencionReclamosAction extends ActionSupport implements ServletRequ
 		response.setHeader("Content-Type", "application/vnd.ms-excel");
 		// String sSistemaOperativo = System.getProperty("os.name");
 		File file;
-		if (Utils.isDesarrollo()) {
+		if (Utils.isProduccion()) {
 			file = new File("/home/equipo1/reclamos/ReporteReclamos.xls");
 		} else {
 			file = new File("C:\\Users\\Sistemas01\\Desktop\\ReporteReclamos.xls");

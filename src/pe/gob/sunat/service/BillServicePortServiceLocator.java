@@ -26,8 +26,8 @@ public class BillServicePortServiceLocator extends org.apache.axis.client.Servic
     //private java.lang.String BillServicePortSoap11_address = "https://calidad.escondatagate.net/wsValidator_2_1/ol-ti-itcpe";//DIRECCION DE UBL 2.1
     //private java.lang.String BillServicePortSoap11_address = "https://www.escondatagate.net/wsValidator/ol-ti-itcpe";//DIRECCION DE UBL 2.0 prod
     
-    //private java.lang.String BillServicePortSoap11_address = "https://www.escondatagate.net:443/wsValidator_2_1/ol-ti-itcpe"; // DIRECCION DE UBL 2.0 prod JCHC 25/03/2022
-    private java.lang.String BillServicePortSoap11_address = "https://osetesting.bizlinks.com.pe/ol-ti-itcpe"; // DIRECCION DE UBL 2.0 prueba JCHC 28/03/2022
+    private java.lang.String BillServicePortSoap11_address = "https://www.escondatagate.net:443/wsValidator_2_1/ol-ti-itcpe"; // DIRECCION DE UBL 2.0 prod JCHC 25/03/2022
+    //private java.lang.String BillServicePortSoap11_address = "https://osetesting.bizlinks.com.pe/ol-ti-itcpe"; // DIRECCION DE UBL 2.0 prueba JCHC 28/03/2022
     
     //https://www.escondatagate.net/wsValidator/ol-ti-itcpe/billService.wsdl/
     public java.lang.String getBillServicePortSoap11Address() {

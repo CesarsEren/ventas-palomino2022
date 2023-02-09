@@ -179,17 +179,17 @@ public class FuncionesFacturacionPDF {
 					e.printStackTrace();
 				}
 
-				String fecha_ven_pago = mapaVentas.get("FenchaVenPago").toString();
+				String fecha_vencimiento = mapaVentas.get("FechaVencimiento").toString();
 				Paragraph paragrapfFechaNueva= null;				
-				if(fecha_ven_pago == null|| fecha_ven_pago.isEmpty()) {
+				if(fecha_vencimiento == null|| fecha_vencimiento.isEmpty()) {
 					  paragrapfFechaNueva = new Paragraph("Fecha Vencimiento :  " + valnuevafec, fuente);
 				}else {
 					 DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd");
 				        DateFormat targetFormat = new SimpleDateFormat("dd/MM/yyyy");
-				        String formattedDate = fecha_ven_pago;
+				        String formattedDate = fecha_vencimiento;
 				        Date date;
 						try {
-							date = originalFormat.parse(fecha_ven_pago);
+							date = originalFormat.parse(fecha_vencimiento);
 							    formattedDate = targetFormat.format(date); 
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
@@ -253,19 +253,19 @@ public class FuncionesFacturacionPDF {
 					e.printStackTrace();
 				}
 
-				String fecha_ven_pago = mapaVentas.get("FenchaVenPago").toString();
+				String fecha_vencimiento = mapaVentas.get("FechaVencimiento").toString();
 				Paragraph paragrapfFechaNueva= null;
-				if(fecha_ven_pago == null|| fecha_ven_pago.isEmpty()) {
+				if(fecha_vencimiento == null|| fecha_vencimiento.isEmpty()) {
 					  paragrapfFechaNueva = new Paragraph("Fecha Vencimiento :  " + valnuevafec, fuente);
 					paragrapfFechaNueva.setAlignment(Element.ALIGN_JUSTIFIED);
 				}else {
 					 
 			        DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd");
 			        DateFormat targetFormat = new SimpleDateFormat("dd/MM/yyyy");
-			        String formattedDate = fecha_ven_pago;
+			        String formattedDate = fecha_vencimiento;
 			        Date date;
 					try {
-						date = originalFormat.parse(fecha_ven_pago);
+						date = originalFormat.parse(fecha_vencimiento);
 						    formattedDate = targetFormat.format(date); 
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
@@ -315,12 +315,12 @@ public class FuncionesFacturacionPDF {
 		}
 
 		long dias_de_vencimiento = 0;
-		String fecha_ven_pago = mapaVentas.get("FenchaVenPago").toString();
+		String fecha_vencimiento = mapaVentas.get("FechaVencimiento").toString();
 		String fecha_emision = mapaVentas.get("FechaEmision").toString();
 		Date date_vencimiento= null;
 		Date date_emision  = null;
 		try {
-			  date_vencimiento = new SimpleDateFormat("yyyy-MM-dd").parse(fecha_ven_pago.trim());
+			  date_vencimiento = new SimpleDateFormat("yyyy-MM-dd").parse(fecha_vencimiento.trim());
 			  date_emision = new SimpleDateFormat("yyyy-MM-dd").parse(fecha_emision.trim());
 			
 			 long diff = date_vencimiento.getTime() - date_emision.getTime();

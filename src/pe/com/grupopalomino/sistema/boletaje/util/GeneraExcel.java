@@ -117,7 +117,7 @@ public class GeneraExcel {
 			e.printStackTrace();
 		}
 		File file;
-		if(Utils.isDesarrollo()){
+		if(Utils.isProduccion()){
 		file = new File("/home/equipo1/reclamos/ReporteReclamos.xls");
 		}else{
 			file = new File("C:\\Users\\Sistemas01\\Desktop\\ReporteReclamos.xls");

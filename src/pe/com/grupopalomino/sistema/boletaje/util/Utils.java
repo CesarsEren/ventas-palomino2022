@@ -136,9 +136,9 @@ public class Utils {
 		e.printStackTrace(new PrintWriter(errors)); 
 		return errors.toString();
 	}
-	
-	public static String STATUS_SYSTEM = "DEV";
-	public static boolean isDesarrollo()
+	// DEV | PROD
+	public static String STATUS_SYSTEM = "PROD";
+	public static boolean isProduccion()
 	{
 		return Utils.STATUS_SYSTEM.equals("PROD");
 	}
