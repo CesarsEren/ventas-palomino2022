@@ -3112,6 +3112,7 @@ public class GeneraDocumentoFe {
 			boolean isdetraccion = false;
 			if (map.get("CodigoTotalVenta").toString().equals("1003") && Float.parseFloat(map.get("Total").toString()) >= 700) {// 1003 = pasajes y mayor igual a 700
 				isdetraccion = true;
+
 				log.info(" Is detraccion 1");
 			} else if (map.get("CodigoTotalVenta").toString().equals("1001") && !map.get("Bus_Carga").toString().equals("VA") && map.get("Serie").toString().equals("390")
 					&& Float.parseFloat(map.get("Total").toString()) >= 700) {
@@ -3120,6 +3121,7 @@ public class GeneraDocumentoFe {
 			} else if (map.get("CodigoTotalVenta").toString().equals("1001") && Float.parseFloat(map.get("Total").toString()) >= 400) {// Encomienda
 				isdetraccion = true;
 				log.info(" Is detraccion 3");
+
 			}
 
 			if (map.get("TipoDocumento").toString().equals("01") && isdetraccion) {
@@ -3473,11 +3475,13 @@ public class GeneraDocumentoFe {
 							// cbc:PaymentMeansID
 							// Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
 							if (!map.get("Bus_Carga").toString().equals("VA") && Float.parseFloat(map.get("Total").toString()) >= 700) {
+
 								Element TermscbcID = doc.createElement("cbc:ID");
 								TermscbcID.appendChild(doc.createTextNode("Detraccion"));
 								cacPaymentTermsDetraccion.appendChild(TermscbcID);
 								
 								Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
+
 								cacPaymentMeansID.appendChild(doc.createTextNode("026")); // 026
 								cacPaymentTermsDetraccion.appendChild(cacPaymentMeansID);
 
@@ -3514,12 +3518,14 @@ public class GeneraDocumentoFe {
 						} else {
 							if (Float.parseFloat(map.get("Total").toString()) >= 400) {
 								// Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
+
 								Element TermscbcID = doc.createElement("cbc:ID");
 								TermscbcID.appendChild(doc.createTextNode("Detraccion"));
 								cacPaymentTermsDetraccion.appendChild(TermscbcID);
 								
 								Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
 								//Element cacPaymentMeansID = doc.createElement("cbc:ID");
+
 								cacPaymentMeansID.appendChild(doc.createTextNode("027")); // 027 Encomiendas
 								cacPaymentTermsDetraccion.appendChild(cacPaymentMeansID);
 
@@ -3602,13 +3608,13 @@ public class GeneraDocumentoFe {
 								} else { // SI ES VA
 									DecimalFormat formato1 = new DecimalFormat("#.00");
 									ladetra = String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString())));
-								}
+								} 
 							} else if(isdetraccion){
 								DecimalFormat formato1 = new DecimalFormat("#.00");
 								ladetra = String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) - (Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.04"))));
 							}else {
 								DecimalFormat formato1 = new DecimalFormat("#.00");
-								ladetra = String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()))); 
+								ladetra = String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()))); 						  
 							}
 						}
 

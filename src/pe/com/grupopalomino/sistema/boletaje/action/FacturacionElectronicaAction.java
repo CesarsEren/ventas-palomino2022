@@ -371,6 +371,7 @@ public class FacturacionElectronicaAction extends ActionSupport {
 			BillServicePortService service = new BillServicePortServiceLocator();
 			BillServicePort billService = service.getBillServicePortSoap11();
 			rpta = billService.sendBill(fileName, toBytes(dataHandler), "");
+
 		} else {
 			log.info("==== ENVIANDO XML A CALIDAD ESCON==== ");
 		}
