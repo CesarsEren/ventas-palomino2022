@@ -67,6 +67,7 @@ import pe.gob.sunat.service.BillServicePortService;
 import pe.gob.sunat.service.BillServicePortServiceLocator;
 import pe.gob.sunat.service.StatusCdrResponse;
 import pe.gob.sunat.service.StatusResponse;
+import pe.gob.sunat.service.bzlinks.produccion.SOAPException_Exception;
 
 @ParentPackage(value = "BoletajePalomino03")
 @PreAuthorize("hasAnyRole('1','F')")
@@ -345,13 +346,23 @@ public class FacturacionElectronicaAction extends ActionSupport {
 		Utils.USERNAME = facturacion.getUsernameSunat();
 		Utils.PASSWORD = facturacion.getPasswordSunat();
 
-		pe.gob.sunat.service.bzlinks.beta.util.HeaderHandlerResolver HeadersSecurity = new pe.gob.sunat.service.bzlinks.beta.util.HeaderHandlerResolver();
+		pe.gob.sunat.service.bzlinks.util.HeaderHandlerResolver HeadersSecurity = new pe.gob.sunat.service.bzlinks.util.HeaderHandlerResolver();
 		HeadersSecurity.setVruc(facturacion.getRuc());
 		byte[] rpta = null;
 		if (Utils.isProduccion()) {
- 
-
+			log.info("==== ENVIANDO XML A PRODUCCIÓN BZLINKS ==== ");
+			pe.gob.sunat.service.bzlinks.produccion.BizlinksOSE_Service service = new pe.gob.sunat.service.bzlinks.produccion.BizlinksOSE_Service();
+			service.setHandlerResolver(HeadersSecurity);
+			pe.gob.sunat.service.bzlinks.produccion.BizlinksOSE port = service.getBizlinksOSEPort();
+			try {
+				rpta = port.sendBill(fileName, dataHandler);
+			} catch (SOAPException_Exception e) {
+				// TODO Auto-generated catch block
+				log.error(e);
+				e.printStackTrace();
+			}
 		} else {
+			log.info("==== ENVIANDO XML A CALIDAD BZLINKS==== ");
 			pe.gob.sunat.service.bzlinks.beta.BizlinksOSE service = new pe.gob.sunat.service.bzlinks.beta.BizlinksOSE();
 			service.setHandlerResolver(HeadersSecurity);
 			pe.gob.sunat.service.bzlinks.beta.BillServicePort port = service.getBillServicePortSoap11();
@@ -359,7 +370,8 @@ public class FacturacionElectronicaAction extends ActionSupport {
 		}
 		return rpta;
 	}
-
+ 
+	
 	public byte[] SendBillEscon(String fileName, DataHandler dataHandler, V_Varios_FacturacionBean facturacion) throws RemoteException, IOException, ServiceException {
 
 		Utils.USERNAME = facturacion.getUsernameSunat();

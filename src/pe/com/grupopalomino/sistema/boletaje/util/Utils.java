@@ -135,13 +135,8 @@ public class Utils {
 		StringWriter errors = new StringWriter();
 		e.printStackTrace(new PrintWriter(errors)); 
 		return errors.toString();
-	}
-	// DEV | PROD
-<<<<<<< HEAD
-	public static String STATUS_SYSTEM = "PROD";
-=======
-	public static String STATUS_SYSTEM = "DEV";
->>>>>>> ddc19bb916c8a6124b105983eada6df1ea70caaf
+	} 
+	public static String STATUS_SYSTEM = "DEV"; 
 	public static boolean isProduccion()
 	{
 		return Utils.STATUS_SYSTEM.equals("PROD");
