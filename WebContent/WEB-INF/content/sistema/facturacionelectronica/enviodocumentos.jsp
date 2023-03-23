@@ -74,6 +74,8 @@ legend {
 																PALOMINO SAC</option>
 															<option value="003">WARI EXPRESS SAC</option>
 															<option value="004">TRANSPORTE WARI SAC</option>
+														
+														<option value="005">TURISMO PALOMINO</option>
 														</sec:authorize>
 														<sec:authorize access="hasAnyRole('F')">
 															<option

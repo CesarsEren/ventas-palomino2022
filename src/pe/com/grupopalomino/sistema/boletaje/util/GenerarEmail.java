@@ -27,9 +27,9 @@ import org.apache.commons.logging.LogFactory;
 
 public class GenerarEmail {
 	
-	private final static String FROM = "tiendavirtual@grupopalomino.com.pe";
-	private final static String USERNAME = "tiendavirtual@grupopalomino.com.pe";
-	private final static String PASSWORD = "gpalomino.12.3";
+	private final static String FROM = "on-line@grupopalomino.com.pe";
+	private final static String USERNAME = "on-line@grupopalomino.com.pe";
+	private final static String PASSWORD = "@Dmn1tr@d0r#$%&,;:'*/!+-";
 	/*private final static String FROM = "informesti@grupopalomino.com.pe";
 	private final static String USERNAME = "informesti@grupopalomino.com.pe";
 	private final static String PASSWORD = "gpalomino.12.3";*/
