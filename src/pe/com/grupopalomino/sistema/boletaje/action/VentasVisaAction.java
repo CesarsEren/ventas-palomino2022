@@ -774,9 +774,9 @@ public class VentasVisaAction extends ActionSupport implements SessionAware, Ser
 			@Result(name = SUCCESS, location = "ventavisa/detallevisa.jsp"), // ventavisa/ventaboletovisa2.jsp"),
 			@Result(name = "NOLOGUEADO", type = "redirectAction", location = "accederegistrocliente"),
 			@Result(name = "PAGOEFECTIVO", type = "redirectAction", location = "generarcip"),
-			@Result(name = "OPENPAY", type = "redirectAction", location = "generarcargo"),
 			@Result(name = ERROR, type = "redirectAction", location = "salir") })
 	public String accedePago() {
+		//@Result(name = "OPENPAY", type = "redirectAction", location = "generarcargo"
 		SpringSecurityClient cliente = null; // (UserDetails)
 		// SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String ClienteVisa = "";

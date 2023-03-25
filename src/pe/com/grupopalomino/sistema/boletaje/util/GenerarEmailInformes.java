@@ -27,9 +27,9 @@ import org.apache.commons.logging.LogFactory;
 
 public class GenerarEmailInformes {
 
-	private final static String FROM = "informesti@grupopalomino.com.pe";
-	private final static String USERNAMEINFORMES = "informesti@grupopalomino.com.pe";
-	private final static String PASSWORDINFORMES = "gpalomino.12.3";
+	private final static String FROM = "informestic@grupopalomino.com.pe";
+	private final static String USERNAMEINFORMES = "informestic@grupopalomino.com.pe";
+	private final static String PASSWORDINFORMES = "4dm1n1str4t0r%&$2023#/*;!@.-&P,";
 	private static final Log log = LogFactory.getLog(GenerarEmailInformes.class);
 
 	public static void enviarCorreoContabilidad(Map<String, String> parametros) {
