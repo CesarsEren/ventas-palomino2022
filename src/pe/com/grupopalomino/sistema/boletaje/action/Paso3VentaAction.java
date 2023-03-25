@@ -18,6 +18,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.opensymphony.xwork2.ActionSupport;
 import pe.com.grupopalomino.sistema.boletaje.bean.B_Correlativos;
+import pe.com.grupopalomino.sistema.boletaje.bean.B_PrecioProgramacion;
 import pe.com.grupopalomino.sistema.boletaje.bean.B_ProgramacionSalidaBean;
 import pe.com.grupopalomino.sistema.boletaje.bean.B_VentaBean;
 import pe.com.grupopalomino.sistema.boletaje.bean.ListaPreVenta;
@@ -32,6 +33,8 @@ import pe.com.grupopalomino.sistema.boletaje.formviews.VentaPaso1Form;
 import pe.com.grupopalomino.sistema.boletaje.formviews.VentaPaso2Form;
 import pe.com.grupopalomino.sistema.boletaje.formviews.VentaPaso3Form;
 import pe.com.grupopalomino.sistema.boletaje.formviews.VentaPaso4Form;
+import pe.com.grupopalomino.sistema.boletaje.service.B_PrecioProgramacionService;
+import pe.com.grupopalomino.sistema.boletaje.service.B_PrecioProgramacionServiceI;
 //import pe.com.grupopalomino.sistema.boletaje.service.ClientesRutaPrecioService;
 //import pe.com.grupopalomino.sistema.boletaje.service.ClientesRutaPrecioServiceI;
 import pe.com.grupopalomino.sistema.boletaje.service.CorrelativoServiceI;
@@ -168,7 +171,7 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 		mensajeServer.add("Cupon no Existe");
 		return SUCCESS;
 	}
-	
+
 	@Action(value = "aplicarcupon", results = { @Result(name = SUCCESS, type = "json") })
 	public String AplicarCupon() {
 		listaPasajeros = obtieneBoletosSesion();
@@ -194,7 +197,7 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 
 	@SuppressWarnings("unchecked")
 	public String actualizarprecio() {
-		//System.out.println(Cuponbean.getDescuento());
+		// System.out.println(Cuponbean.getDescuento());
 		// session.put("listaPasajeros", listaPasajeros);
 
 		String mensajeAplicarCupon = "";
@@ -208,10 +211,9 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 				total += preventa.getPrecioAct();
 				Precioboleto = preventa.getPrecioAct() * (1 - Cuponbean.getDescuento());
 				totalcupon += Math.round(Precioboleto);
-				
-				
+
 				operacion = serviceventa.SQL_UpdatePrecioXCupon("" + preventa.getNro(), "" + preventa.getSalida(),
-						Math.round(Precioboleto),Cuponbean.getDetalle());
+						Math.round(Precioboleto), Cuponbean.getDetalle());
 				if (operacion == -1) {
 					mensajeAplicarCupon = "Ocurrio un Problema al aplicar el cupon el pasajero.)";
 					return mensajeAplicarCupon;
@@ -262,8 +264,11 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 	@SuppressWarnings("unchecked")
 	@Action(value = "agregarpasajero", results = { @Result(name = SUCCESS, type = "json") })
 	public String agregarPasajero() {
+		
+		List<B_PrecioProgramacion> lsprecioprogramacionIDA = (List<B_PrecioProgramacion>) session.get("lsprecioprogramacionIDA");
+		
 		// System.out.println("Ingresado ");
-		try { 
+		try {
 			int minValorIda = (int) session.get("minValorIda");
 			double PrecioActual = 0.0;
 			VentaPaso2Form paso2FormIda = (VentaPaso2Form) session.get("paso2FormIDA");
@@ -352,11 +357,41 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 				}
 				PrecioActual = ventadatos.VerificaPrecioActual(listaCroquisBusIda, paso2FormIda, paso3Form, minValorIda,
 						usuario);
-				if (PrecioActual > 0) {
 
-					errorserver = true;
-					mensajeServer.add("El Precio Ingresado No debe ser menor al Precio Actual :" + PrecioActual);
-					return SUCCESS;
+				if (PrecioActual > 0) {
+					boolean flag = true;
+
+					
+
+					//log.info("lsprecioprogramacionIDA : "+lsprecioprogramacionIDA.toString());
+
+					if (lsprecioprogramacionIDA != null) {
+						if (!lsprecioprogramacionIDA.isEmpty()) {
+							for (B_PrecioProgramacion b_precioproomocional : lsprecioprogramacionIDA)
+								if (paso3Form.getNumeroAsiento().trim()
+										.equals(b_precioproomocional.getAsiento().toString().trim())) {
+									if (Double.parseDouble(paso3Form.getPrecio()) >= b_precioproomocional.getPrecio()) {
+										log.info("Asiento con precio promoción vendido asiento:"
+												+ b_precioproomocional.getAsiento() + " Nro programacion :"
+												+ paso2FormIda.getNroProgramacion());
+										paso3Form.setPrecio(b_precioproomocional.getPrecio().toString());
+										flag = false;
+									} else {
+										errorserver = true;
+										mensajeServer.add("El Precio Ingresado No debe ser menor al Precio Actual :"
+												+ PrecioActual);
+										return SUCCESS;
+									}
+								}
+						}
+
+					}
+					if (flag) {
+
+						errorserver = true;
+						mensajeServer.add("El Precio Ingresado No debe ser menor al Precio Actual :" + PrecioActual);
+						return SUCCESS;
+					}
 				}
 
 				SpringSecurityUser ventausuario = serviceusuario.limiteCreditoUsuario(usuario.getUsername());
@@ -393,8 +428,7 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 					/*
 					 * if((ventausuario.getMontoVentaActual() +
 					 * Double.parseDouble(paso3Form.getPrecio())) >
-					 * ventausuario.getLimiteCredito()){ errorserver = true;
-					 * mensajeServer.add(
+					 * ventausuario.getLimiteCredito()){ errorserver = true; mensajeServer.add(
 					 * "Usted No puede realizar la venta por exceder su Limite de Crédito, por favor Consulte con nuestras Agencias."
 					 * ); return SUCCESS; }
 					 */
@@ -409,7 +443,7 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 			session.put("listaPasajeros", listaPasajeros);
 
 			// SE REALIZA LA PREVENTA
-			mensajeTransaccion = GeneraPreVenta(boleto);
+			mensajeTransaccion = GeneraPreVenta(boleto, lsprecioprogramacionIDA);
 			if (!(mensajeTransaccion.trim().equals(""))) {
 				errorserver = true;
 				mensajeServer.add(mensajeTransaccion);
@@ -424,8 +458,8 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 	}
 
 	@SuppressWarnings("unchecked")
-	public String GeneraPreVenta(VentaPaso3Form paso3Form) {
-
+	public String GeneraPreVenta(VentaPaso3Form paso3Form, List<B_PrecioProgramacion> b_PrecioProgramacions) {
+		//log.info("b_PrecioProgramacions : "+b_PrecioProgramacions.toString());
 		String mensajeResultado = "";
 		boolean resultado = true;
 		try {
@@ -484,7 +518,7 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 							Preventa = ventadatos.DatosEstaticosVenta(Preventa, paso3Form, usuario);
 
 							Preventa = ventadatos.DatosDinamicosVenta(Preventa, correlativo, FechaEmision, paso2FormIda,
-									paso3Form, listaCroquisBusIda, minValorIda, usuario);
+									paso3Form, listaCroquisBusIda, minValorIda, usuario, b_PrecioProgramacions);
 
 							// VALIDANDO EL PRECIO INGRESADO DESDE LA INTERFAZ
 							// DEL USUSARIO (VALIDO SOLO PARA LAS AGENCIAS)
@@ -496,9 +530,10 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 
 								Preventa.setPrecioAct(Double.parseDouble(paso3Form.getPrecio()));
 								Preventa.setPrecio(Double.parseDouble(paso3Form.getPrecio()));
-								
 
 							}
+							System.out.println("preventa: " + Preventa.toString());
+							System.out.println("preventa: " + paso3Form.toString());
 							operacion = serviceventa.insertVenta(Preventa);
 
 							if (operacion != -1) {
@@ -516,12 +551,9 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 								ListaPreventaIda.add(preventa);
 
 								/*
-								 * if(usuario !=null){ //ACTUALIZANDO EL MONTO
-								 * ACTUAL DE LAS VENTAS DEL USUARIO operacion =
-								 * serviceusuario.updateMontoVentaActual(usuario
-								 * .getUsername(),
-								 * paso3Form.getMontoVentaActual()+Preventa.
-								 * getPrecioAct());
+								 * if(usuario !=null){ //ACTUALIZANDO EL MONTO ACTUAL DE LAS VENTAS DEL USUARIO
+								 * operacion = serviceusuario.updateMontoVentaActual(usuario .getUsername(),
+								 * paso3Form.getMontoVentaActual()+Preventa. getPrecioAct());
 								 * 
 								 * }
 								 */
@@ -664,14 +696,12 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 		// SpringSecurityUser usuario = null;
 
 		/*
-		 * if(SecurityContextHolder.getContext().getAuthentication().getName()!=
-		 * null){ if(!(SecurityContextHolder.getContext().getAuthentication().
-		 * getPrincipal() instanceof String)){
-		 * if(SecurityContextHolder.getContext().getAuthentication().
-		 * getPrincipal() instanceof SpringSecurityUser){ usuario=
-		 * (SpringSecurityUser)
-		 * SecurityContextHolder.getContext().getAuthentication().getPrincipal()
-		 * ; } } }
+		 * if(SecurityContextHolder.getContext().getAuthentication().getName()!= null){
+		 * if(!(SecurityContextHolder.getContext().getAuthentication(). getPrincipal()
+		 * instanceof String)){
+		 * if(SecurityContextHolder.getContext().getAuthentication(). getPrincipal()
+		 * instanceof SpringSecurityUser){ usuario= (SpringSecurityUser)
+		 * SecurityContextHolder.getContext().getAuthentication().getPrincipal() ; } } }
 		 */
 
 		try {
@@ -689,8 +719,7 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 
 						/*
 						 * if(usuario!= null){ SpringSecurityUser ventausuario =
-						 * serviceusuario.limiteCreditoUsuario(usuario.
-						 * getUsername()); operacion =
+						 * serviceusuario.limiteCreditoUsuario(usuario. getUsername()); operacion =
 						 * serviceusuario.updateMontoVentaActual(usuario.
 						 * getUsername(),(ventausuario.getMontoVentaActual()) -
 						 * (preventa.getPrecioAct()));
@@ -740,17 +769,15 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 					paso1Form.getOrigenIda().substring(0, 3)));
 
 			/*
-			 * listaComboDestinoBajada =
-			 * (session.get("listaComboDestinoBajada")== null)? new
-			 * ArrayList<V_RutasBean>() :
+			 * listaComboDestinoBajada = (session.get("listaComboDestinoBajada")== null)?
+			 * new ArrayList<V_RutasBean>() :
 			 * (List<V_RutasBean>)session.get("listaComboDestinoBajada");
-			 * listaComboIdentidad = (session.get("listaComboIdentidad")==null)?
-			 * new ArrayList<ComboIdentidad>():
-			 * (List<ComboIdentidad>)session.get("listaComboIdentidad");
-			 * listaComoEmbarque = (session.get("listaComoEmbarque")==null)? new
+			 * listaComboIdentidad = (session.get("listaComboIdentidad")==null)? new
+			 * ArrayList<ComboIdentidad>():
+			 * (List<ComboIdentidad>)session.get("listaComboIdentidad"); listaComoEmbarque =
+			 * (session.get("listaComoEmbarque")==null)? new
 			 * ArrayList<B_ProgramacionSalidaBean>():
-			 * (List<B_ProgramacionSalidaBean>)session.get("listaComoEmbarque")
-			 * ;
+			 * (List<B_ProgramacionSalidaBean>)session.get("listaComoEmbarque") ;
 			 */
 			listaCroquisBusIda = (session.get("listaCroquisBusIda") == null) ? new ArrayList<V_CroquisBusBean>()
 					: (List<V_CroquisBusBean>) session.get("listaCroquisBusIda");
@@ -761,6 +788,9 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 
 		return SUCCESS;
 	}
+	
+	private List<B_PrecioProgramacion> lsprecioprogramacionVUELTA = new ArrayList<>();
+	private B_PrecioProgramacionService b_PrecioProgramacionService = new B_PrecioProgramacionServiceI();
 
 	private void getDetalleBusVuelta(VentaPaso1Form paso1Form) {
 
@@ -792,6 +822,9 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 
 					listaCroquisBusVuelta = serviceCroquis.obtieneCroquisPorNumeroBus(servicioBean.getBusPlantilla());
 				}
+			}
+			if (paso1Form.isIdaVuelta()) {
+				lsprecioprogramacionVUELTA = b_PrecioProgramacionService.SQL_ObtenerAsientosPrecioPromocionConNroProgramacion(paso2FormVUELTA.getNroProgramacion());
 			}
 
 			if (listaCroquisBusVuelta.size() > 0) {
@@ -847,6 +880,30 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 							}
 						}
 					}
+					  
+					if (paso1Form.isIdaVuelta()) {
+						if (lsprecioprogramacionVUELTA != null) {
+							if (!lsprecioprogramacionVUELTA.isEmpty()) {
+								
+								
+								for (V_CroquisBusBean v_croquisbean : listaCroquisBusVuelta) {
+
+									for (B_PrecioProgramacion b_PrecioProgramacion : lsprecioprogramacionVUELTA) {
+
+										if (b_PrecioProgramacion.getAsiento().toString()
+												.equals(v_croquisbean.getAsiento().trim())) {
+
+											log.info("Precio Programación :" + b_PrecioProgramacion.getPrecio() + " "
+													+ b_PrecioProgramacion.getAsiento());
+											v_croquisbean.setPrecio(b_PrecioProgramacion.getPrecio());
+											v_croquisbean.setPromocion(true);
+										}
+									}
+								}
+								session.put("lsprecioprogramacionVUELTA", lsprecioprogramacionVUELTA);
+							}
+						}
+					}
 				}
 			}
 
@@ -855,10 +912,10 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 
 			for (V_CroquisBusBean cbb : listaCroquisBusVuelta) {
 				if (cbb.getAsiento().trim().equals("T1") || cbb.getAsiento().trim().equals("T2")
-						|| cbb.getAsiento().trim().equals("T3") || cbb.getAsiento().trim().equals("T4") 
+						|| cbb.getAsiento().trim().equals("T3") || cbb.getAsiento().trim().equals("T4")
 						|| cbb.getAsiento().trim().equals("T5") || cbb.getAsiento().trim().equals("T6")
-						|| cbb.getAsiento().trim().equals("T7")
-						|| cbb.getAsiento().trim().equals("E") || cbb.getAsiento().trim().equals("B")) {
+						|| cbb.getAsiento().trim().equals("T7") || cbb.getAsiento().trim().equals("E")
+						|| cbb.getAsiento().trim().equals("B")) {
 					cbb.setVisible("false");
 				}
 			}
@@ -909,7 +966,7 @@ public class Paso3VentaAction extends ActionSupport implements SessionAware {
 				newpasajero.setComboIdentidad(pasajero.getComboIdentidad());
 				newpasajero.setAsientoasignado(pasajero.isAsientoasignado());
 				ListaAuxiliarPasajeros.add(newpasajero);
-				
+
 			}
 
 			session.put("ListaAuxiliar", ListaAuxiliarPasajeros);

@@ -19,6 +19,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.rpc.ServiceException;
+import javax.xml.soap.SOAPException;
 import javax.xml.ws.soap.SOAPFaultException;
 
 import org.apache.axis.utils.ByteArrayOutputStream;
@@ -42,6 +43,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.ResolverUtil.IsA;
 import com.opensymphony.xwork2.util.ValueStack;
+import com.sun.media.jfxmedia.logging.Logger;
 import com.sun.xml.internal.ws.fault.ServerSOAPFaultException;
 import pe.com.grupopalomino.sistema.boletaje.bean.B_FacturacionBean;
 import pe.com.grupopalomino.sistema.boletaje.bean.V_Varios_FacturacionBean;
@@ -250,6 +252,8 @@ public class FacturacionElectronicaAction extends ActionSupport {
 			todos = Boolean.parseBoolean(lstData.get(0).get("todos").toString());
 
 			facturacion = variosservice.SQL_SELECT_LISTA_PARAMETROS_FACTURADOR(lstData.get(0).get("empresa").toString());
+			log.info("facturacion " + facturacion.toString());
+			log.info("lstResultado " + lstResultado.toString());
 			if (todos) {
 				List<Map<String, Object>> ventas = facturacionservice.SQL_SELECT_VENTA_ENVIO_FACTURADOR(facturacion.getEmpresa(), Utils.FormatoFecha(lstData.get(0).get("fechaEmision").toString()),
 						Integer.parseInt(lstData.get(0).get("documentos").toString()), 0, 0);
@@ -292,9 +296,17 @@ public class FacturacionElectronicaAction extends ActionSupport {
 					}
 				}
 			}
-		 
+			log.info("lstData " + lstData.toString());
 			EnviarSunatUOse(listaEnviar, mapaFacturacion, facturacion, mapaEnvio, lstResultado);
 
+		} catch (NullPointerException exception) {
+
+			for (StackTraceElement element : exception.getStackTrace()) {
+				log.error("ERR" + element.toString());
+			}
+
+			log.error("NULL3 " + exception.getLocalizedMessage());
+			log.error("NULL3 " + exception.getCause());
 		} catch (Exception ex) {
 			System.out.println("PADRE DE LA EXCEPTION ERROR " + mapaFacturacion.get("DocumentoElectronico").toString() + " Servicio : " + mapaFacturacion.get("ServicioD").toString() + " "
 					+ ex.getMessage().substring(0, ex.getMessage().length()));
@@ -307,6 +319,7 @@ public class FacturacionElectronicaAction extends ActionSupport {
 			facturacionservice.SQL_UPDATE_VENTA_FACTURADOR(Integer.parseInt(mapaFacturacion.get("Nro").toString()), mapaFacturacion.get("Servicio").toString(), 2, "Error 5");
 			mapaJSONResultado.put("rows", lstResultado);
 		}
+
 		return SUCCESS;
 	}
 
@@ -342,36 +355,55 @@ public class FacturacionElectronicaAction extends ActionSupport {
 	}
 
 	public byte[] SendBillBZLinks(String fileName, DataHandler dataHandler, V_Varios_FacturacionBean facturacion) throws RemoteException, IOException, ServiceException {
-
-		Utils.USERNAME = facturacion.getUsernameSunat();
-		Utils.PASSWORD = facturacion.getPasswordSunat();
-
-		pe.gob.sunat.service.bzlinks.util.HeaderHandlerResolver HeadersSecurity = new pe.gob.sunat.service.bzlinks.util.HeaderHandlerResolver();
-		HeadersSecurity.setVruc(facturacion.getRuc());
 		byte[] rpta = null;
-		if (Utils.isProduccion()) {
-			log.info("==== ENVIANDO XML A PRODUCCIÓN BZLINKS ==== ");
-			pe.gob.sunat.service.bzlinks.produccion.BizlinksOSE_Service service = new pe.gob.sunat.service.bzlinks.produccion.BizlinksOSE_Service();
-			service.setHandlerResolver(HeadersSecurity);
-			pe.gob.sunat.service.bzlinks.produccion.BizlinksOSE port = service.getBizlinksOSEPort();
-			try {
-				rpta = port.sendBill(fileName, dataHandler);
-			} catch (SOAPException_Exception e) {
-				// TODO Auto-generated catch block
-				log.error(e);
-				e.printStackTrace();
+		try {
+			Utils.USERNAME = facturacion.getUsernameSunat();
+			Utils.PASSWORD = facturacion.getPasswordSunat();
+
+			pe.gob.sunat.service.bzlinks.util.HeaderHandlerResolver HeadersSecurity = new pe.gob.sunat.service.bzlinks.util.HeaderHandlerResolver();
+			HeadersSecurity.setVruc(facturacion.getRuc());
+
+			if (Utils.isProduccion()) {
+				log.info("==== ENVIANDO XML A PRODUCCIÓN BZLINKS ==== ");
+				pe.gob.sunat.service.bzlinks.produccion.BizlinksOSE_Service service = new pe.gob.sunat.service.bzlinks.produccion.BizlinksOSE_Service();
+				service.setHandlerResolver(HeadersSecurity);
+				pe.gob.sunat.service.bzlinks.produccion.BizlinksOSE port = service.getBizlinksOSEPort();
+				try {
+					rpta = port.sendBill(fileName, dataHandler);
+				} catch (SOAPException_Exception e) {
+					// TODO Auto-generated catch block
+					log.error(e.getStackTrace());
+				}
+			} else {
+
+				log.info("==== ENVIANDO XML A CALIDAD BZLINKS==== ");
+				log.info("==== ENVIANDO XML A CALIDAD BZLINKS==== ");
+				pe.gob.sunat.service.bzlinks.beta.BizlinksOSE service1 = new pe.gob.sunat.service.bzlinks.beta.BizlinksOSE();
+				log.info("==== ENVIANDO XML A CALIDAD BZLINKS==== ");
+				service1.setHandlerResolver(HeadersSecurity);
+				log.info("==== ENVIANDO XML A CALIDAD BZLINKS==== ");
+				pe.gob.sunat.service.bzlinks.beta.BillServicePort port = service1.getBillServicePortSoap11();
+				log.info("==== ENVIANDO XML A CALIDAD BZLINKS==== ");				 
+				rpta = port.sendBill(fileName, dataHandler, "");
+				log.info("==== ENVIANDO XML A CALIDAD BZLINKS==== ");
+				
+				if(rpta == null) {
+					log.info("RESPUESTA NULL");
+				}else {
+					log.info("rpta:  "+rpta.toString());	
+				}				
+
 			}
-		} else {
-			log.info("==== ENVIANDO XML A CALIDAD BZLINKS==== ");
-			pe.gob.sunat.service.bzlinks.beta.BizlinksOSE service = new pe.gob.sunat.service.bzlinks.beta.BizlinksOSE();
-			service.setHandlerResolver(HeadersSecurity);
-			pe.gob.sunat.service.bzlinks.beta.BillServicePort port = service.getBillServicePortSoap11();
-			rpta = port.sendBill(fileName, dataHandler, "");
+		} catch (NullPointerException exception) {
+			for (StackTraceElement element : exception.getStackTrace()) {
+				log.error("ERR2  " + element.toString());
+			}
+			log.error("NULL " + exception.getStackTrace());
+			log.error("NULL2 " + exception);
 		}
 		return rpta;
 	}
- 
-	
+
 	public byte[] SendBillEscon(String fileName, DataHandler dataHandler, V_Varios_FacturacionBean facturacion) throws RemoteException, IOException, ServiceException {
 
 		Utils.USERNAME = facturacion.getUsernameSunat();
@@ -441,16 +473,38 @@ public class FacturacionElectronicaAction extends ActionSupport {
 	public void EnviarSunatUOse(List<B_FacturacionBean> listaEnviar, Map<String, Object> mapaFacturacion, V_Varios_FacturacionBean facturacion, Map<String, Object> mapaEnvio, List<Map<String, Object>> lstResultado)
 			throws ServiceException {
 		byte[] respuestaSunat = null;
+		log.info("==== LLEGÓ AH respuestaSunat");
+		log.info("listaEnviar" + listaEnviar.toString());
 
+		log.info("Test:  " + (listaEnviar == null) + "   " + (mapaFacturacion == null) + "   " + (facturacion == null) + "   " + (mapaEnvio == null) + "   " + (lstResultado == null));
+		log.info("mapaFacturacion" + mapaFacturacion.toString());
 		for (B_FacturacionBean data : listaEnviar) {
-
-			mapaFacturacion = facturacionservice.SQL_SELECT_VENTA_FACTURADOR(data.getId(), data.getServicio());
-			log.info("==== GENERANDO XML DEL DOCUMENTO ==== " + mapaFacturacion.get("DocumentoZip").toString());
-			log.info("==== GENERANDO XML DEL DOCUMENTO ==== OSE :" + facturacion.getOSE());
-			
-			GenerarXMLPorTipoServicio(mapaFacturacion, facturacion);
-
 			try {
+
+				log.info("==== data ==== " + data.toString());
+
+				mapaFacturacion = facturacionservice.SQL_SELECT_VENTA_FACTURADOR(data.getId(), data.getServicio());
+				// log.info("==== GENERANDO XML DEL DOCUMENTO ==== " +
+				// mapaFacturacion.get("DocumentoZip").toString());
+				// log.info("==== GENERANDO XML DEL DOCUMENTO ==== OSE :" +
+				// facturacion.getOSE());
+
+				GenerarXMLPorTipoServicio(mapaFacturacion, facturacion);
+
+			} catch (NullPointerException exception) {
+
+				for (StackTraceElement element : exception.getStackTrace()) {
+					log.error("GenerarXMLPorTipoServicio" + element.toString());
+				}
+
+				log.error("GenerarXMLPorTipoServicio  " + exception.getStackTrace().toString());
+				log.error("GenerarXMLPorTipoServicio  " + exception);
+			}
+			try {
+
+				log.info("is null" + (facturacion == null) + "  " + (mapaFacturacion == null));
+				log.info("mapaFacturacion: " + mapaFacturacion.toString());
+				log.info("is null" + (facturacion.getRutaEnvioSunat()) + "  " + (mapaFacturacion.get("DocumentoZip").toString()));
 
 				FileDataSource dataSource = new FileDataSource(facturacion.getRutaEnvioSunat() + mapaFacturacion.get("DocumentoZip").toString());
 				DataHandler dataHandler = new DataHandler(dataSource);
@@ -460,6 +514,7 @@ public class FacturacionElectronicaAction extends ActionSupport {
 					respuestaSunat = SendBillEscon(mapaFacturacion.get("DocumentoZip").toString(), dataHandler, facturacion);
 					break;
 				case "BZLINKS":
+					respuestaSunat = SendBillBZLinks(mapaFacturacion.get("DocumentoZip").toString(), dataHandler, facturacion);
 					break;
 				default:
 					log.info("NO TENEMOS INTEGRACIÓN CON ESA OSE , SOLO TENEMOS LA OPCIÓN DE ESCON Y BZLINKS");
@@ -549,6 +604,12 @@ public class FacturacionElectronicaAction extends ActionSupport {
 
 				facturacionservice.SQL_UPDATE_VENTA_FACTURADOR(Integer.parseInt(mapaFacturacion.get("Nro").toString()), mapaFacturacion.get("Servicio").toString(), 2, "Error 4");
 				mapaJSONResultado.put("rows", lstResultado);
+			} catch (NullPointerException exception) {
+				for (StackTraceElement element : exception.getStackTrace()) {
+					log.error("ERR2  " + element.toString());
+				}
+				log.error("NULL " + exception.getStackTrace());
+				log.error("NULL2 " + exception);
 			}
 		}
 	}
@@ -561,7 +622,7 @@ public class FacturacionElectronicaAction extends ActionSupport {
 
 	// Documentos Wari Cargo Canjes
 
-	public static void main(String[] args) throws IOException, ServiceException {
+	public static void main3(String[] args) throws IOException, ServiceException {
 		FacturacionService facturacionservice = new FacturacionServiceI();
 		Map<String, Object> mapaFacturacion = new HashMap<>();
 		Varios_FacturacionService variosservice = new Varios_FacturacionServiceI();

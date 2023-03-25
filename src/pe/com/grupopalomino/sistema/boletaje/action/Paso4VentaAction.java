@@ -13,7 +13,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.opensymphony.xwork2.ActionSupport;
 import pe.com.grupopalomino.sistema.boletaje.bean.B_Correlativos;
-
+import pe.com.grupopalomino.sistema.boletaje.bean.B_PrecioProgramacion;
 import pe.com.grupopalomino.sistema.boletaje.bean.B_VentaBean;
 import pe.com.grupopalomino.sistema.boletaje.bean.Cupon;
 import pe.com.grupopalomino.sistema.boletaje.bean.ListaPreVenta;
@@ -149,6 +149,9 @@ public class Paso4VentaAction extends ActionSupport implements SessionAware {
 	@SuppressWarnings("unchecked")
 	@Action(value = "/asientopasajero", results = { @Result(name = SUCCESS, type = "json") })
 	public String AgregarPasajeroAsiento() {
+		
+		List<B_PrecioProgramacion> lsprecioprogramacionVUELTA= (List<B_PrecioProgramacion>) session.get("lsprecioprogramacionVUELTA");
+		
 
 		String mensajeTransaccion = "";
 
@@ -224,9 +227,34 @@ public class Paso4VentaAction extends ActionSupport implements SessionAware {
 				PrecioActual = ventadatos.VerificaPrecioActualVuelta(listaCroquisBusVuelta, paso2FormVUELTA, paso4Form,
 						minValorVuelta, usuario);
 				if (PrecioActual > 0) {
+					/*
 					errorserver = true;
 					mensajeServer = "El Precio Ingresado No debe ser menor al Precio Actual :" + PrecioActual;
-					return SUCCESS;
+					return SUCCESS;*/
+					
+					boolean flag = false;
+					if (lsprecioprogramacionVUELTA != null) {
+						if (!lsprecioprogramacionVUELTA.isEmpty()) {
+							for (B_PrecioProgramacion b_precioproomocional : lsprecioprogramacionVUELTA)
+								if (paso4Form.getNumeroAsiento().trim().equals(b_precioproomocional.getAsiento().toString().trim())) {
+									if (Double.parseDouble(paso4Form.getPrecio()) >= b_precioproomocional.getPrecio()) {
+										 paso4Form.setPrecio(b_precioproomocional.getPrecio().toString());
+										flag = false;
+									} else {
+										errorserver = true;
+										mensajeServer = "El Precio Ingresado No debe ser menor al Precio Actual :" + PrecioActual;
+										return SUCCESS;
+									}
+								}
+						}
+
+					}
+					if (flag) {
+						
+						errorserver = true;
+						mensajeServer = "El Precio Ingresado No debe ser menor al Precio Actual :" + PrecioActual;
+						return SUCCESS;
+					}
 				}
 
 				// VALIDAMOS EL SI LA VENA A REALIZAR SUPERA EL LIMITE DE
@@ -297,7 +325,7 @@ public class Paso4VentaAction extends ActionSupport implements SessionAware {
 							session.put("listaPasajerosTabla", listaPasajerosTabla);
 						}
 					}
-					mensajeTransaccion = GeneraPreventaVuelta(pasajero);
+					mensajeTransaccion = GeneraPreventaVuelta(pasajero,lsprecioprogramacionVUELTA);
 					if (!(mensajeTransaccion.trim().equals(""))) {
 
 						errorserver = true;
@@ -316,7 +344,7 @@ public class Paso4VentaAction extends ActionSupport implements SessionAware {
 	}
 
 	@SuppressWarnings({ "unchecked" })
-	public String GeneraPreventaVuelta(VentaPaso4Form paso4Form) {
+	public String GeneraPreventaVuelta(VentaPaso4Form paso4Form,List<B_PrecioProgramacion> lsprecioprogramacionVUELTA) {
 
 		String mensajeResultado = "";
 		boolean resultado = true;
@@ -376,7 +404,7 @@ public class Paso4VentaAction extends ActionSupport implements SessionAware {
 					if (correlativo != null) {
 
 						ventaVuelta = ventadatos.DatosDinamicosVentaVuelta(ventaVuelta, correlativo, FechaEmision,
-								paso2FormVUELTA, paso4Form, listaCroquisBusVuelta, minValorVuelta, usuario);
+								paso2FormVUELTA, paso4Form, listaCroquisBusVuelta, minValorVuelta, usuario,lsprecioprogramacionVUELTA);
 
 						// VALIDANDO EL PRECIO INGRESADO DESDE LA INTERFAZ DEL
 						// USUSARIO (VALIDO SOLO PARA LAS AGENCIAS)
@@ -389,6 +417,8 @@ public class Paso4VentaAction extends ActionSupport implements SessionAware {
 							ventaVuelta.setPrecio(Double.parseDouble(paso4Form.getPrecio()));
 						}
 
+						System.out.println("ventaVuelta: " + ventaVuelta.toString());
+						System.out.println("ventaVuelta: " + paso4Form.toString());
 						operacion = serviceventa.insertVenta(ventaVuelta);
 
 						if (operacion != -1) {

@@ -2708,6 +2708,7 @@ public class GeneraDocumentoFe {
 
 	public static void GeneraDocumentoFacturaXMLPruebaUBL21(Map<String, Object> map, V_Varios_FacturacionBean empresa) {
 
+		log.info("LLEGÓ A GeneraDocumentoFacturaXMLPruebaUBL21");
 		// int accion =0;
 		switch (map.get("CodigoAfectacionIGV").toString()) {
 		case "10":
@@ -3121,7 +3122,6 @@ public class GeneraDocumentoFe {
 			} else if (map.get("CodigoTotalVenta").toString().equals("1001") && Float.parseFloat(map.get("Total").toString()) >= 400) {// Encomienda
 				isdetraccion = true;
 				log.info(" Is detraccion 3");
-
 			}
 
 			if (map.get("TipoDocumento").toString().equals("01") && isdetraccion) {
@@ -3504,6 +3504,46 @@ public class GeneraDocumentoFe {
 								DecimalFormat formato1 = new DecimalFormat("#.00");
 								String totaladetra = String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.10")));
 
+								log.info(totaladetra);
+
+								Element cacPaymentAmountDet = doc.createElement("cbc:Amount");
+								cacPaymentAmountDet.appendChild(doc.createTextNode(totaladetra));
+								cacPaymentTermsDetraccion.appendChild(cacPaymentAmountDet);
+
+								Attr attrPaymentAmountDet = doc.createAttribute("currencyID");
+								attrPaymentAmountDet.setValue(map.get("Moneda").toString());
+								cacPaymentAmountDet.setAttributeNode(attrPaymentAmountDet);
+							} else if (map.get("Bus_Carga").toString().equals("TD")  && Float.parseFloat(map.get("Total").toString()) >= 400) {
+								// Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
+
+								Element TermscbcID = doc.createElement("cbc:ID");
+								TermscbcID.appendChild(doc.createTextNode("Detraccion"));
+								cacPaymentTermsDetraccion.appendChild(TermscbcID);
+								
+								Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
+								//Element cacPaymentMeansID = doc.createElement("cbc:ID");
+
+								cacPaymentMeansID.appendChild(doc.createTextNode("027")); // 027 Encomiendas
+								cacPaymentTermsDetraccion.appendChild(cacPaymentMeansID);
+
+								Attr attrTaxAmountPayment = doc.createAttribute("schemeName");
+								attrTaxAmountPayment.setValue("SUNAT:Codigo de detraccion");
+								cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment);
+
+								Attr attrTaxAmountPayment1 = doc.createAttribute("schemeAgencyName");
+								attrTaxAmountPayment.setValue("PE:SUNAT");
+								cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment1);
+
+								Attr attrTaxAmountPayment2 = doc.createAttribute("schemeURI");
+								attrTaxAmountPayment.setValue("urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo54");
+								cacPaymentMeansID.setAttributeNode(attrTaxAmountPayment2);
+
+								Element cacPaymentPorcentaje = doc.createElement("cbc:PaymentPercent");
+								cacPaymentPorcentaje.appendChild(doc.createTextNode("4.00"));
+								cacPaymentTermsDetraccion.appendChild(cacPaymentPorcentaje);
+
+								DecimalFormat formato1 = new DecimalFormat("#.00");
+								String totaladetra = String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.04")));
 								log.info(totaladetra);
 
 								Element cacPaymentAmountDet = doc.createElement("cbc:Amount");
