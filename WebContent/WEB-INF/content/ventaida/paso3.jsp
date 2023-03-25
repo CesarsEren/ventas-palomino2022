@@ -245,7 +245,7 @@
 												</div>
 											</div>
 											<hr style="width: 100%" align="left">
-											<!-- OpenPay-->
+											<!-- OpenPay 
 											<div class="row">
 												<div class="col-lg-3 col-md-3 col-xs-12">
 													<input id="openpay" type="radio" name="medioPago" value="3" />
@@ -258,9 +258,8 @@
 													<b>openPay</b> <br> Paga con cualquier tarjeta de
 													crédito o débito<br>
 												</div>
-											</div>
-
-											<!--  Fin OpenPay -->
+											</div> 
+											Fin OpenPay -->
 										</div>
 									</div>
 								</div>
@@ -312,17 +311,33 @@
 									</div>
 								</s:if>
 								<s:else>
-									<div class="silla"
-										style="top: <s:property value="TTop/12"/>px; left: <s:property value="LLeft/15"/>px;">
-										<div class="silla-numero"
-											data-info="<s:property value="Asiento" />"
-											data-disponible="<s:property value="Visible" />"
-											data-precio="<s:property value="Precio" />">
-											<s:property value="Asiento" />
-											<input type="checkbox" name="asientoBus"
-												id="AS-<s:property value="Asiento" />">
+									<s:if test="#asiento.promocion==true">
+										<div class="silla parpadea"
+											style="top: <s:property value="TTop/12"/>px; left: <s:property value="LLeft/15"/>px;">
+											<div class="silla-numero"
+												data-info="<s:property value="Asiento" />"
+												data-disponible="<s:property value="Visible" />"
+												data-precio="<s:property value="Precio" />">
+												<s:property value="Asiento" />
+												<input type="checkbox" name="asientoBus"
+													id="AS-<s:property value="Asiento" />">
+											</div>
 										</div>
-									</div>
+									</s:if>
+									<s:else>
+										<div class="silla"
+											style="top: <s:property value="TTop/12"/>px; left: <s:property value="LLeft/15"/>px;">
+											<div class="silla-numero"
+												data-info="<s:property value="Asiento" />"
+												data-disponible="<s:property value="Visible" />"
+												data-precio="<s:property value="Precio" />">
+												<s:property value="Asiento" />
+												<input type="checkbox" name="asientoBus"
+													id="AS-<s:property value="Asiento" />">
+											</div>
+										</div>
+									</s:else>
+
 								</s:else>
 							</s:if>
 						</s:iterator>
@@ -347,17 +362,32 @@
 									style="top: <s:property value="TTop/12"/>px; left: <s:property value="LLeft/15"/>px;"></div>
 							</s:if>
 							<s:else>
-								<div class="silla"
-									style="top: <s:property value="TTop/12"/>px; left: <s:property value="LLeft/15"/>px;">
-									<div class="silla-numero"
-										data-info="<s:property value="Asiento" />"
-										data-disponible="<s:property value="Visible" />"
-										data-precio="<s:property value="Precio" />">
-										<s:property value="Asiento" />
-										<input type="checkbox" name="asientoBus"
-											id="AS-<s:property value="Asiento" />">
+								<s:if test="#asiento.promocion==true">
+									<div class="silla parpadea"
+										style="top: <s:property value="TTop/12"/>px; left: <s:property value="LLeft/15"/>px;">
+										<div class="silla-numero"
+											data-info="<s:property value="Asiento" />"
+											data-disponible="<s:property value="Visible" />"
+											data-precio="<s:property value="Precio" />">
+											<s:property value="Asiento" />
+											<input type="checkbox" name="asientoBus"
+												id="AS-<s:property value="Asiento" />">
+										</div>
 									</div>
-								</div>
+								</s:if>
+								<s:else>
+									<div class="silla "
+										style="top: <s:property value="TTop/12"/>px; left: <s:property value="LLeft/15"/>px;">
+										<div class="silla-numero"
+											data-info="<s:property value="Asiento" />"
+											data-disponible="<s:property value="Visible" />"
+											data-precio="<s:property value="Precio" />">
+											<s:property value="Asiento" />
+											<input type="checkbox" name="asientoBus"
+												id="AS-<s:property value="Asiento" />">
+										</div>
+									</div>
+								</s:else> 
 							</s:else>
 						</s:if>
 					</s:iterator>

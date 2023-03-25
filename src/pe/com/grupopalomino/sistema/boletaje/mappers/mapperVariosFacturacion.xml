@@ -8,10 +8,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="SQL_SELECT_LISTA_PARAMETROS_FACTURADOR" resultType="variosfacturacionBeanIbatis"
 		parameterType="map" statementType="CALLABLE">
-		<!--EXECUTE USP_SELECT_PARAMETROS_FACTURADOR_V_Varios_Facturacion_SQL
-		#{empresa}-->
-		 EXECUTE USP_SELECT_PARAMETROS_FACTURADOR_V_Varios_Facturacion1_SQL 
-			#{empresa} 
+	EXECUTE USP_SELECT_PARAMETROS_FACTURADOR_V_Varios_Facturacion_SQL
+		#{empresa}
+		 <!-- >EXECUTE USP_SELECT_PARAMETROS_FACTURADOR_V_Varios_Facturacion1_SQL 
+			#{empresa} -->
 	</select>
 
 	<select id="SQL_VARIOS_DESCARGA_FACTURACION_WEB" resultType="variosfacturacionBeanIbatis"

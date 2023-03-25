@@ -42,6 +42,8 @@
 			type="pe.com.grupopalomino.sistema.boletaje.bean.V_RutasBean" />
 		<typeAlias alias="variosBeanIbatis"
 			type="pe.com.grupopalomino.sistema.boletaje.bean.V_Varios" />
+		 <typeAlias alias="b_precioprogramacionBean"
+			type="pe.com.grupopalomino.sistema.boletaje.bean.B_PrecioProgramacion" />
 		<typeAlias alias="clienteRutasBeanIbatis"
 			type="pe.com.grupopalomino.sistema.boletaje.bean.V_Clientes_RutaPrecioBean" />
 		<typeAlias alias="usuarioshorariosBeanIbatis"
@@ -114,6 +116,8 @@
 
 	<!-- Registro de los mappers -->
 	<mappers>
+	<mapper
+			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperB_PrecioProgramacion.xml" />
 		<mapper
 			resource="pe/com/grupopalomino/sistema/boletaje/mappers/mapperLogin.xml" />
 		<mapper
