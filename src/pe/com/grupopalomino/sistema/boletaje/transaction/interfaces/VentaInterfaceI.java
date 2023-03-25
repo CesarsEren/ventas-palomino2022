@@ -3,6 +3,7 @@ package pe.com.grupopalomino.sistema.boletaje.transaction.interfaces;
 import java.util.List;
 import pe.com.grupopalomino.sistema.boletaje.bean.B_Correlativos;
 import pe.com.grupopalomino.sistema.boletaje.bean.B_CuentaCorrienteBean;
+import pe.com.grupopalomino.sistema.boletaje.bean.B_PrecioProgramacion;
 import pe.com.grupopalomino.sistema.boletaje.bean.B_ProgramacionSalidaBean;
 import pe.com.grupopalomino.sistema.boletaje.bean.B_VentaBean;
 import pe.com.grupopalomino.sistema.boletaje.bean.ListaPreVenta;
@@ -163,7 +164,7 @@ public class VentaInterfaceI implements VentaInterface{
 	
 	@Override
 	public B_VentaBean DatosDinamicosVenta(B_VentaBean venta, B_Correlativos correlativo, String FechaEmision,
-			VentaPaso2Form paso2Form,VentaPaso3Form paso3Form,List<V_CroquisBusBean> listaCroquisBus,int minValor,SpringSecurityUser usuario) throws Exception {
+			VentaPaso2Form paso2Form,VentaPaso3Form paso3Form,List<V_CroquisBusBean> listaCroquisBus,int minValor,SpringSecurityUser usuario, List<B_PrecioProgramacion> b_PrecioProgramacions) throws Exception {
 		
 		
 		V_DestinosBean destino = new V_DestinosBean();
@@ -252,6 +253,19 @@ public class VentaInterfaceI implements VentaInterface{
 					}
 				}
 			}
+			if(b_PrecioProgramacions != null) {
+				if(!b_PrecioProgramacions.isEmpty()) {
+					System.out.print("B_programacionPrecio vacío? "+b_PrecioProgramacions.isEmpty());
+					
+				for(B_PrecioProgramacion b_PrecioProgramacion: b_PrecioProgramacions)
+				{
+					if(paso3Form.getNumeroAsiento().trim().equals(b_PrecioProgramacion.getAsiento().toString().trim())) {
+						venta.setPrecioAct(b_PrecioProgramacion.getPrecio());
+					}
+				}
+				}
+			} 
+			
 		}
 		
 		
@@ -502,7 +516,8 @@ public class VentaInterfaceI implements VentaInterface{
 
 	@Override
 	public B_VentaBean DatosDinamicosVentaVuelta(B_VentaBean venta, B_Correlativos correlativo, String FechaEmision,
-			VentaPaso2Form paso2Form, VentaPaso4Form paso4Form, List<V_CroquisBusBean> listaCroquisBus, int minValor,SpringSecurityUser usuario)
+			VentaPaso2Form paso2Form, VentaPaso4Form paso4Form, List<V_CroquisBusBean> listaCroquisBus, int minValor,SpringSecurityUser usuario,
+			List<B_PrecioProgramacion> b_PrecioProgramacions)
 			throws Exception {
 		
 		
@@ -599,6 +614,20 @@ public class VentaInterfaceI implements VentaInterface{
 						}
 					}
 				}
+			
+			 
+			if(b_PrecioProgramacions != null) {
+				if(!b_PrecioProgramacions.isEmpty()) {
+					System.out.print("B_programacionPrecio vacío? "+b_PrecioProgramacions.isEmpty());
+					
+				for(B_PrecioProgramacion b_PrecioProgramacion: b_PrecioProgramacions)
+				{
+					if(paso4Form.getNumeroAsiento().trim().equals(b_PrecioProgramacion.getAsiento().toString().trim())) {
+						venta.setPrecioAct(b_PrecioProgramacion.getPrecio());
+					}
+				}
+				}
+			} 
 			}
 		
 		venta.setPrecio(venta.getPrecioAct());

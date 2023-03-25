@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="BoletajePalomino03">
+
+	<resultMap type="b_precioprogramacionBean" id="b_precioprogramacion">
+		<result property="Nro" column="Nro" />
+		<result property="Asiento" column="Asiento" />
+		<result property="Precio" column="Precio" />
+		<result property="B_Identity" column="B_Identity" />
+	</resultMap>
+
+	<select id="SQL_ObtenerAsientosPrecioPromocionConNroProgramacion" resultMap="b_precioprogramacion" parameterType="map"
+		statementType="CALLABLE">
+
+		USP_OBTENER_PRECIO_PROMOCIONAL_B_precioProgramacion #{Nro}
+
+	</select>
+ 
+
+</mapper>

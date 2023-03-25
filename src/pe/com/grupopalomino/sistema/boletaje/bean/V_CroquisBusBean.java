@@ -13,7 +13,16 @@ private String Visible;
 
 //SOLO PARA INFO DE LA VISTA
 private double precio;
+private boolean promocion;
 
+
+
+public boolean isPromocion() {
+	return promocion;
+}
+public void setPromocion(boolean promocion) {
+	this.promocion = promocion;
+}
 public String getBus() {
 	return Bus;
 }

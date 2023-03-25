@@ -120,8 +120,9 @@ public class VentaPaso3Form implements Serializable{
 	}
 	
 	public void setValuesFromView(VentaPaso3Form ventaPaso3Form){
+		System.out.println("Venta Paso 3 Form  "+ventaPaso3Form.toString());
 		this.setNumeroAsiento(ventaPaso3Form.getNumeroAsiento());
-		this.setPrecio(ventaPaso3Form.getPrecio()); 
+		this.setPrecio(ventaPaso3Form.getPrecio()); 		
 		this.setNumeroDocumentoIdentidad(ventaPaso3Form.getNumeroDocumentoIdentidad());
 		this.setNumeroDocumentoIdentidad(ventaPaso3Form.getNumeroDocumentoIdentidad());
 		this.setNombrePasajero(ventaPaso3Form.getNombrePasajero());

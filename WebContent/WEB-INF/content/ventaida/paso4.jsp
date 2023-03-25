@@ -256,7 +256,8 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 					style="text-align: left;">
 					<input id="rbTerminosVuelta" type="checkbox" value="false" /> <a
-						id="terminos" style="color: black;" href="#"> <u><b>Acepto Los Términos y condiciones</b></u>
+						id="terminos" style="color: black;" href="#"> <u><b>Acepto
+								Los Términos y condiciones</b></u>
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-3 col-xs-12">
@@ -287,17 +288,32 @@
 								style="top: <s:property value="TTop/12"/>px; left: <s:property value="LLeft/15"/>px;"></div>
 						</s:if>
 						<s:else>
-							<div class="silla"
-								style="top: <s:property value="TTop/12"/>px; left: <s:property value="LLeft/15"/>px;">
-								<div class="silla-numero"
-									data-info="<s:property value="Asiento" />"
-									data-disponible="<s:property value="Visible" />"
-									data-precio="<s:property value="Precio" />">
-									<s:property value="Asiento" />
-									<input type="checkbox" name="asientoBus"
-										id="AS-<s:property value="Asiento" />">
+							<s:if test="#asiento.promocion==true">
+								<div class="silla parpadea"
+									style="top: <s:property value="TTop/12"/>px; left: <s:property value="LLeft/15"/>px;">
+									<div class="silla-numero"
+										data-info="<s:property value="Asiento" />"
+										data-disponible="<s:property value="Visible" />"
+										data-precio="<s:property value="Precio" />">
+										<s:property value="Asiento" />
+										<input type="checkbox" name="asientoBus"
+											id="AS-<s:property value="Asiento" />">
+									</div>
 								</div>
-							</div>
+							</s:if>
+							<s:else>
+								<div class="silla"
+									style="top: <s:property value="TTop/12"/>px; left: <s:property value="LLeft/15"/>px;">
+									<div class="silla-numero"
+										data-info="<s:property value="Asiento" />"
+										data-disponible="<s:property value="Visible" />"
+										data-precio="<s:property value="Precio" />">
+										<s:property value="Asiento" />
+										<input type="checkbox" name="asientoBus"
+											id="AS-<s:property value="Asiento" />">
+									</div>
+								</div>
+							</s:else>
 						</s:else>
 					</s:if>
 				</s:iterator>
@@ -318,17 +334,32 @@
 								style="top: <s:property value="TTop/12"/>px; left: <s:property value="LLeft/15"/>px;"></div>
 						</s:if>
 						<s:else>
-							<div class="silla"
-								style="top: <s:property value="TTop/12"/>px; left: <s:property value="LLeft/15"/>px;">
-								<div class="silla-numero"
-									data-info="<s:property value="Asiento" />"
-									data-disponible="<s:property value="Visible" />"
-									data-precio="<s:property value="Precio" />">
-									<s:property value="Asiento" />
-									<input type="checkbox" name="asientoBus"
-										id="AS-<s:property value="Asiento" />">
+							<s:if test="#asiento.promocion==true">
+								<div class="silla parpadea"
+									style="top: <s:property value="TTop/12"/>px; left: <s:property value="LLeft/15"/>px;">
+									<div class="silla-numero"
+										data-info="<s:property value="Asiento" />"
+										data-disponible="<s:property value="Visible" />"
+										data-precio="<s:property value="Precio" />">
+										<s:property value="Asiento" />
+										<input type="checkbox" name="asientoBus"
+											id="AS-<s:property value="Asiento" />">
+									</div>
 								</div>
-							</div>
+							</s:if>
+							<s:else>
+								<div class="silla"
+									style="top: <s:property value="TTop/12"/>px; left: <s:property value="LLeft/15"/>px;">
+									<div class="silla-numero"
+										data-info="<s:property value="Asiento" />"
+										data-disponible="<s:property value="Visible" />"
+										data-precio="<s:property value="Precio" />">
+										<s:property value="Asiento" />
+										<input type="checkbox" name="asientoBus"
+											id="AS-<s:property value="Asiento" />">
+									</div>
+								</div>
+							</s:else>
 						</s:else>
 					</s:if>
 				</s:iterator>
