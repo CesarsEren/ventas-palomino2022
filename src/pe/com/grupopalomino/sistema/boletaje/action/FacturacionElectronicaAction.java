@@ -504,7 +504,7 @@ public class FacturacionElectronicaAction extends ActionSupport {
 
 				log.info("is null" + (facturacion == null) + "  " + (mapaFacturacion == null));
 				log.info("mapaFacturacion: " + mapaFacturacion.toString());
-				log.info("is null" + (facturacion.getRutaEnvioSunat()) + "  " + (mapaFacturacion.get("DocumentoZip").toString()));
+				log.info("is null" + (facturacion.getRutaEnvioSunat()) + " \\" + (mapaFacturacion.get("DocumentoZip").toString()));
 
 				FileDataSource dataSource = new FileDataSource(facturacion.getRutaEnvioSunat() + mapaFacturacion.get("DocumentoZip").toString());
 				DataHandler dataHandler = new DataHandler(dataSource);
