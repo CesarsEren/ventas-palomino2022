@@ -137,7 +137,7 @@ public class Utils {
 		return errors.toString();
 	} 
 	// PROD o DEV
-	public static String STATUS_SYSTEM = "PROD";
+	public static String STATUS_SYSTEM = "DEV";
 	public static boolean isProduccion()
 	{
 		return Utils.STATUS_SYSTEM.equals("PROD");

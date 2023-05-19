@@ -3591,7 +3591,7 @@ public class GeneraDocumentoFe {
 								cacPaymentTermsDetraccion.appendChild(cacPaymentAmountDet);
 
 								Attr attrPaymentAmountDet = doc.createAttribute("currencyID");
-								attrPaymentAmountDet.setValue(map.get("Moneda").toString());
+								attrPaymentAmountDet.setValue("PEN");//map.get("Moneda").toString());
 								cacPaymentAmountDet.setAttributeNode(attrPaymentAmountDet);
 							} else if (map.get("Bus_Carga").toString().equals("TD")
 									&& Float.parseFloat(map.get("Total").toString()) >= 400) {
