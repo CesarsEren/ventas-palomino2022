@@ -3155,18 +3155,29 @@ public class GeneraDocumentoFe {
 			// rootElementInvoice.appendChild(cbcProfileID);
 
 			boolean isdetraccion = false;
+			
+			Double totalSinFormato = Double.parseDouble(map.get("Total").toString());
+			Double precioDolar_Calc = Double.parseDouble(map.get("Tc").toString());
+			
+			Double total = map.get("Moneda")=="PEN"? totalSinFormato : totalSinFormato*precioDolar_Calc;
+			//DecimalFormat formato1 = new DecimalFormat("#.00");
+			
+			//total = formato1.format(total);
+			
+			//Double.parseDouble(map.get("Total").toString();
+			
 			if (map.get("CodigoTotalVenta").toString().equals("1003")
-					&& Float.parseFloat(map.get("Total").toString()) >= 700) {// 1003 = pasajes y mayor igual a 700
+					&& total >= 700) {// 1003 = pasajes y mayor igual a 700
 				isdetraccion = true;
 
 				log.info(" Is detraccion 1");
 			} else if (map.get("CodigoTotalVenta").toString().equals("1001")
 					&& !map.get("Bus_Carga").toString().equals("VA") && map.get("Serie").toString().equals("390")
-					&& Float.parseFloat(map.get("Total").toString()) >= 700) {
+					&& total >= 700) {
 				isdetraccion = true;
 				log.info(" Is detraccion 2");
 			} else if (map.get("CodigoTotalVenta").toString().equals("1001")
-					&& Float.parseFloat(map.get("Total").toString()) >= 400) {// Encomienda
+					&& total >= 400) {// Encomienda
 				isdetraccion = true;
 				log.info(" Is detraccion 3");
 			}
@@ -3486,7 +3497,7 @@ public class GeneraDocumentoFe {
 					if (map.get("CodigoTotalVenta").toString().equals("1003")) {
 						// cbc:PaymentMeansID
 						// Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
-						if (Float.parseFloat(map.get("Total").toString()) >= 700) {
+						if (total >= 700) {
 							Element cacPaymentMeansID = doc.createElement("cbc:ID");
 							cacPaymentMeansID.appendChild(doc.createTextNode("026")); // 026
 							cacPaymentTermsDetraccion.appendChild(cacPaymentMeansID);
@@ -3508,8 +3519,7 @@ public class GeneraDocumentoFe {
 							cacPaymentTermsDetraccion.appendChild(cacPaymentPorcentaje);
 
 							DecimalFormat formato1 = new DecimalFormat("#.00");
-							String totaladetra = String.valueOf(formato1
-									.format(Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.10")));
+							String totaladetra = String.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString()) * Float.parseFloat("0.10")));
 
 							log.info(totaladetra);
 
@@ -3544,7 +3554,7 @@ public class GeneraDocumentoFe {
 							// cbc:PaymentMeansID
 							// Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
 							if (!map.get("Bus_Carga").toString().equals("VA")
-									&& Float.parseFloat(map.get("Total").toString()) >= 700) {
+									&& total >= 700) {
 
 								Element TermscbcID = doc.createElement("cbc:ID");
 								TermscbcID.appendChild(doc.createTextNode("Detraccion"));
@@ -3594,7 +3604,7 @@ public class GeneraDocumentoFe {
 								attrPaymentAmountDet.setValue("PEN");//map.get("Moneda").toString());
 								cacPaymentAmountDet.setAttributeNode(attrPaymentAmountDet);
 							} else if (map.get("Bus_Carga").toString().equals("TD")
-									&& Float.parseFloat(map.get("Total").toString()) >= 400) {
+									&& total >= 400) {
 								// Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
 
 								Element TermscbcID = doc.createElement("cbc:ID");
@@ -3648,7 +3658,7 @@ public class GeneraDocumentoFe {
 							}
 
 						} else {
-							if (Float.parseFloat(map.get("Total").toString()) >= 400) {
+							if (total >= 400) {
 								// Element cacPaymentMeansID = doc.createElement("cbc:PaymentMeansID");
 
 								Element TermscbcID = doc.createElement("cbc:ID");
@@ -3749,7 +3759,7 @@ public class GeneraDocumentoFe {
 						} else { // encomienda
 							if (map.get("Serie").toString().equals("390")) { // serie para "TD" "CA" "BU" "VA"
 								if (!map.get("Bus_Carga").toString().equals("VA")
-										&& Float.parseFloat(map.get("Total").toString()) >= 700) { // si no es VA
+										&& total >= 700) { // si no es VA
 									DecimalFormat formato1 = new DecimalFormat("#.00");
 									ladetra = String
 											.valueOf(formato1.format(Float.parseFloat(map.get("Total").toString())
